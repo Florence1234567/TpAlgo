@@ -36,3 +36,6 @@ add_executable(TPAlgo
 )
 target_compile_features(TPAlgo PRIVATE cxx_std_17)
 target_link_libraries(TPAlgo PRIVATE SFML::Graphics)
+
+# Copy Images folder to output directory
+file(COPY ${CMAKE_SOURCE_DIR}/Images DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})

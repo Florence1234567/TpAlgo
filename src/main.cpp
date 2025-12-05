@@ -15,8 +15,16 @@ int main() {
     try
     {
         GameMap GameMap(windowSize.x, windowSize.y);
-        PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 1.5f, 10.0f, 100.f);
 
+
+        sf::RenderTexture backgroundTexture(sf::Vector2u(windowSize.x, windowSize.y));
+        backgroundTexture.clear(sf::Color::Transparent); 
+        GameMap.Display(backgroundTexture);               
+        backgroundTexture.display();
+        sf::Sprite backgroundSprite(backgroundTexture.getTexture());
+
+        //Create player
+        PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 1.5f, 10.0f, 100.f);
         PlayerController PController(&Player);
 
         sf::Clock dtClock;
@@ -34,8 +42,9 @@ int main() {
 
             window.clear(sf::Color::Blue);
 
-            // GameMap.Display(window);
-            Player.Draw(window);
+            window.draw(backgroundSprite); 
+
+            Player.Draw(window);   
 
             window.display();
         }
