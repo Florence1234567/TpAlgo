@@ -1,15 +1,12 @@
 ﻿  GameMap.cpp
-C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,62): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,62): warning C4244:         with
-C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,62): warning C4244:         [
-C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,62): warning C4244:             T=float
-C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,62): warning C4244:         ]
-C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,39): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,39): warning C4244:         with
-C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,39): warning C4244:         [
-C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,39): warning C4244:             T=float
-C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,39): warning C4244:         ]
-  main.cpp
-  Generating Code...
-  LINK : C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\x64\Debug\TpAlgo.exe not found or not built by the last incremental link; performing full link
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(62,53): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(62,53): warning C4244:         with
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(62,53): warning C4244:         [
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(62,53): warning C4244:             T=float
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(62,53): warning C4244:         ]
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(62,30): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(62,30): warning C4244:         with
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(62,30): warning C4244:         [
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(62,30): warning C4244:             T=float
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(62,30): warning C4244:         ]
   TpAlgo.vcxproj -> C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\x64\Debug\TpAlgo.exe

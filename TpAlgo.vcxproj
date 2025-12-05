@@ -137,6 +137,9 @@
   <ItemGroup>
     <ClInclude Include="GameMap.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Map.cvs" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
