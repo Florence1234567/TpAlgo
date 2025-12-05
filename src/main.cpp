@@ -1,22 +1,34 @@
 #include <iostream>
-#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <map>
+#include "GameMap.h"
 
 int main() {
-    sf::Window window;
-    window.create(sf::VideoMode({800, 600}), "Algo");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Red);
+    sf::Vector2u windowSize(1920, 1080);
+    sf::RenderWindow window(sf::VideoMode(windowSize), "Le meilleur jeu");
+    window.setFramerateLimit(60);
 
-    while (window.isOpen()) {
-        while (const std::optional event = window.pollEvent())
+    try
+    {
+        GameMap GameMap("Map.cvs", windowSize.x, windowSize.y);
+
+        while (window.isOpen())
         {
-            if (event->is<sf::Event::Closed>())
-                window.close();
+            for (auto event = window.pollEvent(); event; event = window.pollEvent())
+                if (event->is<sf::Event::Closed>())
+                    window.close();
+
+            window.clear(sf::Color::Black);
+
+            GameMap.Display(window);
+
+            window.display();
         }
-        // window.clear();
-        // window.draw(shape);
-        window.display();
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return -1;
     }
 
     return 0;

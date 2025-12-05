@@ -12,6 +12,9 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(main src/main.cpp)
-target_compile_features(main PRIVATE cxx_std_17)
-target_link_libraries(main PRIVATE SFML::Graphics)
+add_executable(TPAlgo
+        src/main.cpp
+        src/GameMap.cpp
+)
+target_compile_features(TPAlgo PRIVATE cxx_std_17)
+target_link_libraries(TPAlgo PRIVATE SFML::Graphics)
