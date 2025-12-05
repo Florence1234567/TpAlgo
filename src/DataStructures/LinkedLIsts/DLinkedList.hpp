@@ -14,9 +14,9 @@ public:
     bool empty() const;
     const E& front() const;
     const E& back() const;
-    void add(DNode<E>* node, const E& element);
-    void addFront(const E& element);
-    void addBack(const E& element);
+    void add(DNode<E>* node, E&& element);
+    void addFront(E&& element);
+    void addBack(E&& element);
     void remove(DNode<E>* node);
     void removeFront();
     void removeBack();
@@ -69,9 +69,9 @@ const E & DLinkedList<E>::back() const {
 }
 
 template<typename E>
-void DLinkedList<E>::add(DNode<E> *node, const E &element) {
+void DLinkedList<E>::add(DNode<E> *node, E&& element) {
     DNode<E>* newNode = new DNode<E>();
-    newNode->element = element;
+    newNode->element = std::move(element);
     newNode->next = node;
     newNode->prev = node->prev;
     node->prev->next = newNode;
@@ -80,13 +80,13 @@ void DLinkedList<E>::add(DNode<E> *node, const E &element) {
 }
 
 template<typename E>
-void DLinkedList<E>::addFront(const E &element) {
-    add(head->next, element);
+void DLinkedList<E>::addFront(E&& element) {
+    add(head->next, std::move(element));
 }
 
 template<typename E>
-void DLinkedList<E>::addBack(const E &element) {
-    add(tail, element);
+void DLinkedList<E>::addBack(E&& element) {
+    add(tail, std::move(element));
 }
 
 template<typename E>

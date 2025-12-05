@@ -3,15 +3,20 @@
 
 #pragma once
 #include "../../Actions/Action.h"
+#include "../LinkedLIsts/DLinkedList.hpp"
 
 /**
- * Queue basé sur la doubly linked list perso (DLinkedList) dont les éléments sont des Action (de la classe Action).
+ * Queue d'action (Action) basé sur l'implémentation de la doubly linked list DLinkedList.
  */
 class ActionQueue {
 public:
-    int getSize();
-    bool empty();
+    ActionQueue();
+    int getSize() const;
+    bool empty() const;
     const Action& front() const;
-    void enqueue(const Action& action);
+    void enqueue(std::unique_ptr<Action> action);
     void dequeue();
+
+private:
+    DLinkedList<std::unique_ptr<Action>> list;
 };
