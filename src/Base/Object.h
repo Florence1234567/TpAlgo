@@ -15,7 +15,7 @@ public:
 
     void Draw(sf::RenderWindow& window) const;
 
-    const sf::Sprite* GetSprite() const { return &sprite; };
+    const sf::Sprite* getSprite() const { return &sprite; };
 
     sf::Vector2f GetPosition() const { return sf::Vector2f(posX, posY); };
 
@@ -24,8 +24,8 @@ public:
 protected:
     int posX;
     int posY;
+    sf::Sprite sprite;
 
 private:
     sf::Texture texture;
-    sf::Sprite sprite;
 };

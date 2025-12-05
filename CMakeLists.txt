@@ -25,6 +25,8 @@ add_executable(TPAlgo
         src/Game/GameManager.h
         src/Player/PlayerCharacter.cpp
         src/Player/PlayerCharacter.h
+        src/Player/PlayerController.cpp
+        src/Player/PlayerController.h
 )
 target_compile_features(TPAlgo PRIVATE cxx_std_17)
 target_link_libraries(TPAlgo PRIVATE SFML::Graphics)

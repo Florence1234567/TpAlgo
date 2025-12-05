@@ -14,11 +14,16 @@
 
 class Character : public Object {
 public:
-    Character(int x, int y, float size, int baseSpeed, float hp, const std::string& texturePath): Object(x, y, size, texturePath), speed(baseSpeed), health(hp), maxHealth(hp) {};
+    Character(int x, int y, float size, float baseSpeed, float hp, const std::string& texturePath): Object(x, y, size, texturePath), speed(baseSpeed), health(hp), maxHealth(hp) {};
+
+    virtual void Update(sf::Time dt);
+    void setDestination(float worldX, float worldY);
+    void Move(sf::Time dt);
 
 protected:
-    int speed;
+    float speed;
     float health;
     float maxHealth;
-
+    sf::Vector2<float> destination;
+    bool bHasDestination = false;
 };

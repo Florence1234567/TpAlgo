@@ -8,7 +8,7 @@
 
 class PlayerCharacter : public Character {
 public:
-    PlayerCharacter(int x, int y, float size, int baseSpeed, float hp): Character(x, y, size, baseSpeed, hp, "Images/Character/C_Front.png") {};
+    PlayerCharacter(int x, int y, float size, float baseSpeed, float hp): Character(x, y, size, baseSpeed, hp, "Images/Character/C_Front.png") {};
 
 private:
     /*//Character Sprites

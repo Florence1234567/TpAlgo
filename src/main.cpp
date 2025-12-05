@@ -5,6 +5,7 @@
 #include "Base/Character.h"
 #include "Game/GameMap.h"
 #include "Player/PlayerCharacter.h"
+#include "Player/PlayerController.h"
 
 int main() {
     sf::Vector2u windowSize(1920, 1080);
@@ -13,29 +14,27 @@ int main() {
 
     try
     {
-        sf::Clock moveClock;
-        float interval = 3;
-
         GameMap GameMap(windowSize.x, windowSize.y);
-        PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 1.5f, 10, 100.f);
+        PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 1.5f, 10.0f, 100.f);
 
+        PlayerController PController(&Player);
+
+        sf::Clock dtClock;
         while (window.isOpen())
         {
-            for (auto event = window.pollEvent(); event; event = window.pollEvent())
+            while (const std::optional<sf::Event>& event = window.pollEvent()) {
                 if (event->is<sf::Event::Closed>())
                     window.close();
 
-            window.clear(sf::Color::Black);
-
-            if (moveClock.getElapsedTime().asSeconds() >= interval) {
-                // Player.SetDir(Direction::Down);
-                // Player.Move();
-                // std::cout << "Character row: " << Player.GetRow()
-                    // << ", col: " << Player.GetCol() << std::endl;
-                moveClock.restart();
+                PController.HandleEvent(*event, &window);
             }
 
-            GameMap.Display(window);
+            sf::Time dt = dtClock.restart();
+            Player.Update(dt);
+
+            window.clear(sf::Color::Blue);
+
+            // GameMap.Display(window);
             Player.Draw(window);
 
             window.display();
