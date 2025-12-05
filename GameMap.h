@@ -17,7 +17,10 @@ class GameMap
 public:
 	GameMap(const std::string& fileName);
 
-	void Display(sf::RenderWindow& window);
+	void Display(sf::RenderWindow& window, Direction characterDir, bool isWalkFrame1);
+
+	int GetWidth() { return Width; };
+	int GetHeight() { return Height; };
 
 private:
 	static const int Width = 5;
@@ -51,14 +54,16 @@ private:
 	 {"FrontWalk1", "Images/Character/C_FrontWalk1.png"},
 	 {"FrontWalk2", "Images/Character/C_FrontWalk2.png"},
 	 {"Jump", "Images/Character/C_Jump.png"},
-	 {"Left", "Images/Character/C_Left.png"},
-	 {"LeftWalking", "Images/Character/C_LeftWalking.png"},
-	 {"Right", "Images/Character/C_Right.png"},
-	 {"RightWalking", "Images/Character/C_RightWalking.png"}
+	 {"LeftWalk1", "Images/Character/C_Left.png"},
+	 {"LeftWalk2", "Images/Character/C_LeftWalking.png"},
+	 {"RightWalk", "Images/Character/C_Right.png"},
+	 {"RightWalk2", "Images/Character/C_RightWalking.png"}
 	};
 
 	std::map<std::string, sf::Texture> characterTextures;
 	std::map<std::string, std::unique_ptr<sf::Sprite>> characterSprites;
+
+	std::string GetCharacterSpriteName(Direction dir, bool isWalkFrame1);
 
 	Tile StringToTile(const std::string& value);
 };

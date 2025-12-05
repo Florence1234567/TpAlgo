@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <map>
 #include "GameMap.h"
+#include "Character.h"
 
 int main() {
     sf::Vector2u windowSize(800, 600);
@@ -11,6 +12,7 @@ int main() {
     try
     {
         GameMap GameMap("Map.cvs");
+        Character Character(GameMap.GetWidth() / 2, GameMap.GetHeight() / 2);
 
         while (window.isOpen())
         {
@@ -20,6 +22,7 @@ int main() {
 
             window.clear(sf::Color::Black);
 
+            GameMap.MoveCharacter(Direction::Up);
             GameMap.Display(window);
 
             window.display();

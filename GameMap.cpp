@@ -53,7 +53,7 @@ GameMap::GameMap(const std::string& fileName)
 	}
 }
 
-void GameMap::Display(sf::RenderWindow& window)
+void GameMap::Display(sf::RenderWindow& window, Direction characterDir, bool isWalkFrame1)
 {
 	for (int row = 0; row < Height; row++)
 		for (int col = 0; col < Width; col++)
@@ -70,7 +70,7 @@ void GameMap::Display(sf::RenderWindow& window)
 		}
 
 	//Decide with character sprite to display.
-	auto it = characterSprites.find("Front");
+	auto it = characterSprites.find(GetCharacterSpriteName(characterDir, isWalkFrame1));
 	if (it != characterSprites.end())
 	{
 		float characterRow = Height / 2;
@@ -80,6 +80,29 @@ void GameMap::Display(sf::RenderWindow& window)
 		it->second->setPosition(characterPos);
 		window.draw(*it->second);
 	}
+}
+
+std::string GameMap::GetCharacterSpriteName(Direction dir, bool isWalkFrame1)
+{
+	std::string spriteName;
+
+	switch (dir)
+	{
+	case Direction::Up:
+		spriteName = isWalkFrame1 ? "BackWalk1" : "BackWalk2";
+		break;
+	case Direction::Down:
+		spriteName = isWalkFrame1 ? "FrontWalk1" : "FrontWalk2";
+		break;
+	case Direction::Left:
+		spriteName = isWalkFrame1 ? "LeftWalk1" : "LeftWalk2";
+		break;
+	case Direction::Right:
+		spriteName = isWalkFrame1 ? "RightWalk1" : "RightWalk2";
+		break;
+	}
+
+	return spriteName;
 }
 
 Tile GameMap::StringToTile(const std::string& value)
