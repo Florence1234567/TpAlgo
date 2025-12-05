@@ -1,34 +1,17 @@
 cmake_minimum_required(VERSION 4.0)
 project(TpAlgo LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS ON)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-set(SFML_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/src")
-list(APPEND CMAKE_PREFIX_PATH "${SFML_ROOT}")
+include(FetchContent)
+FetchContent_Declare(SFML
+    GIT_REPOSITORY https://github.com/SFML/SFML.git
+    GIT_TAG 3.0.2
+    GIT_SHALLOW ON
+    EXCLUDE_FROM_ALL
+    SYSTEM)
+FetchContent_MakeAvailable(SFML)
 
-find_package(SFML 3.0 COMPONENTS graphics window system REQUIRED)
-
-include_directories(.)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/include)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/lib)
-
-add_executable(${PROJECT_NAME}
-        src/GameMap.cpp
-        src/GameMap.h
-        src/main.cpp
-)
-
-target_link_libraries(${PROJECT_NAME} PRIVATE
-    sfml-graphics
-    sfml-window
-    sfml-system
-)
-
-if (WIN32)
-    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_directory
-                "${SFML_ROOT}/bin"
-                $<TARGET_FILE_DIR:${PROJECT_NAME}>)
-endif ()
+add_executable(main src/main.cpp)
+target_compile_features(main PRIVATE cxx_std_17)
+target_link_libraries(main PRIVATE SFML::Graphics)
