@@ -1,8 +1,10 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <map>
-#include "GameMap.h"
-#include "Character.h"
+
+#include "Base/Character.h"
+#include "Game/GameMap.h"
+#include "Player/PlayerCharacter.h"
 
 int main() {
     sf::Vector2u windowSize(1920, 1080);
@@ -15,7 +17,7 @@ int main() {
         float interval = 3;
 
         GameMap GameMap(windowSize.x, windowSize.y);
-        Character Player(0, 0);
+        PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 1.5f, 10, 100.f);
 
         while (window.isOpen())
         {
@@ -26,14 +28,15 @@ int main() {
             window.clear(sf::Color::Black);
 
             if (moveClock.getElapsedTime().asSeconds() >= interval) {
-                Player.SetDir(Direction::Down);
-                Player.Move();
-                std::cout << "Character row: " << Player.GetRow()
-                    << ", col: " << Player.GetCol() << std::endl;
+                // Player.SetDir(Direction::Down);
+                // Player.Move();
+                // std::cout << "Character row: " << Player.GetRow()
+                    // << ", col: " << Player.GetCol() << std::endl;
                 moveClock.restart();
             }
 
-            GameMap.Display(window, &Player);
+            GameMap.Display(window);
+            Player.Draw(window);
 
             window.display();
         }
