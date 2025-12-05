@@ -15,14 +15,18 @@ enum Direction { Left, Right, Up, Down };
 class GameMap
 {
 public:
-	GameMap(const std::string& fileName, int width, int height);
+	GameMap(int width, int height);
 
 	void Display(sf::RenderWindow& window);
+	void ExpandTo(int newWidth, int newHeight);
+	void SetTile(int x, int y, Tile tile);
 
 private:
-	int Width = 5;
-	int Height = 5;
+	int Width;
+	int Height;
 	static const int PixelsPerSquare = 64;
+
+	Tile DecideTile(int x, int y);
 
 	std::vector<std::vector<Tile>> map;
 
@@ -59,6 +63,4 @@ private:
 
 	std::map<std::string, sf::Texture> characterTextures;
 	std::map<std::string, std::unique_ptr<sf::Sprite>> characterSprites;
-
-	Tile StringToTile(const std::string& value);
 };

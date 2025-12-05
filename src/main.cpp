@@ -10,7 +10,7 @@ int main() {
 
     try
     {
-        GameMap GameMap("Map.cvs", windowSize.x, windowSize.y);
+        GameMap GameMap(windowSize.x, windowSize.y);
 
         while (window.isOpen())
         {
