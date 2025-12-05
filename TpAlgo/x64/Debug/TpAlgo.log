@@ -1,1 +1,15 @@
-﻿  TpAlgo.vcxproj -> C:\A2025 Algo\TpAlgo\x64\Debug\TpAlgo.exe
+﻿  GameMap.cpp
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,62): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,62): warning C4244:         with
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,62): warning C4244:         [
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,62): warning C4244:             T=float
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,62): warning C4244:         ]
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,39): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,39): warning C4244:         with
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,39): warning C4244:         [
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,39): warning C4244:             T=float
+C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\GameMap.cpp(39,39): warning C4244:         ]
+  main.cpp
+  Generating Code...
+  LINK : C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\x64\Debug\TpAlgo.exe not found or not built by the last incremental link; performing full link
+  TpAlgo.vcxproj -> C:\Users\choui\OneDrive\Documents\GitHub\TpAlgo\x64\Debug\TpAlgo.exe
