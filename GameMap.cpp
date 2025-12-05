@@ -53,7 +53,7 @@ GameMap::GameMap(const std::string& fileName)
 	}
 }
 
-void GameMap::Display(sf::RenderWindow& window, Direction characterDir, bool isWalkFrame1)
+void GameMap::Display(sf::RenderWindow& window, Character* Character)
 {
 	for (int row = 0; row < Height; row++)
 		for (int col = 0; col < Width; col++)
@@ -69,22 +69,21 @@ void GameMap::Display(sf::RenderWindow& window, Direction characterDir, bool isW
 			}
 		}
 
-	//Decide with character sprite to display.
-	auto it = characterSprites.find(GetCharacterSpriteName(characterDir, isWalkFrame1));
+	auto it = characterSprites.find(GetCharacterSpriteName(Character));
 	if (it != characterSprites.end())
 	{
-		float characterRow = Height / 2;
-		float characterCol = Width / 2;
-
-		sf::Vector2f characterPos(characterCol * PixelsPerSquare, characterRow * PixelsPerSquare);
+		sf::Vector2f characterPos(Character->GetCol() * PixelsPerSquare, Character->GetRow() * PixelsPerSquare);
 		it->second->setPosition(characterPos);
 		window.draw(*it->second);
 	}
 }
 
-std::string GameMap::GetCharacterSpriteName(Direction dir, bool isWalkFrame1)
+std::string GameMap::GetCharacterSpriteName(Character* Character)
 {
 	std::string spriteName;
+
+	bool isWalkFrame1 = Character->GetWalkFrame();
+	Direction dir = Character->GetDir();
 
 	switch (dir)
 	{

@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <map>
+#include "Character.h"
 
 enum Tile {
 	EdgeUpLeft, EdgeUp, EdgeUpRight,
@@ -10,14 +11,12 @@ enum Tile {
 	EdgeDownLeft, EdgeDown, EdgeDownRight
 };
 
-enum Direction { Left, Right, Up, Down };
-
 class GameMap
 {
 public:
 	GameMap(const std::string& fileName);
 
-	void Display(sf::RenderWindow& window, Direction characterDir, bool isWalkFrame1);
+	void Display(sf::RenderWindow& window, Character* Character);
 
 	int GetWidth() { return Width; };
 	int GetHeight() { return Height; };
@@ -63,7 +62,7 @@ private:
 	std::map<std::string, sf::Texture> characterTextures;
 	std::map<std::string, std::unique_ptr<sf::Sprite>> characterSprites;
 
-	std::string GetCharacterSpriteName(Direction dir, bool isWalkFrame1);
+	std::string GetCharacterSpriteName(Character* Character);
 
 	Tile StringToTile(const std::string& value);
 };

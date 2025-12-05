@@ -10,7 +10,7 @@ public:
 	void SetPos(float newRow, float newCol);
 	Direction GetDir() { return currentDir; };
 	void SetDir(Direction dir);
-	void Move(Direction dir);
+	void Move();
 	bool GetWalkFrame() { return isWalkFrame1; };
 private:
 	float row, col;

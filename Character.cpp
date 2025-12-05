@@ -5,6 +5,7 @@ Character::Character(float x, float y)
 	row = x;
 	col = y;
 	currentDir = Direction::Down;
+	isWalkFrame1 = true;
 }
 
 void Character::SetPos(float newRow, float newCol)
@@ -18,22 +19,29 @@ void Character::SetDir(Direction dir)
 	currentDir = dir;
 }
 
-void Character::Move(Direction dir)
+void Character::Move()
 {
-	switch (dir) {
+	float nextRow = row, nextCol = col;
+		
+	switch (currentDir) {
 	case Direction::Up:
-		row++;
+		nextRow--;
 		break;
 	case Direction::Down:
-		row--;
+		nextRow++;
 		break;
 	case Direction::Left:
-		col--;
+		nextCol--;
 		break;
 	case Direction::Right:
-		col++;
+		nextCol++;
 		break;
 	}
 
-	isWalkFrame1 = !isWalkFrame1;
+	if (nextRow < 5 && nextRow >= 0 && (nextCol < 5 && nextCol >= 0))
+	{
+		row = nextRow;
+		col = nextCol;
+		isWalkFrame1 = !isWalkFrame1;
+	}
 }
