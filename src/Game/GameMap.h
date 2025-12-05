@@ -7,7 +7,8 @@
 enum Tile {
 	EdgeUpLeft, EdgeUp, EdgeUpRight,
 	EdgeLeft, Grass, EdgeRight,
-	EdgeDownLeft, EdgeDown, EdgeDownRight
+	EdgeDownLeft, EdgeDown, EdgeDownRight,
+	Water, None
 };
 
 class GameMap
@@ -15,7 +16,7 @@ class GameMap
 public:
 	GameMap(int width, int height);
 
-	void Display(sf::RenderWindow& window);
+	void Display(sf::RenderTarget& target);
 
 	int GetWidth() { return Width; };
 	int GetHeight() { return Height; };
@@ -38,10 +39,10 @@ private:
 		{EdgeRight, "Images/Ground/E_R.png"},
 		{EdgeDownLeft, "Images/Ground/E_DL.png"},
 		{EdgeDown, "Images/Ground/E_D.png"},
-		{EdgeDownRight, "Images/Ground/E_DR.png"}
+		{EdgeDownRight, "Images/Ground/E_DR.png"},
+		{Water, "Images/Ground/Water.png"}
 	};
 
 	std::map<Tile, sf::Texture> textures;
 	std::map<Tile, std::unique_ptr<sf::Sprite>> sprites;
-
 };
