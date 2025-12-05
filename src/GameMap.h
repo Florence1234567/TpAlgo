@@ -14,17 +14,19 @@ enum Tile {
 class GameMap
 {
 public:
-	GameMap(const std::string& fileName);
+	GameMap(int width, int height);
 
-	void Display(sf::RenderWindow& window, Character* Character);
+	void Display(sf::RenderWindow& window, Character* character);
 
 	int GetWidth() { return Width; };
 	int GetHeight() { return Height; };
 
 private:
-	static const int Width = 5;
-	static const int Height = 5;
+	int Width;
+	int Height;
 	static const int PixelsPerSquare = 64;
+
+	Tile DecideTile(int x, int y);
 
 	std::vector<std::vector<Tile>> map;
 
@@ -45,24 +47,17 @@ private:
 
 	//Character
 	std::map<std::string, std::string> characterTextureFiles = {
-	 {"Back", "Images/Character/C_Back.png"},
-	 {"BackJump", "Images/Character/C_BackJump.png"},
-	 {"BackWalk1", "Images/Character/C_BackWalk1.png"},
-	 {"BackWalk2", "Images/Character/C_BackWalk2.png"},
-	 {"Front", "Images/Character/C_Front.png"},
 	 {"FrontWalk1", "Images/Character/C_FrontWalk1.png"},
 	 {"FrontWalk2", "Images/Character/C_FrontWalk2.png"},
 	 {"Jump", "Images/Character/C_Jump.png"},
-	 {"LeftWalk1", "Images/Character/C_Left.png"},
-	 {"LeftWalk2", "Images/Character/C_LeftWalking.png"},
-	 {"RightWalk", "Images/Character/C_Right.png"},
-	 {"RightWalk2", "Images/Character/C_RightWalking.png"}
+	 {"Left", "Images/Character/C_Left.png"},
+	 {"LeftWalking", "Images/Character/C_LeftWalking.png"},
+	 {"Right", "Images/Character/C_Right.png"},
+	 {"RightWalking", "Images/Character/C_RightWalking.png"}
 	};
 
 	std::map<std::string, sf::Texture> characterTextures;
 	std::map<std::string, std::unique_ptr<sf::Sprite>> characterSprites;
 
 	std::string GetCharacterSpriteName(Character* Character);
-
-	Tile StringToTile(const std::string& value);
 };

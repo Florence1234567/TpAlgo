@@ -15,6 +15,7 @@ FetchContent_MakeAvailable(SFML)
 add_executable(TPAlgo
         src/main.cpp
         src/GameMap.cpp
+        src/Character.cpp
 )
 target_compile_features(TPAlgo PRIVATE cxx_std_17)
 target_link_libraries(TPAlgo PRIVATE SFML::Graphics)

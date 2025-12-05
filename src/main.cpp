@@ -5,45 +5,44 @@
 #include "Character.h"
 
 int main() {
-	sf::Vector2u windowSize(800, 600);
-	sf::RenderWindow window(sf::VideoMode(windowSize), "Le meilleur jeu");
-	window.setFramerateLimit(60);
+    sf::Vector2u windowSize(1920, 1080);
+    sf::RenderWindow window(sf::VideoMode(windowSize), "Le meilleur jeu");
+    window.setFramerateLimit(120);
 
-	try
-	{
-		sf::Clock moveClock;
-		float interval = 3;
+    try
+    {
+        sf::Clock moveClock;
+        float interval = 3;
 
-		GameMap GameMap("Map.cvs");
-		Character Character(0, 0);
+        GameMap GameMap(windowSize.x, windowSize.y);
+        Character Player(0, 0);
 
-		while (window.isOpen())
-		{
-			for (auto event = window.pollEvent(); event; event = window.pollEvent())
-				if (event->is<sf::Event::Closed>())
-					window.close();
+        while (window.isOpen())
+        {
+            for (auto event = window.pollEvent(); event; event = window.pollEvent())
+                if (event->is<sf::Event::Closed>())
+                    window.close();
 
-			window.clear(sf::Color::Black);
+            window.clear(sf::Color::Black);
 
-			if (moveClock.getElapsedTime().asSeconds() >= interval)
-			{
-				Character.SetDir(Direction::Down);
-				Character.Move();
-				std::cout << "Character row: " << Character.GetRow()
-					<< " col: " << Character.GetCol() << std::endl;
-				moveClock.restart();
-			}
+            if (moveClock.getElapsedTime().asSeconds() >= interval) {
+                Player.SetDir(Direction::Down);
+                Player.Move();
+                std::cout << "Character row: " << Player.GetRow()
+                    << ", col: " << Player.GetCol() << std::endl;
+                moveClock.restart();
+            }
 
-			GameMap.Display(window, &Character);
+            GameMap.Display(window, &Player);
 
-			window.display();
-		}
-	}
-	catch (const std::exception& e)
-	{
-		std::cerr << "Error: " << e.what() << std::endl;
-		return -1;
-	}
+            window.display();
+        }
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return -1;
+    }
 
-	return 0;
+    return 0;
 }

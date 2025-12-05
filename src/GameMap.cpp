@@ -5,116 +5,107 @@
 #include <stdexcept>
 #include <map>
 
-GameMap::GameMap(const std::string& fileName)
-{
-	map.resize(Height, std::vector<Tile>(Width));
+GameMap::GameMap(int width, int height) {
+    Width = width;
+    Height = height;
 
-	std::ifstream file(fileName);
-	if (!file)
-		throw std::runtime_error("Can't open file");
+    map.resize(Height, std::vector<Tile>(Width, Tile::Grass));
 
-	std::string line;
-	for (int i = 0; i < Width && std::getline(file, line); i++)
-	{
-		std::stringstream ss(line);
-		std::string value;
+    // Build the map
+    for (int y = 0; y < Height; y++) {
+        for (int x = 0; x < Width; x++) {
+            map[y][x] = DecideTile(x, y);
+        }
+    }
 
-		for (int j = 0; j < Height && std::getline(ss, value, ','); j++)
-			map[i][j] = StringToTile(value);
-	}
+    // Load textures
+    for (const auto &[tile, path]: textureFiles)
+        if (!textures[tile].loadFromFile(path))
+            std::cerr << "Error loading " << path << std::endl;
 
-	for (const auto& [tile, path] : textureFiles)
-		if (!textures[tile].loadFromFile(path))
-			std::cerr << "Error loading " << path << std::endl;
+    for (auto &[tile, texture]: textures) {
+        sprites[tile] = std::make_unique<sf::Sprite>(texture);
 
-	for (auto& [tile, texture] : textures)
-	{
-		sprites[tile] = std::make_unique<sf::Sprite>(texture);
+        sf::Vector2u textureSize = texture.getSize();
+        float scaleX = static_cast<float>(PixelsPerSquare) / textureSize.x;
+        float scaleY = static_cast<float>(PixelsPerSquare) / textureSize.y;
+        sprites[tile]->setScale(sf::Vector2f(scaleX, scaleY));
+    }
 
-		sf::Vector2u textureSize = texture.getSize();
-		float scaleX = static_cast<float>(PixelsPerSquare) / textureSize.x;
-		float scaleY = static_cast<float>(PixelsPerSquare) / textureSize.y;
-		sprites[tile]->setScale(sf::Vector2f(scaleX, scaleY));
-	}
+    //Character
+    for (const auto &[name, path]: characterTextureFiles)
+        if (!characterTextures[name].loadFromFile(path))
+            std::cerr << "Error loading " << path << std::endl;
 
-	//Character
-	for (const auto& [name, path] : characterTextureFiles)
-		if (!characterTextures[name].loadFromFile(path))
-			std::cerr << "Error loading " << path << std::endl;
+    for (auto &[name, texture]: characterTextures) {
+        characterSprites[name] = std::make_unique<sf::Sprite>(texture);
 
-	for (auto& [name, texture] : characterTextures)
-	{
-		characterSprites[name] = std::make_unique<sf::Sprite>(texture);
-
-		sf::Vector2u textureSize = texture.getSize();
-		float scaleX = static_cast<float>(PixelsPerSquare) / textureSize.x;
-		float scaleY = static_cast<float>(PixelsPerSquare) / textureSize.y;
-		characterSprites[name]->setScale(sf::Vector2f(scaleX, scaleY));
-	}
+        sf::Vector2u textureSize = texture.getSize();
+        float scaleX = static_cast<float>(PixelsPerSquare) / textureSize.x;
+        float scaleY = static_cast<float>(PixelsPerSquare) / textureSize.y;
+        characterSprites[name]->setScale(sf::Vector2f(scaleX, scaleY));
+    }
 }
 
-void GameMap::Display(sf::RenderWindow& window, Character* Character)
-{
-	for (int row = 0; row < Height; row++)
-		for (int col = 0; col < Width; col++)
-		{
-			sf::Vector2f position(col * PixelsPerSquare, row * PixelsPerSquare);
-			Tile currentTile = map[row][col];
+Tile GameMap::DecideTile(int x, int y) {
+    const int tilesX = Width / PixelsPerSquare;
+    const int tilesY = Height / PixelsPerSquare;
+    const int maxX = tilesX - 1;
+    const int maxY = tilesY;
 
-			auto it = sprites.find(currentTile);
-			if (it != sprites.end())
-			{
-				it->second->setPosition(position);
-				window.draw(*it->second);
-			}
-		}
-
-	auto it = characterSprites.find(GetCharacterSpriteName(Character));
-	if (it != characterSprites.end())
-	{
-		sf::Vector2f characterPos(Character->GetCol() * PixelsPerSquare, Character->GetRow() * PixelsPerSquare);
-		it->second->setPosition(characterPos);
-		window.draw(*it->second);
-	}
+    if (x == 0 && y == 0) return Tile::EdgeUpLeft;
+    if (x == maxX && y == 0) return Tile::EdgeUpRight;
+    if (x == 0 && y == maxY) return Tile::EdgeDownLeft;
+    if (x == maxX && y == maxY) return Tile::EdgeDownRight;
+    if (x == 0) return Tile::EdgeLeft;
+    if (x == maxX) return Tile::EdgeRight;
+    if (y == 0) return Tile::EdgeUp;
+    if (y == maxY) return Tile::EdgeDown;
+    return Tile::Grass;
 }
 
-std::string GameMap::GetCharacterSpriteName(Character* Character)
-{
-	std::string spriteName;
+void GameMap::Display(sf::RenderWindow &window, Character *Character) {
+    for (int row = 0; row < Height; row++)
+        for (int col = 0; col < Width; col++) {
+            sf::Vector2f position(col * PixelsPerSquare, row * PixelsPerSquare);
+            Tile currentTile = map[row][col];
 
-	bool isWalkFrame1 = Character->GetWalkFrame();
-	Direction dir = Character->GetDir();
+            auto it = sprites.find(currentTile);
+            if (it != sprites.end()) {
+                it->second->setPosition(position);
+                window.draw(*it->second);
+            }
+        }
 
-	switch (dir)
-	{
-	case Direction::Up:
-		spriteName = isWalkFrame1 ? "BackWalk1" : "BackWalk2";
-		break;
-	case Direction::Down:
-		spriteName = isWalkFrame1 ? "FrontWalk1" : "FrontWalk2";
-		break;
-	case Direction::Left:
-		spriteName = isWalkFrame1 ? "LeftWalk1" : "LeftWalk2";
-		break;
-	case Direction::Right:
-		spriteName = isWalkFrame1 ? "RightWalk1" : "RightWalk2";
-		break;
-	}
-
-	return spriteName;
+    //Decide with character sprite to display.
+    auto it = characterSprites.find(GetCharacterSpriteName(Character));
+    if (it != characterSprites.end()) {
+        sf::Vector2f characterPos(Character->GetCol() * PixelsPerSquare, Character->GetRow() * PixelsPerSquare);
+        it->second->setPosition(characterPos);
+        window.draw(*it->second);
+    }
 }
 
-Tile GameMap::StringToTile(const std::string& value)
-{
-	if (value == "E_UL") return Tile::EdgeUpLeft;
-	if (value == "E_U") return Tile::EdgeUp;
-	if (value == "E_UR") return Tile::EdgeUpRight;
-	if (value == "E_L") return Tile::EdgeLeft;
-	if (value == "G") return Tile::Grass;
-	if (value == "E_R") return Tile::EdgeRight;
-	if (value == "E_DL") return Tile::EdgeDownLeft;
-	if (value == "E_D") return Tile::EdgeDown;
-	if (value == "E_DR") return Tile::EdgeDownRight;
+std::string GameMap::GetCharacterSpriteName(Character *Character) {
+    std::string spriteName;
 
-	throw std::invalid_argument("Unknown object : " + value);
+    bool isWalkFrame1 = Character->GetWalkFrame();
+    Direction dir = Character->GetDir();
+
+    switch (dir) {
+        case Direction::Up:
+            spriteName = isWalkFrame1 ? "BackWalk1" : "BackWalk2";
+            break;
+        case Direction::Down:
+            spriteName = isWalkFrame1 ? "FrontWalk1" : "FrontWalk2";
+            break;
+        case Direction::Left:
+            spriteName = isWalkFrame1 ? "LeftWalk1" : "LeftWalk2";
+            break;
+        case Direction::Right:
+            spriteName = isWalkFrame1 ? "RightWalk1" : "RightWalk2";
+            break;
+    }
+
+    return spriteName;
 }
