@@ -24,6 +24,8 @@ int main() {
         backgroundTexture.display();
         sf::Sprite backgroundSprite(backgroundTexture.getTexture());
 
+        sf::FloatRect grassBounds = GameMap.GetGrassBounds();
+
         //Create player
         PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 2, 50.0f, 100.f);
         PlayerController PController(&Player);
@@ -37,7 +39,7 @@ int main() {
                 if (event->is<sf::Event::Closed>())
                     window.close();
 
-                PController.HandleEvent(*event, &window);
+                PController.HandleEvent(*event, grassBounds, &window);
             }
 
             sf::Time dt = dtClock.restart();

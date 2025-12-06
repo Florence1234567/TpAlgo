@@ -152,3 +152,27 @@ void GameMap::DisplayObjects(sf::RenderWindow& window) {
         }
     }
 }
+
+sf::FloatRect GameMap::GetGrassBounds() const {
+    const int tilesX = Width / PixelsPerSquare;
+    const int tilesY = Height / PixelsPerSquare;
+
+    const int minX = 1;
+    const int minY = 1;
+    const int maxX = tilesX - 2;
+    const int maxY = tilesY - 1;
+
+    const int grassStartX = minX + 1;
+    const int grassStartY = minY + 1;
+    const int grassEndX = maxX - 1;
+    const int grassEndY = maxY - 1;
+
+    float left = grassStartX * PixelsPerSquare;
+    float top = grassStartY * PixelsPerSquare;
+    float width = (grassEndX - grassStartX + 1) * PixelsPerSquare;
+    float height = (grassEndY - grassStartY + 1) * PixelsPerSquare;
+
+    sf::FloatRect bounds(sf::Vector2f(left, top), sf::Vector2f(width, height));
+
+    return bounds;
+}

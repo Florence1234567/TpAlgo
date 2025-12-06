@@ -29,6 +29,8 @@ public:
 	int GetWidth() { return Width; };
 	int GetHeight() { return Height; };
 
+	sf::FloatRect GetGrassBounds() const;
+
 private:
 	int Width;
 	int Height;

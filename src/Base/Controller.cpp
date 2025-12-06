@@ -15,11 +15,11 @@ void Controller::Update(sf::Time dt) {
 
     if (currentAction) {
         if (!currentAction->Update(dt)) {
-            std::cout << currentAction->getName() << " completed" << std::endl;
+            // std::cout << currentAction->getName() << " completed" << std::endl;
             actions->dequeue();
             currentAction = nullptr;
         } else {
-            std::cout << "Executing: " << currentAction->getName() << std::endl;
+            // std::cout << "Executing: " << currentAction->getName() << std::endl;
         }
     }
 }
