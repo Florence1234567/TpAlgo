@@ -18,7 +18,7 @@ public:
 
     virtual void Update(sf::Time dt);
 
-    virtual void HandleEvent(const sf::Event& event, sf::RenderWindow* window = nullptr) = 0;
+    virtual void HandleEvent(const sf::Event& event, const sf::FloatRect playingBounds, sf::RenderWindow* window = nullptr) = 0;
 
 protected:
     Character* owner;

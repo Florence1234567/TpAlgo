@@ -6,13 +6,15 @@
 #include "../Actions/MoveAction.h"
 #include "../Actions/WaitAction.h"
 
-void PlayerController::HandleEvent(const sf::Event &event, sf::RenderWindow *window) {
+void PlayerController::HandleEvent(const sf::Event &event, sf::FloatRect playingBounds, sf::RenderWindow *window) {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
         sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
         sf::Vector2f worldPos = window->mapPixelToCoords(mousePos);
 
-        auto moveAction = std::make_unique<MoveAction>(owner, worldPos);
-        PushAction(std::move(moveAction));
+        if (playingBounds.contains(worldPos)) {
+            auto moveAction = std::make_unique<MoveAction>(owner, worldPos);
+            PushAction(std::move(moveAction));
+        }
     }
 }
 
