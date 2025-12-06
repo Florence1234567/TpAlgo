@@ -16,4 +16,6 @@ private:
     DNode<E>* next;
 
     friend class DLinkedList<E>;
+public:
+    E& GetElement() { return element; };
 };

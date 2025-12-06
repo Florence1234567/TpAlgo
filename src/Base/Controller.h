@@ -20,10 +20,12 @@ public:
 
     virtual void HandleEvent(const sf::Event& event, sf::RenderWindow* window = nullptr) = 0;
 
+    std::vector<std::string>& GetMovementQueue() const;
 protected:
     Character* owner;
     void PushAction(std::unique_ptr<Action> action);
     void ExecuteAction();
     ActionQueue* actions;
     std::unique_ptr<Action> currentAction;
+    mutable std::vector<std::string> cachedActionNames;
 };

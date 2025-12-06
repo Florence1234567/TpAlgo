@@ -17,6 +17,20 @@ public:
     void enqueue(std::unique_ptr<Action> action);
     void dequeue();
     std::unique_ptr<Action> getFirstAction();
+    std::vector<std::string> GetActionNames() const {
+        std::vector<std::string> names;
+
+        for (int i = 0; i < list.getSize(); ++i)
+        {
+            const auto& action = list.At(i);
+
+            if (action)
+                names.push_back(action->getName());
+        }
+
+        return names;
+
+    }
 
 private:
     DLinkedList<std::unique_ptr<Action>> list;

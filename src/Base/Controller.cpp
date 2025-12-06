@@ -24,6 +24,11 @@ void Controller::Update(sf::Time dt) {
     }
 }
 
+std::vector<std::string>& Controller::GetMovementQueue() const
+{
+    cachedActionNames = actions->GetActionNames();
+    return cachedActionNames;
+}
 
 void Controller::PushAction(std::unique_ptr<Action> action) {
     actions->enqueue(std::move(action));
