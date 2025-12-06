@@ -27,6 +27,16 @@ add_executable(TPAlgo
         src/Player/PlayerCharacter.h
         src/Player/PlayerController.cpp
         src/Player/PlayerController.h
+        src/Actions/Action.cpp
+        src/Actions/Action.h
+        src/DataStructures/Queue/ActionQueue.cpp
+        src/DataStructures/Queue/ActionQueue.h
+        src/DataStructures/LinkedLIsts/DLinkedList.hpp
+        src/DataStructures/LinkedLIsts/DNode.hpp
+        src/Actions/MoveAction.cpp
+        src/Actions/MoveAction.h
+        src/Actions/WaitAction.cpp
+        src/Actions/WaitAction.h
 )
 target_compile_features(TPAlgo PRIVATE cxx_std_17)
 target_link_libraries(TPAlgo PRIVATE SFML::Graphics)

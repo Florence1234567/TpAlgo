@@ -5,6 +5,8 @@
 #include "../Base/Controller.h"
 #include <unordered_map>
 
+#include "../DataStructures/Queue/ActionQueue.h"
+
 
 class PlayerController : public Controller {
 public:
@@ -14,5 +16,4 @@ public:
 
     void Update(sf::Time dt) override;
 
-private:
 };

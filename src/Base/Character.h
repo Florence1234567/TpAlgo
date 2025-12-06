@@ -24,6 +24,8 @@ public:
     void setDestination(float worldX, float worldY);
     sf::Vector2<float> getDestination() { return destination; };
     Direction getDirection() const { return currentDir; };
+    bool hasDestination() const { return bHasDestination; };
+
     void Move(sf::Time dt);
 
 protected:

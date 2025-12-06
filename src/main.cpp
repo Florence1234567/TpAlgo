@@ -41,6 +41,7 @@ int main() {
             Player.Update(dt);
             Player.UpdateSprite(dt);
 
+            PController.Update(dt);
 
             window.clear(sf::Color::Blue);
             window.draw(backgroundSprite); 

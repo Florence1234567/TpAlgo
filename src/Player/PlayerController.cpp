@@ -4,18 +4,20 @@
 
 #include "PlayerController.h"
 #include "../Player//PlayerCharacter.h"
+#include "../Actions/MoveAction.h"
+#include "../Actions/WaitAction.h"
 
 void PlayerController::HandleEvent(const sf::Event &event, sf::RenderWindow *window) {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
         sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
-        std::cout << "Position X: " << mousePos.x << "\nPosition Y: " << mousePos.y << std::endl;
         sf::Vector2f worldPos = window->mapPixelToCoords(mousePos);
 
-        static_cast<Character*>(owner)->setDestination(worldPos.x, worldPos.y);
+        auto moveAction = std::make_unique<MoveAction>(owner, worldPos);
+        PushAction(std::move(moveAction));
     }
 }
 
 
 void PlayerController::Update(sf::Time dt) {
-    
+    Controller::Update(dt);
 }
