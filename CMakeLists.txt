@@ -43,8 +43,8 @@ add_executable(TPAlgo
         src/Actions/MoveAction.h
         src/Actions/WaitAction.cpp
         src/Actions/WaitAction.h
-#        src/UI/UIComponent.cpp
-#        src/UI/UIComponent.h
+        src/UI/UIComponent.cpp
+        src/UI/UIComponent.h
 )
 target_compile_features(TPAlgo PRIVATE cxx_std_17)
 target_link_libraries(TPAlgo PRIVATE SFML::Graphics)

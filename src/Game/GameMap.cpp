@@ -78,7 +78,6 @@ Tile GameMap::DecideTile(int x, int y) {
 
 Objects GameMap::DecideObject(int x, int y)
 {
-    const int rightPadding = 320;
     const int tilesX = (Width - rightPadding) / PixelsPerSquare;
     const int tilesY = Height / PixelsPerSquare;
     const int minX = 1;
@@ -153,8 +152,8 @@ void GameMap::DisplayObjects(sf::RenderWindow& window) {
     }
 }
 
-sf::FloatRect GameMap::GetGrassBounds() const {
-    const int tilesX = Width / PixelsPerSquare;
+sf::FloatRect GameMap::GetFenceBounds() const {
+    const int tilesX = (Width - rightPadding) / PixelsPerSquare;
     const int tilesY = Height / PixelsPerSquare;
 
     const int minX = 1;

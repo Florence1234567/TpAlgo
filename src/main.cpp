@@ -24,7 +24,7 @@ int main() {
         backgroundTexture.display();
         sf::Sprite backgroundSprite(backgroundTexture.getTexture());
 
-        sf::FloatRect grassBounds = GameMap.GetGrassBounds();
+        sf::FloatRect grassBounds = GameMap.GetFenceBounds();
 
         //Create player
         PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 2, 50.0f, 100.f);

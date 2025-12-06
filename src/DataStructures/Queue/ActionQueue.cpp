@@ -40,3 +40,16 @@ std::unique_ptr<Action> ActionQueue::getFirstAction() {
     std::unique_ptr<Action> elem = std::move(*list.getHeadElem());
     return elem;
 }
+
+std::vector<std::string> ActionQueue::GetActionNames() const {
+    std::vector<std::string> names;
+
+    for (int i = 0; i < list.getSize(); ++i) {
+        const auto &action = list.At(i);
+
+        if (action)
+            names.push_back(action->getName());
+    }
+
+    return names;
+}

@@ -3,26 +3,26 @@
 #include <iostream>
 #include <map>
 
+#include "../UIComponent.h"
+
 enum Background {
 	P_UL, P_U, P_UR,
 	P_L, Middle, P_R,
 	P_DL, P_D, P_DR
 };
 
-class PlayerUI {
+class PlayerUI : public UIComponent {
 public: 
 	virtual ~PlayerUI() = default;
 
-	virtual void Draw(sf::RenderWindow& window);
-	virtual void Update(sf::Time dt);
+	void Draw(sf::RenderWindow& window) override;
+	void Update(sf::Time dt) override;
 
 protected:
 	PlayerUI(float width, float height, std::string titleText, float margin = 20, float rightPadding = 320);
 
 	void BuildBackground();
 
-	float panelWidth;
-	float panelHeight;
 	float margin;
 	float rightPadding;
 	static const int PixelsPerSquare = 64;
@@ -45,6 +45,5 @@ protected:
 	std::map<Background, std::unique_ptr<sf::Sprite>> backgroundSprites;
 
 	sf::RectangleShape background;
-	sf::Font font;
 	sf::Text title;
 };

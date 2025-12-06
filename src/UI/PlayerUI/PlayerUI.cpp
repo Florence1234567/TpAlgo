@@ -27,16 +27,12 @@ void PlayerUI::Update(sf::Time dt)
 }
 
 PlayerUI::PlayerUI(float width, float height, std::string titleText, float margin, float rightPadding) :
-	panelWidth(width), panelHeight(height), title(sf::Text(font, "Title", 16)), margin(margin), rightPadding(rightPadding)
+	UIComponent(sf::Vector2f(0, 0), sf::Vector2f(width, height)), title(sf::Text(font, "Title", 16)), margin(margin), rightPadding(rightPadding)
 {
-	background.setSize({ panelWidth, panelHeight });
-
-	// Temporary - just to confirm the file exists
-	if (!font.openFromFile("Assets/Fonts/FiraCode/FiraCodeNerdFontMono-Regular.ttf"))
-		std::cerr << "Failed to load font" << std::endl;
+	background.setSize(panelSize);
 
 	title = sf::Text(font, titleText, 16);
-	title.setFillColor(sf::Color::White);
+	title.setFillColor(mainTextColor);
 
 	for (const auto& [object, path] : backgroundTextureFiles)
 		if (!backgoundTextures[object].loadFromFile(path))
@@ -56,8 +52,8 @@ PlayerUI::PlayerUI(float width, float height, std::string titleText, float margi
 
 void PlayerUI::BuildBackground()
 {
-	int cols = static_cast<int>(panelWidth) / PixelsPerSquare;
-	int rows = static_cast<int>(panelHeight) / PixelsPerSquare;
+	int cols = static_cast<int>(panelSize.x) / PixelsPerSquare;
+	int rows = static_cast<int>(panelSize.y) / PixelsPerSquare;
 
 	backgroundMap.resize(rows, std::vector<Background>(cols, Background::Middle));
 

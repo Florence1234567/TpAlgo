@@ -3,7 +3,7 @@
 
 #pragma once
 #include "../../Actions/Action.h"
-#include "../LinkedLIsts/DLinkedList.hpp"
+#include "../LinkedLists/DLinkedList.hpp"
 
 /**
  * Queue d'action (Action) basé sur l'implémentation de la doubly linked list DLinkedList.
@@ -17,19 +17,7 @@ public:
     void enqueue(std::unique_ptr<Action> action);
     void dequeue();
     std::unique_ptr<Action> getFirstAction();
-    std::vector<std::string> GetActionNames() const {
-        std::vector<std::string> names;
-
-        for (int i = 0; i < list.getSize(); ++i)
-        {
-            const auto& action = list.At(i);
-
-            if (action)
-                names.push_back(action->getName());
-        }
-
-        return names;
-    }
+    std::vector<std::string> GetActionNames() const;
 
 private:
     DLinkedList<std::unique_ptr<Action>> list;

@@ -29,12 +29,13 @@ public:
 	int GetWidth() { return Width; };
 	int GetHeight() { return Height; };
 
-	sf::FloatRect GetGrassBounds() const;
+	sf::FloatRect GetFenceBounds() const;
 
 private:
 	int Width;
 	int Height;
 	static const int PixelsPerSquare = 64;
+	const int rightPadding = 320;
 
 	Tile DecideTile(int x, int y);
 	Objects DecideObject(int x, int y);

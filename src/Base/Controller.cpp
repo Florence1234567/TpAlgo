@@ -27,6 +27,11 @@ void Controller::Update(sf::Time dt) {
 std::vector<std::string>& Controller::GetMovementQueue() const
 {
     cachedActionNames = actions->GetActionNames();
+    
+    if (currentAction) {
+        cachedActionNames.insert(cachedActionNames.begin(), currentAction->getName());
+    }
+    
     return cachedActionNames;
 }
 

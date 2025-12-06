@@ -8,8 +8,10 @@
 #include "../Actions/WaitAction.h"
 
 void PlayerController::HandleEvent(const sf::Event &event, sf::FloatRect playingBounds, sf::RenderWindow *window) {
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
-        sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
+    if (const auto* mouseButtonPressed = event.getIf<sf::Event::MouseButtonPressed>())
+    {
+        if (mouseButtonPressed->button != sf::Mouse::Button::Left) return;
+        sf::Vector2i mousePos = mouseButtonPressed->position;
         sf::Vector2f worldPos = window->mapPixelToCoords(mousePos);
 
         if (playingBounds.contains(worldPos)) {
