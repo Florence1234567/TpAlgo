@@ -19,7 +19,6 @@ void PlayerController::HandleEvent(const sf::Event &event, sf::FloatRect playing
     }
 }
 
-
 void PlayerController::Update(sf::Time dt) {
     Controller::Update(dt);
 }

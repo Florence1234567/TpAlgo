@@ -24,13 +24,6 @@ void MovementQueueUI::Draw(sf::RenderWindow& window)
 
 void MovementQueueUI::Update(sf::Time dt)
 {
-	timeSinceLastUpdate += dt.asSeconds();
-
-	if (timeSinceLastUpdate < interval)
-		return;
-
-	timeSinceLastUpdate = 0;
-
 	items.clear();
 
 	const auto queue = playerController.GetMovementQueue();
