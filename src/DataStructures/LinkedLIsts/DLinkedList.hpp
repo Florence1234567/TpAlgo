@@ -21,6 +21,7 @@ public:
     void removeFront();
     void removeBack();
     DNode<E>* getHead() const;
+    E* getHeadElem() const;
     int getSize() const;
 
 private:
@@ -49,7 +50,7 @@ DLinkedList<E>::~DLinkedList() {
 
 template<typename E>
 bool DLinkedList<E>::empty() const {
-    return head->next == tail;
+    return size == 0;
 }
 
 template<typename E>
@@ -115,6 +116,11 @@ void DLinkedList<E>::removeBack() {
 template<typename E>
 DNode<E> * DLinkedList<E>::getHead() const {
     return head->next;
+}
+
+template<typename E>
+E * DLinkedList<E>::getHeadElem() const {
+    return &head->next->element;
 }
 
 template<typename E>

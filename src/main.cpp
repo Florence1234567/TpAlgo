@@ -24,7 +24,7 @@ int main() {
         sf::Sprite backgroundSprite(backgroundTexture.getTexture());
 
         //Create player
-        PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 1.5f, 10.0f, 100.f);
+        PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 1.5f, 50.0f, 100.f);
         PlayerController PController(&Player);
 
         sf::Clock dtClock;
@@ -38,7 +38,7 @@ int main() {
             }
 
             sf::Time dt = dtClock.restart();
-            Player.Update(dt);
+            PController.Update(dt);
 
             window.clear(sf::Color::Blue);
 

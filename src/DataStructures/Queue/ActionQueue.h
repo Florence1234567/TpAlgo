@@ -16,6 +16,7 @@ public:
     const Action& front() const;
     void enqueue(std::unique_ptr<Action> action);
     void dequeue();
+    std::unique_ptr<Action> getFirstAction();
 
 private:
     DLinkedList<std::unique_ptr<Action>> list;

@@ -18,6 +18,7 @@ public:
 
     virtual void Update(sf::Time dt);
     void setDestination(float worldX, float worldY);
+    bool hasDestination() const { return bHasDestination; };
     void Move(sf::Time dt);
 
 protected:

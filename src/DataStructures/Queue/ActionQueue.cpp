@@ -33,3 +33,10 @@ void ActionQueue::dequeue() {
 
     list.removeFront();
 }
+
+std::unique_ptr<Action> ActionQueue::getFirstAction() {
+    if (empty()) throw std::out_of_range("The queue is empty.");
+
+    std::unique_ptr<Action> elem = std::move(*list.getHeadElem());
+    return elem;
+}

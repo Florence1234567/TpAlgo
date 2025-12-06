@@ -33,6 +33,10 @@ add_executable(TPAlgo
         src/DataStructures/Queue/ActionQueue.h
         src/DataStructures/LinkedLIsts/DLinkedList.hpp
         src/DataStructures/LinkedLIsts/DNode.hpp
+        src/Actions/MoveAction.cpp
+        src/Actions/MoveAction.h
+        src/Actions/WaitAction.cpp
+        src/Actions/WaitAction.h
 )
 target_compile_features(TPAlgo PRIVATE cxx_std_17)
 target_link_libraries(TPAlgo PRIVATE SFML::Graphics)
