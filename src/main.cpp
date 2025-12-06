@@ -39,9 +39,9 @@ int main() {
 
             sf::Time dt = dtClock.restart();
             Player.Update(dt);
+            Player.UpdateSprite(dt);
 
             window.clear(sf::Color::Blue);
-
             window.draw(backgroundSprite); 
 
             Player.Draw(window);   

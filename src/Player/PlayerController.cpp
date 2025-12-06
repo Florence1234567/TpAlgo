@@ -3,6 +3,7 @@
 //
 
 #include "PlayerController.h"
+#include "../Player//PlayerCharacter.h"
 
 void PlayerController::HandleEvent(const sf::Event &event, sf::RenderWindow *window) {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
@@ -16,5 +17,5 @@ void PlayerController::HandleEvent(const sf::Event &event, sf::RenderWindow *win
 
 
 void PlayerController::Update(sf::Time dt) {
-
+    
 }

@@ -22,5 +22,17 @@ void Character::Update(sf::Time dt) {
 
 void Character::setDestination(float worldX, float worldY) {
     destination = sf::Vector2f(worldX, worldY);
+
+    sf::Vector2f curPos = sprite.getPosition();
+    sf::Vector2f dir = destination - curPos;
+
+    if (std::hypot(dir.x, dir.y) < 1)
+        return;
+    
     bHasDestination = true;
+
+    if (std::abs(dir.x) > std::abs(dir.y))
+        currentDir = (dir.x > 0) ? Direction::Right : Direction::Left;
+    else
+        currentDir = (dir.y > 0) ? Direction::Down : Direction::Up;
 }
