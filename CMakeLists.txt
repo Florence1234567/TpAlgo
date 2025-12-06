@@ -23,12 +23,12 @@ add_executable(TPAlgo
         src/Base/Controller.h
         src/Game/GameManager.cpp
         src/Game/GameManager.h
-        src/UI/PlayerUI.cpp
-        src/UI/PlayerUI.h
-        src/UI/InventoryUI.cpp
-        src/UI/InventoryUI.h
-        src/UI/MovementQueueUI.cpp
-        src/UI/MovementQueueUI.h
+        src/UI/PlayerUI/PlayerUI.cpp
+        src/UI/PlayerUI/PlayerUI.h
+        src/UI/PlayerUI/InventoryUI.cpp
+        src/UI/PlayerUI/InventoryUI.h
+        src/UI/PlayerUI/MovementQueueUI.cpp
+        src/UI/PlayerUI/MovementQueueUI.h
         src/Player/PlayerCharacter.cpp
         src/Player/PlayerCharacter.h
         src/Player/PlayerController.cpp
@@ -37,15 +37,16 @@ add_executable(TPAlgo
         src/Actions/Action.h
         src/DataStructures/Queue/ActionQueue.cpp
         src/DataStructures/Queue/ActionQueue.h
-        src/DataStructures/LinkedLIsts/DLinkedList.hpp
-        src/DataStructures/LinkedLIsts/DNode.hpp
+        src/DataStructures/LinkedLists/DLinkedList.hpp
+        src/DataStructures/LinkedLists/DNode.hpp
         src/Actions/MoveAction.cpp
         src/Actions/MoveAction.h
         src/Actions/WaitAction.cpp
         src/Actions/WaitAction.h
- "src/UI/PlayerUI.cpp")
+        src/UI/UIComponent.cpp
+        src/UI/UIComponent.h)
 target_compile_features(TPAlgo PRIVATE cxx_std_17)
 target_link_libraries(TPAlgo PRIVATE SFML::Graphics)
 
-# Copy Images folder to output directory
-file(COPY ${CMAKE_SOURCE_DIR}/Images DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+# Copy Assets folder to output directory
+file(COPY ${CMAKE_SOURCE_DIR}/Assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug)

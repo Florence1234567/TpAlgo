@@ -3,5 +3,11 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Builds/_deps/flac-src" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Builds/_deps/freetype-src" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Builds/_deps/freetype-src/subprojects/dlg" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Builds/_deps/ogg-src" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Builds/_deps/sfml-src" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Builds/_deps/vorbis-src" vcs="Git" />
   </component>
 </project>
