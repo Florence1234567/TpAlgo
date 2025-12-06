@@ -43,25 +43,25 @@ private:
 	std::vector<std::vector<Objects>> objectsMap;
 
 	std::map<Tile, std::string> textureFiles = {
-		{EdgeUpLeft, "Images/Ground/E_UL.png"},
-		{EdgeUp, "Images/Ground/E_U.png"},
-		{EdgeUpRight, "Images/Ground/E_UR.png"},
-		{EdgeLeft, "Images/Ground/E_L.png"},
-		{Grass, "Images/Ground/Grass.png"},
-		{EdgeRight, "Images/Ground/E_R.png"},
-		{EdgeDownLeft, "Images/Ground/E_DL.png"},
-		{EdgeDown, "Images/Ground/E_D.png"},
-		{EdgeDownRight, "Images/Ground/E_DR.png"},
-		{Water, "Images/Ground/Water.png"}
+		{EdgeUpLeft, "Assets/Images/Ground/E_UL.png"},
+		{EdgeUp, "Assets/Images/Ground/E_U.png"},
+		{EdgeUpRight, "Assets/Images/Ground/E_UR.png"},
+		{EdgeLeft, "Assets/Images/Ground/E_L.png"},
+		{Grass, "Assets/Images/Ground/Grass.png"},
+		{EdgeRight, "Assets/Images/Ground/E_R.png"},
+		{EdgeDownLeft, "Assets/Images/Ground/E_DL.png"},
+		{EdgeDown, "Assets/Images/Ground/E_D.png"},
+		{EdgeDownRight, "Assets/Images/Ground/E_DR.png"},
+		{Water, "Assets/Images/Ground/Water.png"}
 	};
 
 	std::map<Objects, std::string> objectsTextureFiles = {
-		{ FenceUpLeft, "Images/Fences/F_CornerUL.png" },
-		{ FenceUpRight, "Images/Fences/F_CornerUR.png" },
-		{ FenceLeftRight, "Images/Fences/F_CornerLR.png" },
-		{ FenceUpDown, "Images/Fences/F_CornerUD.png" },
-		{ FenceDownLeft, "Images/Fences/F_CornerDL.png" },
-		{ FenceDownRight, "Images/Fences/F_CornerDR.png" }
+		{ FenceUpLeft, "Assets/Images/Fences/F_CornerUL.png" },
+		{ FenceUpRight, "Assets/Images/Fences/F_CornerUR.png" },
+		{ FenceLeftRight, "Assets/Images/Fences/F_CornerLR.png" },
+		{ FenceUpDown, "Assets/Images/Fences/F_CornerUD.png" },
+		{ FenceDownLeft, "Assets/Images/Fences/F_CornerDL.png" },
+		{ FenceDownRight, "Assets/Images/Fences/F_CornerDR.png" }
 	};
 
 	std::map<Tile, sf::Texture> textures;
