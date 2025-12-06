@@ -13,6 +13,7 @@ public:
 		walkFrameTimer = 0;
 		walkFrameDuration = 1;
 		isWalkFrame1 = true;
+		speed = 25;
 	};
 
     void UpdateSprite(sf::Time dt);
@@ -27,10 +28,12 @@ private:
 	 {"FrontWalk1", "Images/Character/C_FrontWalk1.png"},
 	 {"FrontWalk2", "Images/Character/C_FrontWalk2.png"},
 	 {"Jump", "Images/Character/C_Jump.png"},
-	 {"LeftWalk1", "Images/Character/C_Left.png"},
-	 {"LeftWalk2", "Images/Character/C_LeftWalking.png"},
-	 {"RightWalk1", "Images/Character/C_Right.png"},
-	 {"RightWalk2", "Images/Character/C_RightWalking.png"}
+	 {"Left", "Images/Character/C_Left.png"},
+     {"LeftWalk1", "Images/Character/C_LeftWalking1.png"},
+	 {"LeftWalk2", "Images/Character/C_LeftWalking2.png"},
+	 {"Right", "Images/Character/C_Right.png"},
+	 {"RightWalk1", "Images/Character/C_RightWalking1.png"},
+	 {"RightWalk2", "Images/Character/C_RightWalking2.png"}
 	};
 
 	void LoadCharacterTextures();

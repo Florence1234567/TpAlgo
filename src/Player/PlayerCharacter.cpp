@@ -16,50 +16,36 @@ void PlayerCharacter::UpdateSprite(sf::Time dt)
 		isWalkFrame1 = !isWalkFrame1;
 	}
 
+	switch (currentDir) {
+	case Direction::Up:
+		spriteName = "Back";
+		break;
+	case Direction::Down:
+		spriteName = "Front";
+		break;
+	case Direction::Left:
+		spriteName = "Left";
+		break;
+	case Direction::Right:
+		spriteName = "Right";
+		break;
+	}
+
 	if (bHasDestination)
 	{
-		switch (currentDir) {
-		case Direction::Up:
-			spriteName = "BackWalk";
-			break;
-		case Direction::Down:
-			spriteName = "FrontWalk";
-			break;
-		case Direction::Left:
-			spriteName = "LeftWalk";
-			break;
-		case Direction::Right:
-			spriteName = "RightWalk";
-			break;
-		}
-
 		if (!isWalkFrame1)
-			spriteName += "1";
+			spriteName += "Walk1";
 		else
-			spriteName += "2";
+			spriteName += "Walk2";
 	}
-	else
-		//Idle
-		switch (currentDir) {
-		case Direction::Up:
-			spriteName = "Back";
-			break;
-		case Direction::Down:
-			spriteName = "Front";
-			break;
-		case Direction::Left:
-			spriteName = "Left";
-			break;
-		case Direction::Right:
-			spriteName = "Right";
-			break;
-		}
+		
 
 	auto it = characterSprites.find(spriteName);
 	if (it != characterSprites.end()) {
 		sf::Vector2f currentPos = sprite.getPosition();
 		sprite = *(it->second.get());
 		sprite.setPosition(currentPos);
+		sprite.setScale(sf::Vector2f(3, 3));
 	}
 }
 
