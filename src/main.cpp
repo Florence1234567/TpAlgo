@@ -6,7 +6,7 @@
 #include "Game/GameMap.h"
 #include "Player/PlayerCharacter.h"
 #include "Player/PlayerController.h"
-#include "UI/MovementQueueUI.h"
+#include "UI/PlayerUI/MovementQueueUI.h"
 //#include "UI/InventoryUI.h"
 
 int main() {

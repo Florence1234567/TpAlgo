@@ -30,15 +30,15 @@ protected:
 	std::vector<std::vector<Background>> backgroundMap;
 
 	std::map<Background, std::string> backgroundTextureFiles = {
-		{ P_UL, "Images/Panel/P_UL.png" },
-	    { P_U, "Images/Panel/P_U.png" },
-		{ P_UR, "Images/Panel/P_UR.png" },
-		{ P_L, "Images/Panel/P_L.png" },
-		{ Middle, "Images/Panel/Middle.png" },
-		{ P_R, "Images/Panel/P_R.png" },
-		{ P_DL, "Images/Panel/P_DL.png" },
-		{ P_D, "Images/Panel/P_D.png" },
-		{ P_DR, "Images/Panel/P_DR.png" }
+		{ P_UL, "Assets/Images/Panel/P_UL.png" },
+	    { P_U, "Assets/Images/Panel/P_U.png" },
+		{ P_UR, "Assets/Images/Panel/P_UR.png" },
+		{ P_L, "Assets/Images/Panel/P_L.png" },
+		{ Middle, "Assets/Images/Panel/Middle.png" },
+		{ P_R, "Assets/Images/Panel/P_R.png" },
+		{ P_DL, "Assets/Images/Panel/P_DL.png" },
+		{ P_D, "Assets/Images/Panel/P_D.png" },
+		{ P_DR, "Assets/Images/Panel/P_DR.png" }
 	};
 
 	std::map<Background, sf::Texture> backgoundTextures;

@@ -32,7 +32,7 @@ PlayerUI::PlayerUI(float width, float height, std::string titleText, float margi
 	background.setSize({ panelWidth, panelHeight });
 
 	// Temporary - just to confirm the file exists
-	if (!font.openFromFile("C:/A2025 Algo/TpAlgo/Fonts/FiraCode/FiraCodeNerdFontMono-Regular.ttf"))
+	if (!font.openFromFile("Assets/Fonts/FiraCode/FiraCodeNerdFontMono-Regular.ttf"))
 		std::cerr << "Failed to load font" << std::endl;
 
 	title = sf::Text(font, titleText, 16);
