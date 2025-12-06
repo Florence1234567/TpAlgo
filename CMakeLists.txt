@@ -23,8 +23,8 @@ add_executable(TPAlgo
         src/Base/Controller.h
         src/Game/GameManager.cpp
         src/Game/GameManager.h
-        src/UI/PlayerUI/PlayerUI.cpp
-        src/UI/PlayerUI/PlayerUI.h
+        src/UI/PlayerUI/PlayerUIComponent.cpp
+        src/UI/PlayerUI/PlayerUIComponent.h
         src/UI/PlayerUI/InventoryUI.cpp
         src/UI/PlayerUI/InventoryUI.h
         src/UI/PlayerUI/MovementQueueUI.cpp

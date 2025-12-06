@@ -1,6 +1,6 @@
 #pragma once
-#include "PlayerUI.h"
+#include "PlayerUIComponent.h"
 
-class InventoryUI : PlayerUI {
+class InventoryUI : PlayerUIComponent {
 
 };

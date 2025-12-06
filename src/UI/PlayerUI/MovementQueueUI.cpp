@@ -4,7 +4,7 @@
 
 MovementQueueUI::MovementQueueUI(PlayerController& controller, sf::Vector2u& windowSize,
 	float width, float height, const std::string& titleText)
-	: PlayerUI(width, height, titleText), playerController(controller)
+	: PlayerUIComponent(width, height, titleText), playerController(controller)
 {
 	position.x = static_cast<float>(windowSize.x) - rightPadding - panelSize.x;
 	position.y = margin;

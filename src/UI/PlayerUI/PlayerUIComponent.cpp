@@ -1,6 +1,6 @@
-#include "PlayerUI.h"
+#include "PlayerUIComponent.h"
 
-void PlayerUI::Draw(sf::RenderWindow& window)
+void PlayerUIComponent::Draw(sf::RenderWindow& window)
 {
 	BuildBackground();
 	sf::Vector2f origin = background.getPosition();
@@ -22,11 +22,11 @@ void PlayerUI::Draw(sf::RenderWindow& window)
 	window.draw(title);
 }
 
-void PlayerUI::Update(sf::Time dt)
+void PlayerUIComponent::Update(sf::Time dt)
 {
 }
 
-PlayerUI::PlayerUI(float width, float height, std::string titleText, float margin, float rightPadding) :
+PlayerUIComponent::PlayerUIComponent(float width, float height, std::string titleText, float margin, float rightPadding) :
 	UIComponent(sf::Vector2f(0, 0), sf::Vector2f(width, height)), title(sf::Text(font, "Title", 16)), margin(margin), rightPadding(rightPadding)
 {
 	background.setSize(panelSize);
@@ -50,7 +50,7 @@ PlayerUI::PlayerUI(float width, float height, std::string titleText, float margi
 	BuildBackground();
 }
 
-void PlayerUI::BuildBackground()
+void PlayerUIComponent::BuildBackground()
 {
 	int cols = static_cast<int>(panelSize.x) / PixelsPerSquare;
 	int rows = static_cast<int>(panelSize.y) / PixelsPerSquare;

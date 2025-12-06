@@ -1,11 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "PlayerUI.h"
+#include "PlayerUIComponent.h"
 #include "../../Player/PlayerController.h"
 #include <vector>
 #include <string>
 
-class MovementQueueUI : public PlayerUI {
+class MovementQueueUI : public PlayerUIComponent {
 public:
     MovementQueueUI(PlayerController& controller, sf::Vector2u& windowSize,
         float width, float height, const std::string& title = "Player Movement Queue");
