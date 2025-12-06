@@ -3,6 +3,9 @@
 #include <sstream>
 #include <map>
 #include <iostream>
+#include <random>
+#include <cmath>        
+#include <memory>       
 
 GameMap::GameMap(int width, int height) {
     Width = width;
@@ -45,6 +48,8 @@ GameMap::GameMap(int width, int height) {
         float scaleY = static_cast<float>(PixelsPerSquare) / textureSize.y;
         objectsSprites[object]->setScale(sf::Vector2f(scaleX, scaleY));
     }
+
+    //PlaceRandomObjects(15);
 }
 
 Tile GameMap::DecideTile(int x, int y) {
@@ -102,6 +107,91 @@ Objects GameMap::DecideObject(int x, int y)
     return Objects::ObjectNone;
 }
 
+/*void GameMap::PlaceRandomObjects(int count)
+{
+    const int tilesX = (Width - rightPadding) / PixelsPerSquare;
+    const int tilesY = Height / PixelsPerSquare;
+    const int minX = 2;
+    const int minY = 2;
+    const int maxX = tilesX - 3;
+    const int maxY = tilesY - 2;
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distX(minX, maxX);
+    std::uniform_int_distribution<> distY(minY, maxY);
+    std::uniform_int_distribution<> distObject(0, 2);
+
+    int placed = 0;
+    int attemps = 0;
+    const int maxAttemps = count * 10;
+
+    while (placed < count && attemps < maxAttemps)
+    {
+        attemps++;
+
+        int tileX = distX(gen);
+        int tileY = distY(gen);
+
+        if (!IsValidObjectPosition(tileX, tileY))
+            continue;
+
+        ObjectType objectType;
+        int objChoice = distObject(gen);
+
+        switch (objChoice) 
+        {
+        case 0:
+            objectType = ObjectType::Rock;
+            break;
+        case 1:
+            objectType = ObjectType::Chest;
+            break;
+        default:
+            objectType = ObjectType::Rock;
+            break;
+        }
+
+        //Center of tile.
+        int pixelX = tileX * PixelsPerSquare + PixelsPerSquare / 2;
+        int pixelY = tileY * PixelsPerSquare + PixelsPerSquare / 2;
+
+        gameObjects.push_back(std::make_unique<GameObject>(pixelX, pixelY, 2, objectType));
+        placed++;
+    }
+}
+
+bool GameMap::IsValidObjectPosition(int x, int y) const
+{
+    const int tilesX = (Width - rightPadding) / PixelsPerSquare;
+    const int tilesY = Height / PixelsPerSquare;
+
+    if (x < 2 || x >= tilesX - 3 || y < 2 || y >= tilesY - 2)
+        return false;
+
+    if (map[y][x] != Tile::Grass)
+        return false;
+
+    int pixelX = x * PixelsPerSquare + PixelsPerSquare / 2;
+    int pixelY = y * PixelsPerSquare + PixelsPerSquare / 2;
+
+    for (const auto& obj : gameObjects)
+    {
+        sf::Vector2f objPos = obj->GetPosition();
+
+        float dx = pixelX - objPos.x;
+        float dy = pixelY - objPos.y;
+        float distSq = dx * dx + dy * dy;
+
+        float minDist = PixelsPerSquare * 2;
+
+        if (distSq < minDist * minDist)
+            return false;
+    }
+
+    return true;
+}*/
+
 void GameMap::Display(sf::RenderTarget &target) {
     for (int row = 0; row < Height; row++) {
         for (int col = 0; col < Width; col++) {
@@ -150,6 +240,10 @@ void GameMap::DisplayObjects(sf::RenderWindow& window) {
             }
         }
     }
+
+    /*for (const auto& obj : gameObjects) {
+        obj->Draw(window);
+    }*/
 }
 
 sf::FloatRect GameMap::GetFenceBounds() const {
@@ -175,3 +269,32 @@ sf::FloatRect GameMap::GetFenceBounds() const {
 
     return bounds;
 }
+
+std::vector<sf::FloatRect> GameMap::GetObjectBounds() const
+{
+    std::vector<sf::FloatRect> boundsList;
+
+    for (const auto& obj : gameObjects)
+        boundsList.push_back(obj->GetCollisionBounds());
+
+    return boundsList;
+}
+
+/*bool GameMap::IsPositionBlocked(float x, float y, float width, float height) const
+{
+    sf::FloatRect fenceBounds = GetFenceBounds();
+    sf::FloatRect playerBounds(sf::Vector2f(x - width / 2, y - height / 2), sf::Vector2f(width, height));
+
+    if (!fenceBounds.contains(sf::Vector2f(x, y)))
+        return true;
+
+    for (const auto& obj : gameObjects)
+    {
+        sf::FloatRect objBounds = obj->GetCollisionBounds();
+
+        if (auto intersection = playerBounds.findIntersection(objBounds))
+            return true;
+    }
+
+    return false;
+}*/

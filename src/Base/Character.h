@@ -8,7 +8,6 @@
 #include "SFML/Graphics/Texture.hpp"
 #include "SFML/Network/SocketHandle.hpp"
 #include <iostream>
-
 #include "SFML/Graphics/RenderWindow.hpp"
 
 

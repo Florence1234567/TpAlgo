@@ -2,7 +2,6 @@
 
 void PlayerUIComponent::Draw(sf::RenderWindow& window)
 {
-	BuildBackground();
 	sf::Vector2f origin = background.getPosition();
 
 	for (int row = 0; row < backgroundMap.size(); row++)
@@ -27,11 +26,11 @@ void PlayerUIComponent::Update(sf::Time dt)
 }
 
 PlayerUIComponent::PlayerUIComponent(float width, float height, std::string titleText, float margin, float rightPadding) :
-	UIComponent(sf::Vector2f(0, 0), sf::Vector2f(width, height)), title(sf::Text(font, "Title", 16)), margin(margin), rightPadding(rightPadding)
+	UIComponent(sf::Vector2f(0, 0), sf::Vector2f(width * PixelsPerSquare, height * PixelsPerSquare)), title(sf::Text(font, "Title", 16)), margin(margin), rightPadding(rightPadding)
 {
 	background.setSize(panelSize);
 
-	title = sf::Text(font, titleText, 16);
+	title = sf::Text(font, titleText, 20);
 	title.setFillColor(mainTextColor);
 
 	for (const auto& [object, path] : backgroundTextureFiles)

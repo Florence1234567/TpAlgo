@@ -16,21 +16,21 @@ int main() {
 
     try
     {
-        GameMap GameMap(windowSize.x, windowSize.y);
+        GameMap gameMap(windowSize.x, windowSize.y);
 
         sf::RenderTexture backgroundTexture(sf::Vector2u(windowSize.x, windowSize.y));
         backgroundTexture.clear(sf::Color::Transparent); 
-        GameMap.Display(backgroundTexture);               
+        gameMap.Display(backgroundTexture);               
         backgroundTexture.display();
         sf::Sprite backgroundSprite(backgroundTexture.getTexture());
 
-        sf::FloatRect grassBounds = GameMap.GetFenceBounds();
+        sf::FloatRect grassBounds = gameMap.GetFenceBounds();
 
         //Create player
         PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 2, 50.0f, 100.f);
-        PlayerController PController(&Player);
+        PlayerController PController(&Player, &gameMap);
 
-        MovementQueueUI MovementQueueUI(PController, windowSize, 10, 5, "Player Movement Queue");
+        MovementQueueUI MovementQueueUI(PController, windowSize, 5, 7, "Player Movement Queue");
 
         sf::Clock dtClock;
         while (window.isOpen())

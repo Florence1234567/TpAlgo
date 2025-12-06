@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <map>
+#include "GameObject.h"
 
 enum Tile {
 	EdgeUpLeft, EdgeUp, EdgeUpRight,
@@ -30,6 +31,8 @@ public:
 	int GetHeight() { return Height; };
 
 	sf::FloatRect GetFenceBounds() const;
+	std::vector<sf::FloatRect> GetObjectBounds() const;
+	//bool IsPositionBlocked(float x, float y, float width = 32, float height = 32) const;
 
 private:
 	int Width;
@@ -39,6 +42,11 @@ private:
 
 	Tile DecideTile(int x, int y);
 	Objects DecideObject(int x, int y);
+
+	std::vector<std::unique_ptr<GameObject>> gameObjects;
+
+	/*void PlaceRandomObjects(int count);
+	bool IsValidObjectPosition(int x, int y) const;*/
 
 	std::vector<std::vector<Tile>> map;
 	std::vector<std::vector<Objects>> objectsMap;

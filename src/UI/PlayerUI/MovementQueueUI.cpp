@@ -6,13 +6,11 @@ MovementQueueUI::MovementQueueUI(PlayerController& controller, sf::Vector2u& win
 	float width, float height, const std::string& titleText)
 	: PlayerUIComponent(width, height, titleText), playerController(controller)
 {
-	position.x = static_cast<float>(windowSize.x) - rightPadding - panelSize.x;
+	position.x = static_cast<float>(windowSize.x) - panelSize.x - margin;
 	position.y = margin;
 
 	background.setPosition(position);
-	title.setPosition({ position.x + 10, position.y + 5 });
-
-	BuildBackground();
+	title.setPosition({ position.x + contentMargin, position.y + contentMargin - 5 });
 }
 
 void MovementQueueUI::Draw(sf::RenderWindow& window)
@@ -27,18 +25,17 @@ void MovementQueueUI::Update(sf::Time dt)
 {
 	items.clear();
 
-
 	const auto queue = playerController.GetMovementQueue();
 
 	if (queue.empty())
 		return;
 
-	float x = background.getPosition().x + 10;
-	float y = background.getPosition().y + 30;
+	float x = background.getPosition().x + contentMargin;
+	float y = background.getPosition().y + contentMargin + 20;
 
 	for (const auto& action : queue)
 	{
-		sf::Text text(font, sf::String(action), 14);
+		sf::Text text(font, sf::String(action), 16);
 		text.setFillColor(mainTextColor);
 		text.setPosition({ x, y });
 		items.push_back(text);
