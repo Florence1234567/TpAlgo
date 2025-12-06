@@ -49,8 +49,6 @@ std::vector<std::string> ActionQueue::GetActionNames() const {
 
         if (action)
             names.push_back(action->getName());
-
-        if (action) std::cout << action->getName() << std::endl;
     }
 
     return names;

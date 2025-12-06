@@ -11,12 +11,13 @@ MovementQueueUI::MovementQueueUI(PlayerController& controller, sf::Vector2u& win
 
 	background.setPosition(position);
 	title.setPosition({ position.x + 10, position.y + 5 });
+
+	BuildBackground();
 }
 
 void MovementQueueUI::Draw(sf::RenderWindow& window)
 {
-	window.draw(background);
-	window.draw(title);
+	PlayerUIComponent::Draw(window);
 
 	for (const auto& item : items)
 		window.draw(item);
