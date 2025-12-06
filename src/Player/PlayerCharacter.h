@@ -13,7 +13,6 @@ public:
 		walkFrameTimer = 0;
 		walkFrameDuration = 1;
 		isWalkFrame1 = true;
-		speed = 25;
 	};
 
     void UpdateSprite(sf::Time dt);
