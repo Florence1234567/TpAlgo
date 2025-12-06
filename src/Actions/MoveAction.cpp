@@ -9,6 +9,6 @@ void MoveAction::Execute() {
 }
 
 bool MoveAction::Update(sf::Time dt) {
-    bCompleted = owner->hasDestination();
+    bCompleted = !owner->hasDestination();
     return !Finished();
 }
