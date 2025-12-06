@@ -25,6 +25,7 @@ protected:
     int posX;
     int posY;
     sf::Sprite sprite;
+    float scale;
 
 private:
     sf::Texture texture;

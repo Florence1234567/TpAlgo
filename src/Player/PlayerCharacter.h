@@ -13,9 +13,10 @@ public:
 		walkFrameTimer = 0;
 		walkFrameDuration = 1;
 		isWalkFrame1 = true;
-		speed = 25;
+		speed = baseSpeed;
 	};
 
+	void Update(sf::Time dt) override;
     void UpdateSprite(sf::Time dt);
 private:
     //Character Sprites
