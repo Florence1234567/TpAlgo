@@ -22,7 +22,7 @@ const Action &ActionQueue::front() const {
     return *list.front();
 }
 
-void ActionQueue::enqueue(std::unique_ptr<Action> action) {
+void ActionQueue::enqueue(std::shared_ptr<Action> action) {
     if (!action) throw std::invalid_argument("The action is null.");
 
     list.addBack(std::move(action));
@@ -34,10 +34,10 @@ void ActionQueue::dequeue() {
     list.removeFront();
 }
 
-std::unique_ptr<Action> ActionQueue::getFirstAction() {
+std::shared_ptr<Action> ActionQueue::getFirstAction() {
     if (empty()) throw std::out_of_range("The queue is empty.");
 
-    std::unique_ptr<Action> elem = std::move(*list.getHeadElem());
+    std::shared_ptr<Action> elem = list.getHeadElem();
     return elem;
 }
 
@@ -49,6 +49,8 @@ std::vector<std::string> ActionQueue::GetActionNames() const {
 
         if (action)
             names.push_back(action->getName());
+
+        if (action) std::cout << action->getName() << std::endl;
     }
 
     return names;

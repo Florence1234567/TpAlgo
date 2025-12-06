@@ -27,11 +27,7 @@ void Controller::Update(sf::Time dt) {
 std::vector<std::string>& Controller::GetMovementQueue() const
 {
     cachedActionNames = actions->GetActionNames();
-    
-    if (currentAction) {
-        cachedActionNames.insert(cachedActionNames.begin(), currentAction->getName());
-    }
-    
+
     return cachedActionNames;
 }
 
@@ -40,7 +36,7 @@ void Controller::PushAction(std::unique_ptr<Action> action) {
 }
 
 void Controller::ExecuteAction() {
-    if (!actions || actions->empty()) return;
+    if (!actions || actions->empty()) PushAction(std::make_unique<WaitAction>(owner));
 
     currentAction = actions->getFirstAction();
     if (currentAction)

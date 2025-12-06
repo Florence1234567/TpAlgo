@@ -26,6 +26,6 @@ protected:
     void PushAction(std::unique_ptr<Action> action);
     void ExecuteAction();
     ActionQueue* actions;
-    std::unique_ptr<Action> currentAction;
+    std::shared_ptr<Action> currentAction;
     mutable std::vector<std::string> cachedActionNames;
 };

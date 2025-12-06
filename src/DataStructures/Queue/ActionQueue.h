@@ -14,11 +14,11 @@ public:
     int getSize() const;
     bool empty() const;
     const Action& front() const;
-    void enqueue(std::unique_ptr<Action> action);
+    void enqueue(std::shared_ptr<Action> action);
     void dequeue();
-    std::unique_ptr<Action> getFirstAction();
+    std::shared_ptr<Action> getFirstAction();
     std::vector<std::string> GetActionNames() const;
 
 private:
-    DLinkedList<std::unique_ptr<Action>> list;
+    DLinkedList<std::shared_ptr<Action>> list;
 };

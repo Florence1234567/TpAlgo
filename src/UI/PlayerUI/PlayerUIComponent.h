@@ -13,14 +13,13 @@ enum Background {
 
 class PlayerUIComponent : public UIComponent {
 public: 
+	PlayerUIComponent(float width, float height, std::string titleText, float margin = 20, float rightPadding = 320);
 	virtual ~PlayerUIComponent() = default;
 
 	void Draw(sf::RenderWindow& window) override;
 	void Update(sf::Time dt) override;
 
 protected:
-	PlayerUIComponent(float width, float height, std::string titleText, float margin = 20, float rightPadding = 320);
-
 	void BuildBackground();
 
 	float margin;
