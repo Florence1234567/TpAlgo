@@ -53,7 +53,7 @@ int main() {
             window.clear(sf::Color::Blue);
             window.draw(backgroundSprite); 
 
-            //GameMap.DisplayObjects(window);
+            gameMap.DisplayObjects(window);
             MovementQueueUI.Draw(window);
             Player.Draw(window);   
 
