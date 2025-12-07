@@ -31,7 +31,7 @@ bool ActionButton::contains(sf::Vector2f point) const {
 
 
 /// Menu contextuel
-ActionContextMenuUI::ActionContextMenuUI(const PlayerController *controller, sf::Vector2f position)
+ActionContextMenuUI::ActionContextMenuUI(PlayerController *controller, sf::Vector2f position)
     : PlayerUIComponent(position, sf::Vector2f(4, 3), 20, 280), playerController(controller) {
     title = sf::Text(font, "Perform Action", 15);
     title.setFillColor(mainTextColor);
@@ -48,6 +48,7 @@ void ActionContextMenuUI::Draw(sf::RenderWindow &window) {
     PlayerUIComponent::Draw(window);
 
     items.clear();
+    buttons.clear();
 
     const std::vector<std::unique_ptr<Action> > &executable_actions = playerController->GetExecutableActions();;
 
@@ -80,9 +81,10 @@ void ActionContextMenuUI::HandleEvent(const sf::Event &event, sf::RenderWindow *
             if (background.getGlobalBounds().contains(worldPos)) {
                 for (const auto &button: buttons) {
                     if (button.contains(worldPos)) {
-                        const std::vector<std::unique_ptr<Action> > &actions = playerController->GetExecutableActions();
                         const auto &action = button.getAction();
+                        if (!action) return;
                         const_cast<PlayerController *>(playerController)->PerformAction(action->Clone());
+                        const_cast<PlayerController *>(playerController)->CloseContextMenu();
                         return;
                     }
                 }

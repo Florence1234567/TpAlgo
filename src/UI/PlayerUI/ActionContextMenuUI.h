@@ -32,7 +32,7 @@ private:
 /// Menu contextuel
 class ActionContextMenuUI : public PlayerUIComponent {
 public:
-    ActionContextMenuUI(const PlayerController* controller, sf::Vector2f position);
+    ActionContextMenuUI(PlayerController* controller, sf::Vector2f position);
 
     void Draw(sf::RenderWindow& window) override;
     void Update(sf::Time dt) override;

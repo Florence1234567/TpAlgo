@@ -58,7 +58,7 @@ void PlayerCharacter::LoadCharacterTextures() {
     for (const auto &[name, path]: characterTextureFiles) {
         sf::Texture texture;
         if (texture.loadFromFile(path))
-            characterTextures[name] = texture;
+            characterTextures[name] = std::move(texture);
         else
             std::cerr << "Error loading " << path << std::endl;
     }

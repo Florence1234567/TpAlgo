@@ -74,5 +74,6 @@ void PlayerController::PerformAction(std::unique_ptr<Action> action) {
             break;
     }
 
-    bShowContextMenu = false;
+    CloseContextMenu();
+    cachedExecutableAction.clear();
 }

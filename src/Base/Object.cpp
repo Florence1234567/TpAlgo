@@ -4,10 +4,14 @@
 
 #include "Object.h"
 
-Object::Object(int x, int y, float size, const std::string &texturePath) : posX(x), posY(y), scale(size), sprite(sf::Sprite(texture)) {
-    if (!texture.loadFromFile(texturePath))
-        throw std::runtime_error("Failed to load texture " + texturePath);
+static sf::Texture loadTexture(const std::string &path) {
+    sf::Texture texture;
+    if (!texture.loadFromFile(path))
+        throw std::runtime_error("Failed to load texture " + path);
+    return texture;
+}
 
+Object::Object(int x, int y, float size, const std::string &texturePath) : posX(x), posY(y), scale(size), texture(loadTexture(texturePath)), sprite(texture) {
     bDestroyed = false;
     bVisible = true;
 
@@ -20,7 +24,7 @@ Object::Object(int x, int y, float size, const std::string &texturePath) : posX(
 }
 
 void Object::Draw(sf::RenderWindow &window) const {
-    if (bVisible || !bDestroyed)
+    if (bVisible && !bDestroyed)
         window.draw(sprite);
 }
 
