@@ -36,8 +36,3 @@ void Character::setDestination(float worldX, float worldY) {
     else
         currentDir = (dir.y > 0) ? Direction::Down : Direction::Up;
 }
-
-void Character::clearDestination()
-{
-    bHasDestination = false;
-}

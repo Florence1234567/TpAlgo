@@ -32,7 +32,6 @@ public:
 
 	sf::FloatRect GetFenceBounds() const;
 	std::vector<sf::FloatRect> GetObjectBounds() const;
-	std::vector<std::unique_ptr<GameObject>> GetGameObjects() { return gameObjects; };
 	bool IsPositionBlocked(float x, float y, float width = 32, float height = 32) const;
 
 private:

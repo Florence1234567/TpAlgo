@@ -49,7 +49,7 @@ GameMap::GameMap(int width, int height) {
 		objectsSprites[object]->setScale(sf::Vector2f(scaleX, scaleY));
 	}
 
-	PlaceRandomObjects(30);
+	PlaceRandomObjects(60);
 }
 
 Tile GameMap::DecideTile(int x, int y) {
@@ -120,7 +120,7 @@ void GameMap::PlaceRandomObjects(int count)
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> distX(minX, maxX);
 	std::uniform_int_distribution<> distY(minY, maxY);
-	std::uniform_int_distribution<> distObject(0, 2);
+	std::uniform_int_distribution<> distObject(0, 13);
 
 	int placed = 0;
 	int attemps = 0;
@@ -237,18 +237,7 @@ void GameMap::Display(sf::RenderTarget& target) {
 
 void GameMap::DisplayObjects(sf::RenderWindow& window) {
 	for (const auto& obj : gameObjects)
-	{
-		sf::FloatRect bounds = obj->GetCollisionBounds();
-
-		sf::RectangleShape rect;
-		rect.setPosition(bounds.position);
-		rect.setSize(bounds.size);
-		rect.setFillColor(sf::Color::Transparent);
-		rect.setOutlineColor(sf::Color::Red);
-		rect.setOutlineThickness(1.f);
-		window.draw(rect);
 		obj->Draw(window);
-	}
 }
 
 sf::FloatRect GameMap::GetFenceBounds() const {

@@ -8,12 +8,11 @@
 
 class MoveAction : public Action {
 public:
-    MoveAction(Character* character, const sf::Vector2f& destination, const std::vector<sf::FloatRect>& colliders);
+    MoveAction(Character* character, const sf::Vector2f& destination);
 
     void Execute() override;
     bool Update(sf::Time dt) override;
 
 private:
     sf::Vector2f destination;
-    const std::vector<sf::FloatRect>& colliders;
 };

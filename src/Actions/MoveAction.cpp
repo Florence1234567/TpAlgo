@@ -4,8 +4,8 @@
 
 #include "MoveAction.h"
 
-MoveAction::MoveAction(Character* character, const sf::Vector2f& destination, const std::vector<sf::FloatRect>& colliders)
-    : Action(character, "Move"), destination(destination), colliders(colliders)
+MoveAction::MoveAction(Character* character, const sf::Vector2f& destination)
+    : Action(character, "Move"), destination(destination)
 {
 }
 
@@ -14,17 +14,6 @@ void MoveAction::Execute() {
 }
 
 bool MoveAction::Update(sf::Time dt) {
-    Character* character = static_cast<Character*>(owner);
-
-    sf::FloatRect futureBounds = character->GetCollisionBounds();
-
-    for (const auto& rect : colliders)
-        if (futureBounds.findIntersection(rect)) {
-            character->clearDestination();
-            bCompleted = true;
-            return false;
-        }
-
     bCompleted = !owner->hasDestination();
     return !Finished();
 }

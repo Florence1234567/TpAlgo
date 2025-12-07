@@ -25,7 +25,6 @@ public:
     sf::Vector2<float> getDestination() { return destination; };
     Direction getDirection() const { return currentDir; };
     bool hasDestination() const { return bHasDestination; };
-    void clearDestination();
 
     void Move(sf::Time dt);
 

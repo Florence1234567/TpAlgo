@@ -15,12 +15,12 @@ sf::FloatRect GameObject::GetCollisionBounds() const
 {
     sf::FloatRect bounds = sprite.getGlobalBounds();
 
-    float shrinkX = bounds.size.x * 0.05f;
-    float liftY = bounds.size.y * 0.05f;
-    float heightAdjusted = bounds.size.y * 0.5f;
+    float expandX = bounds.size.x * 0.05f;      
+    float liftY = bounds.size.y * 0.02f;        
+    float heightAdjusted = bounds.size.y * 0.6f;
 
     return sf::FloatRect(
-        { bounds.position.x + shrinkX, bounds.position.y + liftY },
-        { bounds.size.x - shrinkX * 2.f, heightAdjusted }
+        { bounds.position.x + expandX, bounds.position.y + liftY },
+        { bounds.size.x - expandX * 2.f, heightAdjusted }
     );
 }
