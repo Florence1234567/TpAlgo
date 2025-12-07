@@ -13,7 +13,7 @@ enum Background {
 
 class PlayerUIComponent : public UIComponent {
 public: 
-	PlayerUIComponent(float width, float height, std::string titleText, float margin = 30, float rightPadding = 280);
+	PlayerUIComponent(sf::Vector2f position, sf::Vector2f , float margin, float padding);
 	virtual ~PlayerUIComponent() = default;
 
 	void Draw(sf::RenderWindow& window);
@@ -23,7 +23,7 @@ protected:
 	void BuildBackground();
 
 	float margin;
-	float rightPadding;
+	float padding;
 	static const int PixelsPerSquare = 64;
 
 	std::vector<std::vector<Background>> backgroundMap;
@@ -44,5 +44,5 @@ protected:
 	std::map<Background, std::unique_ptr<sf::Sprite>> backgroundSprites;
 
 	sf::RectangleShape background;
-	sf::Text title;
+    sf::Text title;
 };

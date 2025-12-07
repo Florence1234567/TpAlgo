@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Base/Object.h"
+#include "../../Base/Object.h"
 
 enum class ObjectType {
     Berries, Bush1, Bush2, Flower1, Flower2, Flower3, Flower4,
@@ -15,6 +15,7 @@ public:
 
     sf::FloatRect GetCollisionBounds() const;
     ObjectType GetType() const { return type; }
+    std::string GetTypeAsString() const { return std::to_string(static_cast<int>(type)); }
 
 private:
 	ObjectType type;
