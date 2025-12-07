@@ -16,7 +16,6 @@ Object::Object(int x, int y, float size, const std::string &texturePath) : posX(
     sprite.setScale(sf::Vector2f(scale, scale));
 }
 
-void Object::Draw(sf::RenderWindow &window) {
-    sprite.setPosition(GetPosition());
+void Object::Draw(sf::RenderWindow &window) const {
     window.draw(sprite);
 }

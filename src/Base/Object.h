@@ -13,7 +13,7 @@ class Object {
 public:
     Object(int x, int y, float size, const std::string& texturePath);
 
-    void Draw(sf::RenderWindow& window);
+    void Draw(sf::RenderWindow& window) const;
 
     const sf::Sprite* getSprite() const { return &sprite; };
 
