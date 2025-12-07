@@ -24,12 +24,18 @@ public:
     sf::Vector2<float> getDestination() { return destination; };
     Direction getDirection() const { return currentDir; };
     bool hasDestination() const { return bHasDestination; };
+
+    int GetMaxHealth() { return maxHealth; };
+
+    int GetHealth() { return health; };
+    void SetHealth(int damage) { health - damage; };
+
     void Move(sf::Time dt);
 
 protected:
     float speed;
-    float health;
-    float maxHealth;
+    int health;
+    int maxHealth;
     sf::Vector2<float> destination;
     bool bHasDestination = false;
     Direction currentDir;

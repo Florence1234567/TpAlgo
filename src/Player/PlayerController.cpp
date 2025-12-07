@@ -9,7 +9,7 @@
 #include "../Actions/MoveAction.h"
 #include "../Actions/WaitAction.h"
 
-void PlayerController::HandleEvent(const sf::Event& event, sf::FloatRect playingBounds, sf::RenderWindow* window) {
+/*void PlayerController::HandleEvent(const sf::Event& event, sf::FloatRect playingBounds, sf::RenderWindow* window) {
 	if (const auto* mouseButtonPressed = event.getIf<sf::Event::MouseButtonPressed>()) {
 		sf::Vector2i mousePos = mouseButtonPressed->position;
 		sf::Vector2f worldPos = window->mapPixelToCoords(mousePos);
@@ -35,6 +35,27 @@ void PlayerController::HandleEvent(const sf::Event& event, sf::FloatRect playing
 		}
 		default:
 			break;
+		}
+	}
+}*/
+
+void PlayerController::HandleEvent(const sf::Event& event, sf::FloatRect playingBounds, sf::RenderWindow* window) {
+	if (const auto* mouseButtonPressed = event.getIf<sf::Event::MouseButtonPressed>()) {
+		if (mouseButtonPressed->button == sf::Mouse::Button::Left) {
+			sf::Vector2i mousePos = mouseButtonPressed->position;
+			sf::Vector2f worldPos = window->mapPixelToCoords(mousePos);
+			if (playingBounds.contains(worldPos)) {
+				auto moveAction = std::make_unique<MoveAction>(owner, worldPos);
+				PushAction(std::move(moveAction));
+			}
+		}
+		if (mouseButtonPressed->button == sf::Mouse::Button::Right) {
+			sf::Vector2i mousePos = mouseButtonPressed->position;
+			sf::Vector2f worldPos = window->mapPixelToCoords(mousePos);
+			if (playingBounds.contains(worldPos)) {
+				auto attackAction = std::make_unique<AttackAction>(owner, worldPos);
+				PushAction(std::move(attackAction));
+			}
 		}
 	}
 }

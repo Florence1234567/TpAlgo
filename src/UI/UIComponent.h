@@ -16,6 +16,7 @@ public:
 
     virtual void Draw(sf::RenderWindow& window) = 0;
     virtual void Update(sf::Time dt) = 0;
+    sf::Vector2f GetPanelSize() { return panelSize; };
 
 protected:
     sf::Font font;

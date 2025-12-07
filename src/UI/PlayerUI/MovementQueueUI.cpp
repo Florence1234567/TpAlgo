@@ -7,7 +7,7 @@ MovementQueueUI::MovementQueueUI(PlayerController& controller, sf::Vector2u& win
 	: PlayerUIComponent(width, height, titleText), playerController(controller)
 {
 	position.x = static_cast<float>(windowSize.x) - panelSize.x - margin;
-	position.y = margin;
+	position.y = margin + 70;
 
 	background.setPosition(position);
 	title.setPosition({ position.x + contentMargin, position.y + contentMargin - 5 });

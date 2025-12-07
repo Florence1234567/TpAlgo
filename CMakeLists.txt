@@ -31,6 +31,8 @@ add_executable(TPAlgo
         src/UI/PlayerUI/InventoryUI.h
         src/UI/PlayerUI/MovementQueueUI.cpp
         src/UI/PlayerUI/MovementQueueUI.h
+        src/UI/PlayerUI/HealthBar.cpp
+        src/UI/PlayerUI/HealthBar.h
         src/Player/PlayerCharacter.cpp
         src/Player/PlayerCharacter.h
         src/Player/PlayerController.cpp

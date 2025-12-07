@@ -49,7 +49,7 @@ GameMap::GameMap(int width, int height) {
 		objectsSprites[object]->setScale(sf::Vector2f(scaleX, scaleY));
 	}
 
-	PlaceRandomObjects(15);
+	//PlaceRandomObjects(30);
 }
 
 Tile GameMap::DecideTile(int x, int y) {

@@ -7,7 +7,8 @@
 #include "Player/PlayerCharacter.h"
 #include "Player/PlayerController.h"
 #include "UI/PlayerUI/MovementQueueUI.h"
-//#include "UI/InventoryUI.h"
+#include "UI/PlayerUI/InventoryUI.h"
+#include "UI/PlayerUI/HealthBar.h"
 
 int main() {
     sf::Vector2u windowSize(1920, 1080);
@@ -30,7 +31,13 @@ int main() {
         PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 2, 50.0f, 100.f);
         PlayerController PController(&Player, &gameMap);
 
-        MovementQueueUI MovementQueueUI(PController, windowSize, 5, 7, "Player Movement Queue");
+        //Create UI
+        sf::Vector2f healthPos(1, 1);
+        sf::Vector2f healthSize(1, 1);
+        /*HealthBar HealthBar(healthPos, healthSize, windowSize, Player);
+
+        MovementQueueUI MovementQueueUI(PController, windowSize, 5, 7, "Movement Queue");
+        InventoryUI InventoryUI(PController, windowSize, 5, 7, MovementQueueUI.GetPanelSize().y, "Inventory");*/
 
         sf::Clock dtClock;
         while (window.isOpen())
@@ -48,14 +55,17 @@ int main() {
 
             PController.Update(dt);
 
-            MovementQueueUI.Update(dt);
+            /*MovementQueueUI.Update(dt);
+            InventoryUI.Update(dt);*/
 
             window.clear(sf::Color::Blue);
             window.draw(backgroundSprite); 
 
             gameMap.DisplayObjects(window);
-            MovementQueueUI.Draw(window);
-            Player.Draw(window);   
+            /*MovementQueueUI.Draw(window);
+            InventoryUI.Draw(window);
+            HealthBar.Draw(window);*/
+            Player.Draw(window);
 
             window.display();
         }
