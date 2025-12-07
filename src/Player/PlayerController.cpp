@@ -16,7 +16,7 @@ void PlayerController::HandleEvent(const sf::Event &event, sf::FloatRect playing
             sf::Vector2f worldPos = window->mapPixelToCoords(mousePos);
 
             if (playingBounds.contains(worldPos)) {
-                auto moveAction = std::make_unique<MoveAction>(owner, worldPos);
+                auto moveAction = std::make_unique<MoveAction>(owner, worldPos, objectBounds);
                 PushAction(std::move(moveAction));
             }
         }
@@ -26,7 +26,7 @@ void PlayerController::HandleEvent(const sf::Event &event, sf::FloatRect playing
             sf::Vector2f worldPos = window->mapPixelToCoords(mousePos);
 
             if (playingBounds.contains(worldPos)) {
-                auto attackAction = std::make_unique<AttackAction>(owner, worldPos);
+                auto attackAction = std::make_unique<AttackAction>(owner, worldPos, objectBounds);
                 PushAction(std::move(attackAction));
             }
         }

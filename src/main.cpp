@@ -28,7 +28,9 @@ int main() {
 
         //Create player
         PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 2, 50.0f, 100.f);
-        PlayerController PController(&Player);
+
+        auto boundsList = GameMap.GetObjectBounds();
+        PlayerController PController(&Player, boundsList);
 
         MovementQueueUI MovementQueueUI(PController, windowSize, 5, 7, "Movement Queue");
         InventoryUI InventoryUI(PController, windowSize, 5, 7, MovementQueueUI.GetPanelSize().y, "Inventory");

@@ -20,6 +20,7 @@ public:
     sf::Vector2f GetPosition() const { return sf::Vector2f(posX, posY); };
 
     float GetSize() const { return sprite.getScale().x; };
+    virtual sf::FloatRect GetCollisionBounds() const;
 
 protected:
     int posX;

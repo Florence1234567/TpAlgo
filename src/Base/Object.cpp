@@ -19,3 +19,10 @@ Object::Object(int x, int y, float size, const std::string &texturePath) : posX(
 void Object::Draw(sf::RenderWindow &window) const {
     window.draw(sprite);
 }
+
+sf::FloatRect Object::GetCollisionBounds() const
+{
+    sf::FloatRect bounds = sprite.getGlobalBounds();
+
+    return bounds;
+}
