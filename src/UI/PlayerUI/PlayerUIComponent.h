@@ -12,11 +12,11 @@ enum Background {
 };
 
 class PlayerUIComponent : public UIComponent {
-public: 
-	PlayerUIComponent(float width, float height, std::string titleText, float margin = 20, float rightPadding = 320);
+public:
+	PlayerUIComponent(float width, float height, std::string titleText, float margin = 30, float rightPadding = 280);
 	virtual ~PlayerUIComponent() = default;
 
-	void Draw(sf::RenderWindow& window) override;
+	void Draw(sf::RenderWindow& window);
 	void Update(sf::Time dt) override;
 
 protected:
@@ -30,7 +30,7 @@ protected:
 
 	std::map<Background, std::string> backgroundTextureFiles = {
 		{ P_UL, "Assets/Images/Panel/P_UL.png" },
-	    { P_U, "Assets/Images/Panel/P_U.png" },
+		{ P_U, "Assets/Images/Panel/P_U.png" },
 		{ P_UR, "Assets/Images/Panel/P_UR.png" },
 		{ P_L, "Assets/Images/Panel/P_L.png" },
 		{ Middle, "Assets/Images/Panel/Middle.png" },
