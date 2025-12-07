@@ -4,12 +4,20 @@
 
 #include "LootAction.h"
 
+#include "../Player/PlayerCharacter.h"
+
 void LootAction::Execute() {
-    delete object;
+    std::cout << "Looting" << std::endl;
 }
 
 bool LootAction::Update(sf::Time dt) {
-    bCompleted = !object;
+    lootTime -= dt.asSeconds();
+    bCompleted = lootTime <= 0.f;
+
+    if (bCompleted) {
+        static_cast<PlayerCharacter*>(owner)->Loot(object);
+    }
+
     return !Finished();
 }
 
@@ -23,10 +31,6 @@ bool LootAction::isInRange() const {
     const float dx = a.x - b.x;
     const float dy = a.y - b.y;
     const float distance = std::sqrt(dx * dx + dy * dy);
-
-    std::cout << "Position joueur: " << a.x << ", " << a.y << std::endl;
-    std::cout << "Position objet: " << b.x << ", " << b.y << std::endl;
-    std::cout << "Distance: " << distance << std::endl;
 
     return distance < range;
 }

@@ -10,7 +10,7 @@
 
 class LootAction : public Action {
 public:
-    explicit LootAction(Character* character, const GameObject* target) : Action(character, ActionType::Loot, "Loot"), object(target) {};
+    explicit LootAction(Character* character, GameObject* target) : Action(character, ActionType::Loot, "Loot"), object(target) {};
 
     void Execute() override;
     bool Update(sf::Time dt) override;
@@ -21,6 +21,7 @@ public:
     std::unique_ptr<MoveAction> CallMoveActionFirst();
 
 private:
-    const GameObject* object;
+    GameObject* object;
     const float range = 100;
+    float lootTime = 3.f;
 };

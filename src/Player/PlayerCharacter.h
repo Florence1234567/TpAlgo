@@ -5,6 +5,8 @@
 #include "../Base/Character.h"
 #include <iostream>
 
+#include "../Game/GameObjects/GameObject.h"
+
 class PlayerCharacter : public Character {
 public:
 	PlayerCharacter(int x, int y, float size, float baseSpeed, float hp) : Character(x, y, size, baseSpeed, hp, "Assets/Images/Character/C_Front.png") {
@@ -18,6 +20,9 @@ public:
 
 	void Update(sf::Time dt) override;
     void UpdateSprite(sf::Time dt);
+
+	void Loot(GameObject* lootTarget);
+
 private:
     //Character Sprites
 	std::map<std::string, std::string> characterTextureFiles = {

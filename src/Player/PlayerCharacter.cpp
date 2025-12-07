@@ -70,3 +70,8 @@ void PlayerCharacter::LoadCharacterTextures() {
         characterSprites[name]->setOrigin(sf::Vector2f(bounds.size.x/2.f, bounds.size.y/2.f));
     }
 }
+
+void PlayerCharacter::Loot(GameObject *lootTarget) {
+    std::cout << "Done!" << std::endl;
+    lootTarget->Destroy();
+}
