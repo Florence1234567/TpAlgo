@@ -13,3 +13,7 @@ bool WaitAction::Update(sf::Time dt) {
     bCompleted = waitTime <= 0.f;
     return !Finished();
 }
+
+std::unique_ptr<Action> WaitAction::Clone() const {
+    return std::make_unique<WaitAction>(*this);
+}

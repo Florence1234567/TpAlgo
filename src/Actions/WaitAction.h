@@ -14,6 +14,8 @@ public:
     void Execute() override;
     bool Update(sf::Time df) override;
 
+    std::unique_ptr<Action> Clone() const override;
+
 private:
     float waitTime;
 };

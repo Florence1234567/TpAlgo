@@ -5,10 +5,9 @@
 #include <vector>
 #include <string>
 
-class MovementQueueUI : public PlayerUIComponent {
+class ActionQueueUI : public PlayerUIComponent {
 public:
-    MovementQueueUI(PlayerController& controller, sf::Vector2u& windowSize,
-        float width, float height, const std::string& title = "Player Movement Queue");
+    ActionQueueUI(PlayerController& controller, sf::Vector2u& windowSize, float margin = 20, float rightPadding = 280);
 
     void Draw(sf::RenderWindow& window) override;
     void Update(sf::Time dt) override;
@@ -20,4 +19,5 @@ private:
     float contentMargin = 30;
     float timeSinceLastUpdate = 0;
     float interval = 0.5;
+    sf::Vector2f size = sf::Vector2f(5, 7);
 };

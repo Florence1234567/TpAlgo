@@ -1,19 +1,20 @@
-#include "MovementQueueUI.h"
+#include "ActionQueueUI.h"
 #include "../../DataStructures/Queue/ActionQueue.h"
 #include <iostream>
 
-MovementQueueUI::MovementQueueUI(PlayerController& controller, sf::Vector2u& windowSize,
-	float width, float height, const std::string& titleText)
-	: PlayerUIComponent(width, height, titleText), playerController(controller)
+ActionQueueUI::ActionQueueUI(PlayerController& controller, sf::Vector2u& windowSize, float margin, float rightPadding)
+	: PlayerUIComponent(position, sf::Vector2f(5, 7), 20, 280), playerController(controller)
 {
-	position.x = static_cast<float>(windowSize.x) - panelSize.x - margin;
-	position.y = margin;
+	title = sf::Text(font, "Player Movement Queue", 20);
+	title.setFillColor(mainTextColor);
+
+	position = sf::Vector2f(static_cast<float>(windowSize.x) - background.getSize().x - margin, margin) ;
 
 	background.setPosition(position);
 	title.setPosition({ position.x + contentMargin, position.y + contentMargin - 5 });
 }
 
-void MovementQueueUI::Draw(sf::RenderWindow& window)
+void ActionQueueUI::Draw(sf::RenderWindow& window)
 {
 	PlayerUIComponent::Draw(window);
 
@@ -21,11 +22,11 @@ void MovementQueueUI::Draw(sf::RenderWindow& window)
 		window.draw(item);
 }
 
-void MovementQueueUI::Update(sf::Time dt)
+void ActionQueueUI::Update(sf::Time dt)
 {
 	items.clear();
 
-	const auto queue = playerController.GetMovementQueue();
+	const auto queue = playerController.GetActionQueue();
 
 	if (queue.empty())
 		return;

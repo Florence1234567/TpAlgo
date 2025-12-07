@@ -6,7 +6,8 @@
 #include "Game/GameMap.h"
 #include "Player/PlayerCharacter.h"
 #include "Player/PlayerController.h"
-#include "UI/PlayerUI/MovementQueueUI.h"
+#include "UI/PlayerUI/ActionQueueUI.h"
+#include "UI/PlayerUI/ActionContextMenuUI.h"
 //#include "UI/InventoryUI.h"
 
 int main() {
@@ -30,7 +31,9 @@ int main() {
         PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 2, 50.0f, 100.f);
         PlayerController PController(&Player, &gameMap);
 
-        MovementQueueUI MovementQueueUI(PController, windowSize, 5, 7, "Player Movement Queue");
+        ActionQueueUI ActionQueueUI(PController, windowSize);
+        sf::Vector2f contextMenuPosition(ActionQueueUI.getPosition().x, ActionQueueUI.getPosition().y + ActionQueueUI.getPanelSize().y);
+        ActionContextMenuUI ActionContextMenuUI(&PController, contextMenuPosition);
 
         sf::Clock dtClock;
         while (window.isOpen())
@@ -38,6 +41,9 @@ int main() {
             while (const std::optional<sf::Event>& event = window.pollEvent()) {
                 if (event->is<sf::Event::Closed>())
                     window.close();
+
+                if (PController.IsContextMenuOpen())
+                    ActionContextMenuUI.HandleEvent(*event, &window);
 
                 PController.HandleEvent(*event, grassBounds, &window);
             }
@@ -48,14 +54,16 @@ int main() {
 
             PController.Update(dt);
 
-            MovementQueueUI.Update(dt);
+            ActionQueueUI.Update(dt);
 
             window.clear(sf::Color::Blue);
             window.draw(backgroundSprite); 
 
             gameMap.DisplayObjects(window);
-            MovementQueueUI.Draw(window);
-            Player.Draw(window);   
+            Player.Draw(window);
+
+            ActionQueueUI.Draw(window);
+            ActionContextMenuUI.Draw(window);
 
             window.display();
         }

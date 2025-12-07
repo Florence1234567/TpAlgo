@@ -1,38 +1,9 @@
 #include "PlayerUIComponent.h"
 
-void PlayerUIComponent::Draw(sf::RenderWindow& window)
+PlayerUIComponent::PlayerUIComponent(sf::Vector2f position, sf::Vector2f panelSize, float margin, float Padding) :
+	UIComponent(position, sf::Vector2f(panelSize.x * PixelsPerSquare, panelSize.y * PixelsPerSquare)),
+	title(sf::Text(font, "Title", 16)) , margin(margin), padding(Padding)
 {
-	sf::Vector2f origin = background.getPosition();
-
-	for (int row = 0; row < backgroundMap.size(); row++)
-		for (int col = 0; col < backgroundMap[row].size(); col++) {
-			sf::Vector2f position(origin.x + col * PixelsPerSquare, origin.y + row * PixelsPerSquare);
-			Background tile = backgroundMap[row][col];
-
-			auto it = backgroundSprites.find(tile);
-
-			if (it != backgroundSprites.end())
-			{
-				it->second->setPosition(position);
-				window.draw(*it->second);
-			}
-		}
-
-	window.draw(title);
-}
-
-void PlayerUIComponent::Update(sf::Time dt)
-{
-}
-
-PlayerUIComponent::PlayerUIComponent(float width, float height, std::string titleText, float margin, float rightPadding) :
-	UIComponent(sf::Vector2f(0, 0), sf::Vector2f(width * PixelsPerSquare, height * PixelsPerSquare)), title(sf::Text(font, "Title", 16)), margin(margin), rightPadding(rightPadding)
-{
-	background.setSize(panelSize);
-
-	title = sf::Text(font, titleText, 20);
-	title.setFillColor(mainTextColor);
-
 	for (const auto& [object, path] : backgroundTextureFiles)
 		if (!backgoundTextures[object].loadFromFile(path))
 			std::cerr << "Error loading " << path << std::endl;
@@ -45,18 +16,42 @@ PlayerUIComponent::PlayerUIComponent(float width, float height, std::string titl
 		float scaleY = static_cast<float>(PixelsPerSquare) / textureSize.y;
 		backgroundSprites[object]->setScale(sf::Vector2f(scaleX, scaleY));
 	}
-
 	BuildBackground();
+}
+
+void PlayerUIComponent::Draw(sf::RenderWindow& window) {
+	sf::Vector2f origin = background.getPosition();
+
+	for (int row = 0; row < backgroundMap.size(); row++) {
+		for (int col = 0; col < backgroundMap[row].size(); col++) {
+			sf::Vector2f position(origin.x + col * PixelsPerSquare, origin.y + row * PixelsPerSquare);
+			Background tile = backgroundMap[row][col];
+
+			auto it = backgroundSprites.find(tile);
+
+			if (it != backgroundSprites.end())
+			{
+				it->second->setPosition(position);
+				window.draw(*it->second);
+			}
+		}
+	}
+	window.draw(title);
+}
+
+void PlayerUIComponent::Update(sf::Time dt)
+{
 }
 
 void PlayerUIComponent::BuildBackground()
 {
+	background.setSize(panelSize);
 	int cols = static_cast<int>(panelSize.x) / PixelsPerSquare;
 	int rows = static_cast<int>(panelSize.y) / PixelsPerSquare;
 
 	backgroundMap.resize(rows, std::vector<Background>(cols, Background::Middle));
 
-	for (int y = 0; y < rows; ++y)
+	for (int y = 0; y < rows; ++y) {
 		for (int x = 0; x < cols; ++x)
 		{
 			bool top = (y == 0);
@@ -74,5 +69,6 @@ void PlayerUIComponent::BuildBackground()
 			else if (right)          backgroundMap[y][x] = Background::P_R;
 			else                     backgroundMap[y][x] = Background::Middle;
 		}
+	}
 }
 

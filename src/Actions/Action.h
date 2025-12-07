@@ -16,6 +16,8 @@ public:
     virtual bool Update(sf::Time dt) = 0;
     virtual bool Finished() { return bCompleted; };
 
+    virtual std::unique_ptr<Action> Clone() const = 0;
+
     std::string getName() const { return name; };
 
 protected:

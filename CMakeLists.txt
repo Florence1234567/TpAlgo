@@ -29,8 +29,8 @@ add_executable(TPAlgo
         src/UI/PlayerUI/PlayerUIComponent.h
         src/UI/PlayerUI/InventoryUI.cpp
         src/UI/PlayerUI/InventoryUI.h
-        src/UI/PlayerUI/MovementQueueUI.cpp
-        src/UI/PlayerUI/MovementQueueUI.h
+        src/UI/PlayerUI/ActionQueueUI.cpp
+        src/UI/PlayerUI/ActionQueueUI.h
         src/Player/PlayerCharacter.cpp
         src/Player/PlayerCharacter.h
         src/Player/PlayerController.cpp
@@ -49,6 +49,8 @@ add_executable(TPAlgo
         src/UI/UIComponent.h
         src/Actions/AttackAction.cpp
         src/Actions/AttackAction.h
+        src/UI/PlayerUI/ActionContextMenuUI.cpp
+        src/UI/PlayerUI/ActionContextMenuUI.h
 )
 target_compile_features(TPAlgo PRIVATE cxx_std_17)
 target_link_libraries(TPAlgo PRIVATE SFML::Graphics)
