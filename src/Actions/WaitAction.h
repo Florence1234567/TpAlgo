@@ -9,7 +9,7 @@
 
 class WaitAction : public Action {
 public:
-    explicit WaitAction(Character* character) : Action(character, "Wait Action"), waitTime(3.f) {};
+    explicit WaitAction(Character* character) : Action(character, ActionType::Wait, "Wait Action"), waitTime(3.f) {};
 
     void Execute() override;
     bool Update(sf::Time df) override;

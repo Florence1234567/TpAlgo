@@ -5,6 +5,7 @@
 #include "PlayerController.h"
 
 #include "../Actions/AttackAction.h"
+#include "../Actions/LootAction.h"
 #include "../Player//PlayerCharacter.h"
 #include "../Actions/MoveAction.h"
 #include "../Actions/WaitAction.h"
@@ -18,13 +19,13 @@ void PlayerController::HandleEvent(const sf::Event &event, sf::FloatRect playing
         if (!playingBounds.contains(worldPos))
             return;
 
-        for (const auto &objBounds: gameMap->GetObjectBounds()) {
-            if (objBounds.contains(worldPos)) {
+        for (const auto &gameObject: gameMap->GetGameObjects()) {
+            if (gameObject->GetCollisionBounds().contains(worldPos)) {
                 if (mouseButtonPressed->button == sf::Mouse::Button::Left && !bShowContextMenu) {
                     cachedExecutableAction.clear();
                     lastClickedPosition = worldPos;
                     cachedExecutableAction.push_back(std::make_unique<MoveAction>(owner, worldPos));
-                    cachedExecutableAction.push_back(std::make_unique<AttackAction>(owner, worldPos));
+                    cachedExecutableAction.push_back(std::make_unique<LootAction>(owner, gameObject));
                     bShowContextMenu = true;
                     contextMenuPosition = worldPos;
                 }
@@ -47,6 +48,31 @@ void PlayerController::Update(sf::Time dt) {
 }
 
 void PlayerController::PerformAction(std::unique_ptr<Action> action) {
-    PushAction(std::move(action));
+    switch (action->getType()) {
+        case ActionType::Move:
+            PushAction(std::move(action));
+            break;
+        case ActionType::Loot:
+            if (auto* lootAction = dynamic_cast<LootAction*>(action.get())) {
+                if (!lootAction->isInRange()) {
+                    std::unique_ptr<MoveAction> moveAction = static_cast<LootAction*>(action.get())->CallMoveActionFirst();
+                    PushAction(std::move(moveAction));
+                    PushAction(std::move(action));
+                } else {
+                    PushAction(std::move(action));
+                }
+            }
+            break;
+        case ActionType::Attack:
+            PushAction(std::move(action));
+            break;
+        case ActionType::Wait:
+            PushAction(std::move(action));
+            break;
+        default:
+            PushAction(std::move(action));
+            break;
+    }
+
     bShowContextMenu = false;
 }

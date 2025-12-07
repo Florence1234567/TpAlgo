@@ -9,7 +9,7 @@
 
 class MoveAction : public Action {
 public:
-    explicit MoveAction(Character* character, const sf::Vector2f& destination) : Action(character, "Move Action"), destination(destination) {};
+    explicit MoveAction(Character* character, const sf::Vector2f& destination) : Action(character, ActionType::Move, "Move"), destination(destination) {};
 
     void Execute() override;
     bool Update(sf::Time dt) override;

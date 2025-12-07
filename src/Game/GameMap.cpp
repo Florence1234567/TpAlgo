@@ -275,15 +275,14 @@ sf::FloatRect GameMap::GetFenceBounds() const {
 	return bounds;
 }
 
-std::vector<sf::FloatRect> GameMap::GetObjectBounds() const
-{
-	std::vector<sf::FloatRect> boundsList;
-
+std::vector<GameObject*> GameMap::GetGameObjects() const {
+	std::vector<GameObject*> objectsList;
 	for (const auto& obj : gameObjects)
-		boundsList.push_back(obj->GetCollisionBounds());
+		objectsList.push_back(obj.get());
 
-	return boundsList;
+	return objectsList;
 }
+
 
 bool GameMap::IsPositionBlocked(float x, float y, float width, float height) const
 {
