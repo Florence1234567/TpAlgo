@@ -5,7 +5,7 @@
 ActionQueueUI::ActionQueueUI(PlayerController& controller, sf::Vector2u& windowSize, float margin, float rightPadding)
 	: PlayerUIComponent(position, sf::Vector2f(5, 7), 20, 280), playerController(controller)
 {
-	title = sf::Text(font, "Player Movement Queue", 20);
+	title = sf::Text(font, "Movement Queue", 20);
 	title.setFillColor(mainTextColor);
 
 	position = sf::Vector2f(static_cast<float>(windowSize.x) - background.getSize().x - margin, margin) ;

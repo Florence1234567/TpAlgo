@@ -4,7 +4,7 @@
 
 enum class ObjectType {
     Berries, Bush1, Bush2, Flower1, Flower2, Flower3, Flower4,
-    Fruit, Grass1, Grass2, Log, PurpleShrooms, RedShrooms, Rock
+    Fruit, Grass1, Grass2, Log, PurpleShrooms, RedShrooms, Rock, Count
 };
 
 class GameObject : public Object {
@@ -16,7 +16,9 @@ public:
     sf::FloatRect GetCollisionBounds() const;
     ObjectType GetType() const { return type; }
     std::string GetTypeAsString() const { return std::to_string(static_cast<int>(type)); }
-
+    std::string GetTypeTextAsString() const;
+    static int GetObjectTypeCount() { return static_cast<std::size_t>(ObjectType::Count); };
+    bool IsLootable() const;
 private:
 	ObjectType type;
 

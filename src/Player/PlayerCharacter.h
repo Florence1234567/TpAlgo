@@ -23,6 +23,8 @@ public:
 
 	void Loot(GameObject* lootTarget);
 
+	std::vector<GameObject*> GetInventory() const { return inventory; };
+
 private:
     //Character Sprites
 	std::map<std::string, std::string> characterTextureFiles = {
@@ -50,4 +52,6 @@ private:
 	float walkFrameTimer;
 	float walkFrameDuration;
 	bool isWalkFrame1;
+
+	std::vector<GameObject*> inventory;
 };

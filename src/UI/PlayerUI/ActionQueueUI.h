@@ -16,7 +16,6 @@ private:
     PlayerController& playerController; 
     std::vector<sf::Text> items;
 
-    float contentMargin = 30;
     float timeSinceLastUpdate = 0;
     float interval = 0.5;
     sf::Vector2f size = sf::Vector2f(5, 7);

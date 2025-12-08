@@ -8,7 +8,7 @@
 #include "Player/PlayerController.h"
 #include "UI/PlayerUI/ActionQueueUI.h"
 #include "UI/PlayerUI/ActionContextMenuUI.h"
-//#include "UI/InventoryUI.h"
+#include "UI/PlayerUI/InventoryUI.h"
 
 int main() {
     sf::Vector2u windowSize(1920, 1080);
@@ -31,9 +31,10 @@ int main() {
         PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 2, 50.0f, 100.f);
         PlayerController PController(&Player, &gameMap);
 
-        ActionQueueUI ActionQueueUI(PController, windowSize);
+        ActionQueueUI ActionQueueUI(PController, windowSize, 50);
         sf::Vector2f contextMenuPosition(ActionQueueUI.getPosition().x, ActionQueueUI.getPosition().y + ActionQueueUI.getPanelSize().y);
         ActionContextMenuUI ActionContextMenuUI(&PController, contextMenuPosition);
+        InventoryUI InventoryUI(PController, Player, windowSize, 50);
 
         sf::Clock dtClock;
         while (window.isOpen())
@@ -51,19 +52,18 @@ int main() {
             sf::Time dt = dtClock.restart();
             Player.Update(dt);
             Player.UpdateSprite(dt);
-
             PController.Update(dt);
-
             ActionQueueUI.Update(dt);
+            InventoryUI.Update(dt);
 
             window.clear(sf::Color::Blue);
             window.draw(backgroundSprite); 
 
             gameMap.DisplayObjects(window);
             Player.Draw(window);
-
             ActionQueueUI.Draw(window);
             ActionContextMenuUI.Draw(window);
+            InventoryUI.Draw(window);
 
             window.display();
         }

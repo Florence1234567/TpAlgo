@@ -24,6 +24,7 @@ protected:
 
 	float margin;
 	float padding;
+	float contentMargin = 30;
 	static const int PixelsPerSquare = 64;
 
 	std::vector<std::vector<Background>> backgroundMap;

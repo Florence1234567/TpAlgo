@@ -19,19 +19,21 @@ void PlayerController::HandleEvent(const sf::Event &event, sf::FloatRect playing
         if (!playingBounds.contains(worldPos))
             return;
 
-        for (const auto &gameObject: gameMap->GetGameObjects()) {
+        for (const auto &gameObject: gameMap->GetGameObjects())
             if (gameObject->GetCollisionBounds().contains(worldPos)) {
                 if (mouseButtonPressed->button == sf::Mouse::Button::Left && !bShowContextMenu) {
                     cachedExecutableAction.clear();
                     lastClickedPosition = worldPos;
                     cachedExecutableAction.push_back(std::make_unique<MoveAction>(owner, worldPos));
-                    cachedExecutableAction.push_back(std::make_unique<LootAction>(owner, gameObject));
+
+                    if(gameObject->IsLootable())
+                        cachedExecutableAction.push_back(std::make_unique<LootAction>(owner, gameObject));
+
                     bShowContextMenu = true;
                     contextMenuPosition = worldPos;
                 }
                 return;
             }
-        }
 
         if (mouseButtonPressed->button == sf::Mouse::Button::Left && !bShowContextMenu) {
             cachedExecutableAction.clear();
