@@ -4,18 +4,28 @@
 #pragma once
 #include "../Base/Controller.h"
 #include <unordered_map>
-#include "../DataStructures/Queue/ActionQueue.h"
 #include "../Game/GameMap.h"
-
+#include "../DataStructures/Queue/ActionQueue.h"
 
 class PlayerController : public Controller {
 public:
-    explicit PlayerController(Character* player, const GameMap* map) : Controller(player), gameMap(map) {};
+    explicit PlayerController(Character* player, const GameMap* map) : Controller(player), gameMap(map){};
 
     void HandleEvent(const sf::Event& event, sf::FloatRect playingBounds, sf::RenderWindow* window) override;
 
     void Update(sf::Time dt) override;
 
+    bool IsContextMenuOpen() const { return bShowContextMenu; }
+    void CloseContextMenu() { bShowContextMenu = false; }
+    sf::Vector2f GetContextMenuPosition() const { return contextMenuPosition; }
+
+    void PerformAction(std::unique_ptr<Action> action);
+
 private:
     const GameMap* gameMap;
+    sf::Vector2f lastClickedPosition;
+
+    // Context menu
+    bool bShowContextMenu = false;
+    sf::Vector2f contextMenuPosition;
 };

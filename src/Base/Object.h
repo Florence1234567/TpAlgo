@@ -21,12 +21,17 @@ public:
 
     float GetSize() const { return sprite.getScale().x; };
 
+    void Destroy();
+
+private:
+    sf::Texture texture;
+
 protected:
     int posX;
     int posY;
     sf::Sprite sprite;
     float scale;
+    bool bDestroyed = false;
+    bool bVisible = true;
 
-private:
-    sf::Texture texture;
 };

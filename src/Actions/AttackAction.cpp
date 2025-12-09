@@ -12,3 +12,7 @@ bool AttackAction::Update(sf::Time dt) {
     bCompleted = !owner->hasDestination();
     return !Finished();
 }
+
+std::unique_ptr<Action> AttackAction::Clone() const {
+    return std::make_unique<AttackAction>(*this);
+}

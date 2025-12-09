@@ -20,7 +20,8 @@ public:
 
     virtual void HandleEvent(const sf::Event& event, const sf::FloatRect playingBounds, sf::RenderWindow* window = nullptr) = 0;
 
-    std::vector<std::string>& GetMovementQueue() const;
+    std::vector<std::string>& GetActionQueue() const;
+    const std::vector<std::unique_ptr<Action>>& GetExecutableActions() const;
 protected:
     Character* owner;
     void PushAction(std::unique_ptr<Action> action);
@@ -28,4 +29,5 @@ protected:
     ActionQueue* actions;
     std::shared_ptr<Action> currentAction;
     mutable std::vector<std::string> cachedActionNames;
+    mutable std::vector<std::unique_ptr<Action>> cachedExecutableAction;
 };
