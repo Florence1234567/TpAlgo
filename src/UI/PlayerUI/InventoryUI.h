@@ -2,6 +2,7 @@
 #include "PlayerUIComponent.h"
 #include "../../Player/PlayerController.h"
 #include "../../Player/PlayerCharacter.h"
+#include "../../Objects/Items/Item.h"
 
 struct InventorySlot {
     sf::Sprite sprite;

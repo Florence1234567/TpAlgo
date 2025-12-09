@@ -2,10 +2,10 @@
 // Created by Antoine on 2025-12-05.
 //
 #pragma once
-#include "../Base/Character.h"
+#include "../Objects/Character.h"
 #include <iostream>
 
-#include "../Game/GameObjects/GameObject.h"
+#include "../Objects/GameObjects/GameObject.h"
 
 class PlayerCharacter : public Character {
 public:
@@ -23,7 +23,7 @@ public:
 
 	void Loot(GameObject* lootTarget);
 
-	std::vector<GameObject*> GetInventory() const { return inventory; };
+	std::vector<Item*> GetInventory() const { return inventory; };
 
 private:
     //Character Sprites
@@ -53,5 +53,5 @@ private:
 	float walkFrameDuration;
 	bool isWalkFrame1;
 
-	std::vector<GameObject*> inventory;
+	std::vector<Item*> inventory;
 };

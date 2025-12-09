@@ -33,7 +33,7 @@ void InventoryUI::Update(sf::Time dt)
 {
 	items.clear();
 
-	std::vector<GameObject*>& inventory = character.GetInventory();
+	std::vector<Item*> inventory = character.GetInventory();
 
 	if (inventory.empty())
 		return;
@@ -44,15 +44,15 @@ void InventoryUI::Update(sf::Time dt)
 	const float rowSpacing = 48.f;
 
 	std::map<sf::String, int> typeCounts;
-	std::map<sf::String, GameObject*> typeToExample;
+	std::map<sf::String, Item*> typeToExample;
 
-	for (GameObject* item : inventory)
+	for (Item* item : inventory)
 	{
 		if (!item)
 			continue;
 
-		sf::String type = item->GetTypeTextAsString();
-		typeCounts[type]++;            
+		sf::String type = item->GetName();
+		typeCounts[type]++;
 		typeToExample[type] = item;
 	}
 
@@ -63,7 +63,7 @@ void InventoryUI::Update(sf::Time dt)
 		sf::String name = pair.first;
 		int count = pair.second;
 
-		GameObject* exampleItem = typeToExample[name];
+		Item* exampleItem = typeToExample[name];
 		if (!exampleItem)
 			continue;
 

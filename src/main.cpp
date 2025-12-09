@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <map>
 
-#include "Base/Character.h"
+#include "Objects/Character.h"
 #include "Game/GameMap.h"
 #include "Player/PlayerCharacter.h"
 #include "Player/PlayerController.h"

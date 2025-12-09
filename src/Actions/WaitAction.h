@@ -4,7 +4,7 @@
 
 #pragma once
 #include "Action.h"
-#include "../Base/Character.h"
+#include "../Objects/Character.h"
 
 
 class WaitAction : public Action {

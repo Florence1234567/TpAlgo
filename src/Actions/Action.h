@@ -5,7 +5,7 @@
 #include <SFML/System/Time.hpp>
 #include <stdexcept>
 
-#include "../Base/Character.h"
+#include "../Objects/Character.h"
 
 enum class ActionType {
     Move,

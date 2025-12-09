@@ -3,7 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <map>
-#include "GameObjects/GameObject.h"
+#include "../Objects/GameObjects/GameObject.h"
 
 enum Tile {
 	EdgeUpLeft, EdgeUp, EdgeUpRight,

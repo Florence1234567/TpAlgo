@@ -1,15 +1,25 @@
 #include "GameObject.h"
 #include "GameObject.h"
 
+#include "../Items/Potions/HealthPotion.h"
+
 GameObject::GameObject(int x, int y, float size, ObjectType type)
 	: Object(x, y, size, GetTexturePath(type)), type(type)
 {
+    if (type == ObjectType::Rock || type == ObjectType::Log) {
+        bLootable = true;
+    }
+
+    if (bLootable)
+        FillInventory(1);
+    else
+        FillInventory(0);
 }
 
-void GameObject::Draw(sf::RenderTarget& target)
+void GameObject::Draw(sf::RenderWindow& window) const
 {
-	sprite.setPosition(GetPosition());
-	target.draw(sprite);
+    Object::Draw(window);
+	window.draw(sprite);
 }
 
 sf::FloatRect GameObject::GetCollisionBounds() const
@@ -52,5 +62,14 @@ std::string GameObject::GetTypeTextAsString() const
 
 bool GameObject::IsLootable() const
 {
-    return this->GetType() == ObjectType::Rock;
+    return bLootable;
 }
+
+void GameObject::FillInventory(int inventorySpace) {
+    for (int i = 0; i < inventorySpace; ++i) {
+        // #TODO fill inventory with rendom objects
+        Item* newItem = new HealthPotion;
+        objectInventory.push_back(newItem);
+    }
+}
+
