@@ -6,7 +6,8 @@
 #include "Game/GameMap.h"
 #include "Player/PlayerCharacter.h"
 #include "Player/PlayerController.h"
-#include "UI/PlayerUI/MovementQueueUI.h"
+#include "UI/PlayerUI/ActionQueueUI.h"
+#include "UI/PlayerUI/ActionContextMenuUI.h"
 #include "UI/PlayerUI/InventoryUI.h"
 
 int main() {
@@ -16,22 +17,24 @@ int main() {
 
     try
     {
-        GameMap GameMap(windowSize.x, windowSize.y);
+        GameMap gameMap(windowSize.x, windowSize.y);
 
         sf::RenderTexture backgroundTexture(sf::Vector2u(windowSize.x, windowSize.y));
         backgroundTexture.clear(sf::Color::Transparent); 
-        GameMap.Display(backgroundTexture);               
+        gameMap.Display(backgroundTexture);               
         backgroundTexture.display();
         sf::Sprite backgroundSprite(backgroundTexture.getTexture());
 
-        sf::FloatRect grassBounds = GameMap.GetFenceBounds();
+        sf::FloatRect grassBounds = gameMap.GetFenceBounds();
 
         //Create player
         PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 2, 50.0f, 100.f);
-        PlayerController PController(&Player, &GameMap);
+        PlayerController PController(&Player, &gameMap);
 
-        MovementQueueUI MovementQueueUI(PController, windowSize, 5, 7, "Movement Queue");
-        InventoryUI InventoryUI(PController, windowSize, 5, 7, MovementQueueUI.GetPanelSize().y, "Inventory");
+        ActionQueueUI ActionQueueUI(PController, windowSize, 50);
+        sf::Vector2f contextMenuPosition(ActionQueueUI.getPosition().x, ActionQueueUI.getPosition().y + ActionQueueUI.getPanelSize().y);
+        ActionContextMenuUI ActionContextMenuUI(&PController, contextMenuPosition);
+        InventoryUI InventoryUI(PController, Player, windowSize, 50);
 
         sf::Clock dtClock;
         while (window.isOpen())
@@ -40,25 +43,27 @@ int main() {
                 if (event->is<sf::Event::Closed>())
                     window.close();
 
+                if (PController.IsContextMenuOpen())
+                    ActionContextMenuUI.HandleEvent(*event, &window);
+
                 PController.HandleEvent(*event, grassBounds, &window);
             }
 
             sf::Time dt = dtClock.restart();
             Player.Update(dt);
             Player.UpdateSprite(dt);
-
             PController.Update(dt);
-
-            MovementQueueUI.Update(dt);
+            ActionQueueUI.Update(dt);
             InventoryUI.Update(dt);
 
             window.clear(sf::Color::Blue);
             window.draw(backgroundSprite); 
 
-            GameMap.DisplayObjects(window);
-            MovementQueueUI.Draw(window);
+            gameMap.DisplayObjects(window);
+            Player.Draw(window);
+            ActionQueueUI.Draw(window);
+            ActionContextMenuUI.Draw(window);
             InventoryUI.Draw(window);
-            Player.Draw(window);   
 
             window.display();
         }

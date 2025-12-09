@@ -9,10 +9,12 @@
 
 class AttackAction : public Action {
 public:
-    explicit AttackAction(Character* character, const sf::Vector2f& destination) : Action(character, "Attack Action"), destination(destination) {};
+    explicit AttackAction(Character* character, const sf::Vector2f& destination) : Action(character, ActionType::Attack, "Attack"), destination(destination) {};
 
     void Execute() override;
     bool Update(sf::Time dt) override;
+
+    std::unique_ptr<Action> Clone() const override;
 
 private:
     sf::Vector2f destination;

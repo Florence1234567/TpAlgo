@@ -6,12 +6,15 @@
 #include "Action.h"
 #include "SFML/System/Vector2.hpp"
 
+
 class MoveAction : public Action {
 public:
-    MoveAction(Character* character, const sf::Vector2f& destination);
+    explicit MoveAction(Character* character, const sf::Vector2f& destination) : Action(character, ActionType::Move, "Move"), destination(destination) {};
 
     void Execute() override;
     bool Update(sf::Time dt) override;
+
+    std::unique_ptr<Action> Clone() const override;
 
 private:
     sf::Vector2f destination;

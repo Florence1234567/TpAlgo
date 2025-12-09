@@ -17,3 +17,7 @@ bool MoveAction::Update(sf::Time dt) {
     bCompleted = !owner->hasDestination();
     return !Finished();
 }
+
+std::unique_ptr<Action> MoveAction::Clone() const {
+    return std::make_unique<MoveAction>(*this);
+}

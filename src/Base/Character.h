@@ -8,7 +8,6 @@
 #include "SFML/Graphics/Texture.hpp"
 #include "SFML/Network/SocketHandle.hpp"
 #include <iostream>
-
 #include "SFML/Graphics/RenderWindow.hpp"
 
 
@@ -25,7 +24,6 @@ public:
     sf::Vector2<float> getDestination() { return destination; };
     Direction getDirection() const { return currentDir; };
     bool hasDestination() const { return bHasDestination; };
-
     void Move(sf::Time dt);
 
 protected:

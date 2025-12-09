@@ -49,7 +49,7 @@ GameMap::GameMap(int width, int height) {
 		objectsSprites[object]->setScale(sf::Vector2f(scaleX, scaleY));
 	}
 
-	PlaceRandomObjects(60);
+	PlaceRandomObjects(30);
 }
 
 Tile GameMap::DecideTile(int x, int y) {
@@ -120,7 +120,7 @@ void GameMap::PlaceRandomObjects(int count)
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> distX(minX, maxX);
 	std::uniform_int_distribution<> distY(minY, maxY);
-	std::uniform_int_distribution<> distObject(0, 13);
+	std::uniform_int_distribution<> distObject(0, GameObject::GetObjectTypeCount());
 
 	int placed = 0;
 	int attemps = 0;
@@ -237,7 +237,10 @@ void GameMap::Display(sf::RenderTarget& target) {
 
 void GameMap::DisplayObjects(sf::RenderWindow& window) {
 	for (const auto& obj : gameObjects)
+	{
+		sf::FloatRect bounds = obj->GetCollisionBounds();
 		obj->Draw(window);
+	}
 }
 
 sf::FloatRect GameMap::GetFenceBounds() const {
@@ -264,15 +267,14 @@ sf::FloatRect GameMap::GetFenceBounds() const {
 	return bounds;
 }
 
-std::vector<sf::FloatRect> GameMap::GetObjectBounds() const
-{
-	std::vector<sf::FloatRect> boundsList;
-
+std::vector<GameObject*> GameMap::GetGameObjects() const {
+	std::vector<GameObject*> objectsList;
 	for (const auto& obj : gameObjects)
-		boundsList.push_back(obj->GetCollisionBounds());
+		objectsList.push_back(obj.get());
 
-	return boundsList;
+	return objectsList;
 }
+
 
 bool GameMap::IsPositionBlocked(float x, float y, float width, float height) const
 {

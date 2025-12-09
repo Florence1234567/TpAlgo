@@ -58,7 +58,7 @@ void PlayerCharacter::LoadCharacterTextures() {
     for (const auto &[name, path]: characterTextureFiles) {
         sf::Texture texture;
         if (texture.loadFromFile(path))
-            characterTextures[name] = texture;
+            characterTextures[name] = std::move(texture);
         else
             std::cerr << "Error loading " << path << std::endl;
     }
@@ -69,4 +69,10 @@ void PlayerCharacter::LoadCharacterTextures() {
         sf::FloatRect bounds = characterSprites[name]->getLocalBounds();
         characterSprites[name]->setOrigin(sf::Vector2f(bounds.size.x/2.f, bounds.size.y/2.f));
     }
+}
+
+void PlayerCharacter::Loot(GameObject *lootTarget) {
+    std::cout << "Done!" << std::endl;
+    inventory.push_back(lootTarget);
+    lootTarget->Destroy();
 }

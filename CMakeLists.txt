@@ -13,49 +13,46 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 add_executable(TPAlgo
-        src/Actions/Action.cpp
-        src/Actions/Action.h
-        src/Actions/MoveAction.cpp
-        src/Actions/MoveAction.h
-        src/Actions/WaitAction.cpp
-        src/Actions/WaitAction.h
-        src/Actions/AttackAction.cpp
-        src/Actions/AttackAction.h
-
-        src/DataStructures/Queue/ActionQueue.cpp
-        src/DataStructures/Queue/ActionQueue.h
-        src/DataStructures/LinkedLists/DLinkedList.hpp
-        src/DataStructures/LinkedLists/DNode.hpp
-
+        src/main.cpp
+        src/Game/GameMap.cpp
+        src/Base/Object.cpp
+        src/Base/Object.h
         src/Base/Character.cpp
         src/Base/Character.h
         src/Base/Controller.cpp
         src/Base/Controller.h
-        src/Base/Object.cpp
-        src/Base/Object.h
-
         src/Game/GameManager.cpp
         src/Game/GameManager.h
-        src/Game/GameMap.cpp
-        src/Game/GameMap.h
-        src/Game/GameObject.cpp
-        src/Game/GameObject.h
-        
-        src/Player/PlayerCharacter.cpp
-        src/Player/PlayerCharacter.h
-        src/Player/PlayerController.cpp
-        src/Player/PlayerController.h
-
+        src/Game/GameObjects/GameObject.cpp
+        src/Game/GameObjects/GameObject.h
         src/UI/PlayerUI/PlayerUIComponent.cpp
         src/UI/PlayerUI/PlayerUIComponent.h
         src/UI/PlayerUI/InventoryUI.cpp
         src/UI/PlayerUI/InventoryUI.h
-        src/UI/PlayerUI/MovementQueueUI.cpp
-        src/UI/PlayerUI/MovementQueueUI.h
+        src/UI/PlayerUI/ActionQueueUI.cpp
+        src/UI/PlayerUI/ActionQueueUI.h
+        src/Player/PlayerCharacter.cpp
+        src/Player/PlayerCharacter.h
+        src/Player/PlayerController.cpp
+        src/Player/PlayerController.h
+        src/Actions/Action.cpp
+        src/Actions/Action.h
+        src/DataStructures/Queue/ActionQueue.cpp
+        src/DataStructures/Queue/ActionQueue.h
+        src/DataStructures/LinkedLists/DLinkedList.hpp
+        src/DataStructures/LinkedLists/DNode.hpp
+        src/Actions/MoveAction.cpp
+        src/Actions/MoveAction.h
+        src/Actions/WaitAction.cpp
+        src/Actions/WaitAction.h
         src/UI/UIComponent.cpp
         src/UI/UIComponent.h
-
-        src/main.cpp
+        src/Actions/AttackAction.cpp
+        src/Actions/AttackAction.h
+        src/UI/PlayerUI/ActionContextMenuUI.cpp
+        src/UI/PlayerUI/ActionContextMenuUI.h
+        src/Actions/LootAction.cpp
+        src/Actions/LootAction.h
 )
 target_compile_features(TPAlgo PRIVATE cxx_std_17)
 target_link_libraries(TPAlgo PRIVATE SFML::Graphics)
