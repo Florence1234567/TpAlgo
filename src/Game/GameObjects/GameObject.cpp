@@ -1,11 +1,6 @@
 #include "GameObject.h"
 #include "GameObject.h"
 
-GameObject::GameObject(int x, int y, float size, ObjectType type)
-	: Object(x, y, size, GetTexturePath(type)), type(type)
-{
-}
-
 void GameObject::Draw(sf::RenderTarget& target)
 {
 	sprite.setPosition(GetPosition());
