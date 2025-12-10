@@ -11,6 +11,8 @@
 
 class Object {
 public:
+    virtual ~Object() = default;
+
     Object(int x, int y, float size, const std::string& texturePath);
 
     virtual void Draw(sf::RenderWindow& window) const;

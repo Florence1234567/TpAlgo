@@ -6,4 +6,5 @@
 
 void HealthPotion::DrinkPotion() {
     std::cout << "Drinking Health Potion" << std::endl;
+    // #TODO Drinking behavior
 }

@@ -59,6 +59,10 @@ add_executable(TPAlgo
         src/Objects/Items/PotionItem.h
         src/Objects/Items/Potions/HealthPotion.cpp
         src/Objects/Items/Potions/HealthPotion.h
+        src/Objects/Items/Potions/DamagePotion.cpp
+        src/Objects/Items/Potions/DamagePotion.h
+        src/Objects/Items/Potions/SpeedPotion.cpp
+        src/Objects/Items/Potions/SpeedPotion.h
 )
 target_compile_features(TPAlgo PRIVATE cxx_std_17)
 target_link_libraries(TPAlgo PRIVATE SFML::Graphics)

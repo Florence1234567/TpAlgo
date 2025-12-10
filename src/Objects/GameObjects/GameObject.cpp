@@ -1,7 +1,9 @@
 #include "GameObject.h"
 #include "GameObject.h"
 
+#include "../Items/Potions/DamagePotion.h"
 #include "../Items/Potions/HealthPotion.h"
+#include "../Items/Potions/SpeedPotion.h"
 
 GameObject::GameObject(int x, int y, float size, ObjectType type)
 	: Object(x, y, size, GetTexturePath(type)), type(type)
@@ -69,7 +71,11 @@ void GameObject::FillInventory(int inventorySpace) {
     for (int i = 0; i < inventorySpace; ++i) {
         // #TODO fill inventory with rendom objects
         Item* newItem = new HealthPotion;
+        Item* newItem2 = new SpeedPotion;
+        Item* newItem3 = new DamagePotion;
         objectInventory.push_back(newItem);
+        objectInventory.push_back(newItem2);
+        objectInventory.push_back(newItem3);
     }
 }
 
