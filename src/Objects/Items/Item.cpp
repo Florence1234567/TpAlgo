@@ -4,7 +4,7 @@
 
 #include "Item.h"
 
-Item::Item(int x, int y, float size, std::string texturePath, ItemType itemType, std::string itemName) : Object(x, y, size, texturePath), name(itemName) {
+Item::Item(std::string texturePath, ItemType itemType, std::string itemName) : Object(0, 0, 0, texturePath), name(itemName) {
     type = itemType;
 }
 

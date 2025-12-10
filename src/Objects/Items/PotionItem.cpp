@@ -4,7 +4,7 @@
 
 #include "PotionItem.h"
 
-PotionItem::PotionItem(std::string texturePath, std::string potionName) : Item(5, 10, 5, texturePath, ItemType::HealthPotion, potionName) {
+PotionItem::PotionItem(std::string texturePath, std::string potionName) : Item(texturePath, ItemType::HealthPotion, potionName) {
     bConsumable = true;
 }
 

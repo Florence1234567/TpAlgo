@@ -21,9 +21,9 @@ void InventoryUI::Draw(sf::RenderWindow& window)
 	{
 		window.draw(slot.sprite);
 
-		sf::Text text(font, slot.name + "		x" + std::to_string(slot.count), 16);
+		sf::Text text(font, slot.name + "	x" + std::to_string(slot.count), 16);
 		text.setFillColor(mainTextColor);
-		text.setPosition({ slot.sprite.getPosition().x + 60.f, slot.sprite.getPosition().y - 10.f});
+		text.setPosition({ slot.sprite.getPosition().x + 40.f, slot.sprite.getPosition().y - 10.f});
 
 		window.draw(text);
 	}
@@ -69,8 +69,8 @@ void InventoryUI::Update(sf::Time dt)
 
 		const sf::Sprite* original = exampleItem->getSprite(); 
 		sf::Sprite sprite = *original;                          
-		sprite.setScale({ 3.f, 3.f });                          
-		sprite.setPosition({ x + contentMargin, y + index * rowSpacing + contentMargin });
+		sprite.setScale({ 2.f, 2.f });
+		sprite.setPosition({ x + contentMargin*0.75f, y + index * rowSpacing + contentMargin });
 
 		InventorySlot slot(sprite, name, count);
 

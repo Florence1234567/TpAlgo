@@ -15,7 +15,7 @@ enum class ItemType {
 
 class Item : public Object {
 public:
-    Item(int x, int y, float size, std::string texturePath, ItemType type, std::string itemName);
+    Item(std::string texturePath, ItemType type, std::string itemName);
 
     void Draw(sf::RenderWindow& window) const override;
 

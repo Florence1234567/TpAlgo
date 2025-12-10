@@ -8,9 +8,8 @@
 
 class HealthPotion : public PotionItem {
 public:
-    HealthPotion() : PotionItem(TexturePath, "Health Potion") {};
+    HealthPotion() : PotionItem("Assets/Images/Objects/Berries.png", "Health Potion") {};
     void DrinkPotion() override;
 
 private:
-    std::string TexturePath = "Assets/Images/Objects/Berries.png";
 };
