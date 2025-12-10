@@ -46,7 +46,7 @@ void PlayerController::HandleEvent(const sf::Event &event, sf::FloatRect playing
                     continue;
 
                 if (enemy->GetCollisionBounds().contains(worldPos)) {
-                    cachedExecutableAction.push_back(std::make_unique<AttackAction>(owner, worldPos));
+                    cachedExecutableAction.push_back(std::make_unique<AttackAction>(owner, enemy));
                     return;
                 }
             }
@@ -77,7 +77,16 @@ void PlayerController::PerformAction(std::unique_ptr<Action> action) {
             }
             break;
         case ActionType::Attack:
-            PushAction(std::move(action));
+            if (auto *attackAction = dynamic_cast<AttackAction*>(action.get())) {
+                if (!attackAction->isInRange()) {
+                    std::unique_ptr<MoveAction> moveAction = static_cast<AttackAction*>(action.get())->
+                            CallMoveActionFirst();
+                    PushAction(std::move(moveAction));
+                    PushAction(std::move(action));
+                }else {
+                    PushAction(std::move(action));
+                }
+            }
             break;
         case ActionType::Wait:
             PushAction(std::move(action));

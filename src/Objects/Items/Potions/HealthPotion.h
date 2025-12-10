@@ -12,4 +12,5 @@ public:
     void DrinkPotion() override;
 
 private:
+    float healAmount = 10;
 };
