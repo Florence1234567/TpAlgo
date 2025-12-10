@@ -19,7 +19,6 @@ Object::Object(int x, int y, float size, const std::string &texturePath) : posX(
     sf::FloatRect bounds = sprite.getLocalBounds();
     sprite.setOrigin(sf::Vector2f(bounds.size.x / 2.f, bounds.size.y / 2.f));
     sprite.setPosition(sf::Vector2f(x, y));
-
     sprite.setScale(sf::Vector2f(scale, scale));
 }
 

@@ -17,8 +17,9 @@ void PlayerController::HandleEvent(const sf::Event &event, sf::FloatRect playing
         sf::Vector2f worldPos = window->mapPixelToCoords(mousePos);
 
         if (!playingBounds.contains(worldPos))
-            return;
+            return;   
 
+        //Movements check
         for (const auto &gameObject: gameMap->GetGameObjects())
             if (gameObject->GetCollisionBounds().contains(worldPos)) {
                 if (mouseButtonPressed->button == sf::Mouse::Button::Left && !bShowContextMenu) {

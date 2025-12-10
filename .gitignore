@@ -416,5 +416,6 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+/.idea
 /Builds
 /Builds

@@ -8,6 +8,7 @@ struct InventorySlot {
     sf::Sprite sprite;
     sf::String name;
     int count;
+    sf::FloatRect bounds;
 
     InventorySlot(const sf::Sprite& s, const sf::String& name, int c)
         : sprite(s), name(name), count(c) {}
@@ -16,9 +17,11 @@ struct InventorySlot {
 class InventoryUI : public PlayerUIComponent {
 public:
     InventoryUI(PlayerController& controller, PlayerCharacter& character, sf::Vector2u& windowSize, float margin = 20, float rightPadding = 280);
-
+    
     void Draw(sf::RenderWindow& window) override;
     void Update(sf::Time dt) override;
+
+    void HandleEvent(const sf::Event& event, sf::RenderWindow* window);
 
 private:
     PlayerController& controller;

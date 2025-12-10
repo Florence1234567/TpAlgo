@@ -24,6 +24,7 @@ public:
 	void Loot(GameObject* lootTarget);
 
 	std::vector<Item*> GetInventory() const { return inventory; };
+	void RemoveItemFromInventory(int index);
 
 private:
     //Character Sprites

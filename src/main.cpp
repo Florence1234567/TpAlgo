@@ -47,6 +47,7 @@ int main() {
                     ActionContextMenuUI.HandleEvent(*event, &window);
 
                 PController.HandleEvent(*event, grassBounds, &window);
+                InventoryUI.HandleEvent(*event, &window);
             }
 
             sf::Time dt = dtClock.restart();
