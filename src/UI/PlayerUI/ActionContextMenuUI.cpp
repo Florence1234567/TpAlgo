@@ -10,14 +10,14 @@
 ActionButton::ActionButton(const Action *Action, const sf::Vector2f &Position, const sf::Font &font)
     : action(Action), label(font, sf::String(action->getName()), fontSize) {
     label.setFillColor(textColor);
-    label.setPosition(Position);
-    float lenght = Action->getName().length();
-    float size = label.getCharacterSize();
+    sf::FloatRect textBounds = label.getLocalBounds();
 
-    sf::Vector2f bgSize(lenght * size, size + padding * 2);
-    button.setSize(bgSize);
+    button.setSize({ textBounds.size.x + padding * 2.f, textBounds.size.y + padding * 2.f });
     button.setFillColor(buttonColor);
-    button.setPosition({Position.x - padding, Position.y - padding});
+
+    button.setPosition(Position);
+
+    label.setPosition({ Position.x + padding - textBounds.position.x, Position.y + padding - textBounds.position.y });
 }
 
 void ActionButton::Draw(sf::RenderWindow &window) const {

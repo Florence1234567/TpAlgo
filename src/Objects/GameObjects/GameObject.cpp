@@ -1,7 +1,4 @@
 #include "GameObject.h"
-#include "GameObject.h"
-
-void GameObject::Draw(sf::RenderTarget& target)
 #include "../Items/Potions/DamagePotion.h"
 #include "../Items/Potions/HealthPotion.h"
 #include "../Items/Potions/SpeedPotion.h"
