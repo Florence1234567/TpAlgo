@@ -64,7 +64,7 @@ std::string GameObject::GetTypeTextAsString() const
 
 bool GameObject::IsLootable() const
 {
-    return this->GetType() == ObjectType::Rock;
+    return bLootable;
 }
 
 void GameObject::FillInventory(int inventorySpace) {

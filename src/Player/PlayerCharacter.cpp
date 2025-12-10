@@ -80,7 +80,11 @@ void PlayerCharacter::Loot(GameObject *lootTarget) {
     lootTarget->Destroy();
 }
 
-void PlayerCharacter::RemoveItemFromInventory(int index)
+void PlayerCharacter::UseItem(Item* item)
 {
-    inventory.erase(inventory.begin() + index);
+    item->UseItem();
+    auto it = std::find(inventory.begin(), inventory.end(), item);
+    if (it == inventory.end())
+        return;
+    inventory.erase(it);
 }

@@ -31,7 +31,7 @@ void InventoryUI::Draw(sf::RenderWindow &window) {
 void InventoryUI::Update(sf::Time dt) {
     items.clear();
 
-    std::vector<Item *> inventory = character.GetInventory();
+    std::vector<Item*> inventory = character.GetInventory();
 
     if (inventory.empty())
         return;
@@ -42,7 +42,8 @@ void InventoryUI::Update(sf::Time dt) {
     const float rowSpacing = 48.f;
 
     std::map<sf::String, int> typeCounts;
-    std::map<sf::String, Item *> typeToExample;
+    std::map<sf::String, Item*> typeToExample;
+    std::map<sf::String, std::vector<Item*>> typeToItems;
 
     for (Item *item: inventory) {
         if (!item)
@@ -51,6 +52,7 @@ void InventoryUI::Update(sf::Time dt) {
         sf::String type = item->GetName();
         typeCounts[type]++;
         typeToExample[type] = item;
+        typeToItems[type].push_back(item);
     }
 
     std::size_t index = 0;
@@ -70,6 +72,7 @@ void InventoryUI::Update(sf::Time dt) {
 
         InventorySlot slot(sprite, name, count);
         slot.bounds = sprite.getGlobalBounds();
+        slot.itemsReference = typeToItems[name];
 
         items.push_back(slot);
 
@@ -90,7 +93,8 @@ void InventoryUI::HandleEvent(const sf::Event &event, sf::RenderWindow *window) 
 
         for (std::size_t i = 0; i < items.size(); ++i) {
             if (items[i].bounds.contains(worldPos)) {
-                character.RemoveItemFromInventory(i);
+                Item* itemToRemove = items[i].itemsReference[0];
+                character.UseItem(itemToRemove);
                 return;
             }
         }

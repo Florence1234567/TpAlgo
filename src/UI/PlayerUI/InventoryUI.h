@@ -9,6 +9,7 @@ struct InventorySlot {
     sf::String name;
     int count;
     sf::FloatRect bounds;
+    std::vector<Item*> itemsReference;
 
     InventorySlot(const sf::Sprite& s, const sf::String& name, int c)
         : sprite(s), name(name), count(c) {}
