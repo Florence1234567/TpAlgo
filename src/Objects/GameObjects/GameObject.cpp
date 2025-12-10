@@ -66,3 +66,15 @@ bool GameObject::IsLootable() const
 {
     return this->GetType() == ObjectType::Rock;
 }
+
+void GameObject::FillInventory(int inventorySpace) {
+    for (int i = 0; i < inventorySpace; ++i) {
+        // #TODO fill inventory with rendom objects
+        Item* newItem = new HealthPotion;
+        Item* newItem2 = new SpeedPotion;
+        Item* newItem3 = new DamagePotion;
+        objectInventory.push_back(newItem);
+        objectInventory.push_back(newItem2);
+        objectInventory.push_back(newItem3);
+    }
+}

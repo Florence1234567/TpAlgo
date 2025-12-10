@@ -10,8 +10,7 @@ enum class ObjectType {
 
 class GameObject : public Object {
 public:
-    GameObject::GameObject(int x, int y, float size, ObjectType type)
-        : Object(x, y, size, GetTexturePath(type)), type(type) {}
+    GameObject::GameObject(int x, int y, float size, ObjectType type);
 
     void Draw(sf::RenderWindow& window) const override;
 
