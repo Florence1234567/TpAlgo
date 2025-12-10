@@ -53,6 +53,10 @@ add_executable(TPAlgo
         src/UI/PlayerUI/ActionContextMenuUI.h
         src/Actions/LootAction.cpp
         src/Actions/LootAction.h
+        src/Enemy/EnemyController.cpp 
+        src/Enemy/EnemyController.h 
+        src/Enemy/EnemyCharacter.cpp 
+        src/Enemy/EnemyCharacter.h
 )
 target_compile_features(TPAlgo PRIVATE cxx_std_17)
 target_link_libraries(TPAlgo PRIVATE SFML::Graphics)
