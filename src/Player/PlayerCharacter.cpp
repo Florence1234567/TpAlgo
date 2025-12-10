@@ -12,7 +12,7 @@ void PlayerCharacter::Update(sf::Time dt) {
 void PlayerCharacter::UpdateSprite(sf::Time dt) {
     std::string spriteName;
 
-    walkFrameTimer += dt.asSeconds() + speed;
+    walkFrameTimer += dt.asSeconds();
 
     if (walkFrameTimer >= walkFrameDuration) {
         walkFrameTimer = 0;

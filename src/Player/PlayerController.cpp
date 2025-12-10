@@ -19,7 +19,27 @@ void PlayerController::HandleEvent(const sf::Event &event, sf::FloatRect playing
         if (!playingBounds.contains(worldPos))
             return;   
 
-        //Movements check
+        //Enemy Check
+        for(const auto& enemy : gameMap->GetEnemies()) {
+            if (!enemy)
+                continue;
+
+            if (enemy->GetCollisionBounds().contains(worldPos)) {
+                if (mouseButtonPressed->button == sf::Mouse::Button::Left) {
+                    cachedExecutableAction.clear();
+                    lastClickedPosition = worldPos;
+
+                    cachedExecutableAction.push_back(std::make_unique<AttackAction>(owner, worldPos));
+
+                    bShowContextMenu = true;
+                    contextMenuPosition = worldPos;
+                }
+
+                return;
+            }
+        }
+
+        //Movements check 
         for (const auto &gameObject: gameMap->GetGameObjects())
             if (gameObject->GetCollisionBounds().contains(worldPos)) {
                 if (mouseButtonPressed->button == sf::Mouse::Button::Left && !bShowContextMenu) {

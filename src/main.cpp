@@ -9,6 +9,7 @@
 #include "UI/PlayerUI/ActionQueueUI.h"
 #include "UI/PlayerUI/ActionContextMenuUI.h"
 #include "UI/PlayerUI/InventoryUI.h"
+#include "Enemy/EnemyCharacter.h"
 
 int main() {
     sf::Vector2u windowSize(1920, 1080);
@@ -36,6 +37,15 @@ int main() {
         ActionContextMenuUI ActionContextMenuUI(&PController, contextMenuPosition);
         InventoryUI InventoryUI(PController, Player, windowSize, 50);
 
+        //Enemies
+        auto Chick = std::make_unique<EnemyCharacter>(windowSize.x / 3, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Chick);
+        EnemyCharacter* ChickPtr = Chick.get();
+        gameMap.AddEnemy(std::move(Chick));
+
+        auto Cow = std::make_unique<EnemyCharacter>(windowSize.x / 4, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Cow);
+        EnemyCharacter* CowPtr = Cow.get();
+        gameMap.AddEnemy(std::move(Cow));
+
         sf::Clock dtClock;
         while (window.isOpen())
         {
@@ -52,6 +62,12 @@ int main() {
 
             sf::Time dt = dtClock.restart();
             Player.Update(dt);
+            ChickPtr->Update(dt);
+            ChickPtr->UpdateSprite(dt);
+
+            CowPtr->Update(dt);
+            CowPtr->UpdateSprite(dt);
+
             Player.UpdateSprite(dt);
             PController.Update(dt);
             ActionQueueUI.Update(dt);
@@ -62,6 +78,9 @@ int main() {
 
             gameMap.DisplayObjects(window);
             Player.Draw(window);
+            ChickPtr->Draw(window);
+            CowPtr->Draw(window);
+
             ActionQueueUI.Draw(window);
             ActionContextMenuUI.Draw(window);
             InventoryUI.Draw(window);

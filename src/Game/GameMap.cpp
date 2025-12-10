@@ -275,7 +275,6 @@ std::vector<GameObject*> GameMap::GetGameObjects() const {
 	return objectsList;
 }
 
-
 bool GameMap::IsPositionBlocked(float x, float y, float width, float height) const
 {
 	sf::FloatRect fenceBounds = GetFenceBounds();
@@ -293,4 +292,13 @@ bool GameMap::IsPositionBlocked(float x, float y, float width, float height) con
 	}
 
 	return false;
+}
+
+std::vector<EnemyCharacter*> GameMap::GetEnemies() const
+{
+	std::vector<EnemyCharacter*> enemyList;
+	for (const auto& enemy : enemies)
+		enemyList.push_back(enemy.get());
+
+	return enemyList;
 }
