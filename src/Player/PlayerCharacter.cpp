@@ -76,7 +76,6 @@ void PlayerCharacter::Loot(GameObject *lootTarget) {
     for (auto object: lootTarget->GetInventory()) {
         inventory.push_back(object);
     }
-    // inventory.push_back(lootTarget);
     lootTarget->Destroy();
 }
 

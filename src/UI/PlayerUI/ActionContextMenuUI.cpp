@@ -84,7 +84,6 @@ void ActionContextMenuUI::HandleEvent(const sf::Event &event, sf::RenderWindow *
                         const auto &action = button.getAction();
                         if (!action) return;
                         const_cast<PlayerController *>(playerController)->PerformAction(action->Clone());
-                        const_cast<PlayerController *>(playerController)->CloseContextMenu();
                         return;
                     }
                 }
@@ -92,10 +91,6 @@ void ActionContextMenuUI::HandleEvent(const sf::Event &event, sf::RenderWindow *
             else {
                 const_cast<PlayerController *>(playerController)->CloseContextMenu();
             }
-        }
-
-        if (mouseButtonPressed->button == sf::Mouse::Button::Right) {
-            const_cast<PlayerController *>(playerController)->CloseContextMenu();
         }
     }
 }

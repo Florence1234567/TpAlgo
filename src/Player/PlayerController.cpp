@@ -8,7 +8,6 @@
 #include "../Actions/LootAction.h"
 #include "../Player//PlayerCharacter.h"
 #include "../Actions/MoveAction.h"
-#include "../Actions/WaitAction.h"
 #include "../UI/PlayerUI/ActionContextMenuUI.h"
 
 void PlayerController::HandleEvent(const sf::Event &event, sf::FloatRect playingBounds, sf::RenderWindow *window) {
@@ -16,45 +15,11 @@ void PlayerController::HandleEvent(const sf::Event &event, sf::FloatRect playing
         sf::Vector2i mousePos = mouseButtonPressed->position;
         sf::Vector2f worldPos = window->mapPixelToCoords(mousePos);
 
+        if (mouseButtonPressed->button == sf::Mouse::Button::Right && bShowContextMenu)
+            CloseContextMenu();
+
         if (!playingBounds.contains(worldPos))
-            return;   
-
-        //Enemy Check
-        for(const auto& enemy : gameMap->GetEnemies()) {
-            if (!enemy)
-                continue;
-
-            if (enemy->GetCollisionBounds().contains(worldPos)) {
-                if (mouseButtonPressed->button == sf::Mouse::Button::Left) {
-                    cachedExecutableAction.clear();
-                    lastClickedPosition = worldPos;
-
-                    cachedExecutableAction.push_back(std::make_unique<AttackAction>(owner, worldPos));
-
-                    bShowContextMenu = true;
-                    contextMenuPosition = worldPos;
-                }
-
-                return;
-            }
-        }
-
-        //Movements check 
-        for (const auto &gameObject: gameMap->GetGameObjects())
-            if (gameObject->GetCollisionBounds().contains(worldPos)) {
-                if (mouseButtonPressed->button == sf::Mouse::Button::Left && !bShowContextMenu) {
-                    cachedExecutableAction.clear();
-                    lastClickedPosition = worldPos;
-                    cachedExecutableAction.push_back(std::make_unique<MoveAction>(owner, worldPos));
-
-                    if(gameObject->IsLootable())
-                        cachedExecutableAction.push_back(std::make_unique<LootAction>(owner, gameObject));
-
-                    bShowContextMenu = true;
-                    contextMenuPosition = worldPos;
-                }
-                return;
-            }
+            return;
 
         if (mouseButtonPressed->button == sf::Mouse::Button::Left && !bShowContextMenu) {
             cachedExecutableAction.clear();
@@ -62,8 +27,27 @@ void PlayerController::HandleEvent(const sf::Event &event, sf::FloatRect playing
             cachedExecutableAction.push_back(std::make_unique<MoveAction>(owner, worldPos));
             bShowContextMenu = true;
             contextMenuPosition = worldPos;
+
+            //Lootable objects check
+            for (const auto &gameObject: gameMap->GetGameObjects()) {
+                if (gameObject->GetCollisionBounds().contains(worldPos) && gameObject->IsLootable()) {
+                    cachedExecutableAction.push_back(std::make_unique<LootAction>(owner, gameObject));
+                }
+            }
+
+            //Enemy check
+            for (const auto &enemy: gameMap->GetEnemies()) {
+                if (!enemy)
+                    continue;
+
+                if (enemy->GetCollisionBounds().contains(worldPos)) {
+                    cachedExecutableAction.push_back(std::make_unique<AttackAction>(owner, worldPos));
+                    return;
+                }
+            }
         }
     }
+
 }
 
 void PlayerController::Update(sf::Time dt) {
@@ -76,9 +60,10 @@ void PlayerController::PerformAction(std::unique_ptr<Action> action) {
             PushAction(std::move(action));
             break;
         case ActionType::Loot:
-            if (auto* lootAction = dynamic_cast<LootAction*>(action.get())) {
+            if (auto *lootAction = dynamic_cast<LootAction *>(action.get())) {
                 if (!lootAction->isInRange()) {
-                    std::unique_ptr<MoveAction> moveAction = static_cast<LootAction*>(action.get())->CallMoveActionFirst();
+                    std::unique_ptr<MoveAction> moveAction = static_cast<LootAction *>(action.get())->
+                            CallMoveActionFirst();
                     PushAction(std::move(moveAction));
                     PushAction(std::move(action));
                 } else {

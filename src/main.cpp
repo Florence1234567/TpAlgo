@@ -34,7 +34,7 @@ int main() {
 
         ActionQueueUI ActionQueueUI(PController, windowSize, 50);
         sf::Vector2f contextMenuPosition(ActionQueueUI.getPosition().x, ActionQueueUI.getPosition().y + ActionQueueUI.getPanelSize().y);
-        ActionContextMenuUI ActionContextMenuUI(&PController, contextMenuPosition);
+        ActionContextMenuUI ContextMenuUI(&PController, contextMenuPosition);
         InventoryUI InventoryUI(PController, Player, windowSize, 50);
 
         //Enemies
@@ -54,12 +54,13 @@ int main() {
                     window.close();
 
                 if (PController.IsContextMenuOpen())
-                    ActionContextMenuUI.HandleEvent(*event, &window);
+                    ContextMenuUI.HandleEvent(*event, &window);
 
                 PController.HandleEvent(*event, grassBounds, &window);
                 InventoryUI.HandleEvent(*event, &window);
             }
 
+            // Update
             sf::Time dt = dtClock.restart();
             Player.Update(dt);
             ChickenPtr->Update(dt);
@@ -73,17 +74,18 @@ int main() {
             ActionQueueUI.Update(dt);
             InventoryUI.Update(dt);
 
+            // Draw
             window.clear(sf::Color::Blue);
             window.draw(backgroundSprite); 
 
             gameMap.DisplayObjects(window);
-            Player.Draw(window);
             ChickenPtr->Draw(window);
             CowPtr->Draw(window);
+            Player.Draw(window);
 
             ActionQueueUI.Draw(window);
-            ActionContextMenuUI.Draw(window);
             InventoryUI.Draw(window);
+            ContextMenuUI.Draw(window);
 
             window.display();
         }
