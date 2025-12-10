@@ -13,7 +13,8 @@
 
 class Character : public Object {
 public:
-    Character(int x, int y, float size, float baseSpeed, float hp, const std::string& texturePath): Object(x, y, size, texturePath), speed(baseSpeed), health(hp), maxHealth(hp) {};
+    Character(int x, int y, float size, float baseSpeed, float hp, float damage, const float attackCooldown, std::string name, const std::string& texturePath)
+        : Object(x, y, size, texturePath), speed(baseSpeed), health(hp), maxHealth(hp), damage(damage), armour(0), name(name), ATTACKCOOLDOWN(attackCooldown), currentCooldown(0) {};
 
     enum class Direction {
         Up, Down, Left, Right
@@ -25,12 +26,23 @@ public:
     Direction getDirection() const { return currentDir; };
     bool hasDestination() const { return bHasDestination; };
     void Move(sf::Time dt);
+    float getHealth() const { return health; };
+    bool isAlive() const { return health > 0; };
+    void TakeDamage(float damage);
+	void Attack(Character* target);
 
 protected:
+    std::string name;
     float speed;
     float health;
     float maxHealth;
+    float damage;
+    float armour;
     sf::Vector2<float> destination;
     bool bHasDestination = false;
     Direction currentDir;
+
+	const float ATTACKCOOLDOWN;
+	float currentCooldown;
+	Character* currentTarget = nullptr;
 };

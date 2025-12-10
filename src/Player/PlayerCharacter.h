@@ -5,15 +5,17 @@
 #include "../Objects/Character.h"
 #include <iostream>
 
+#include "../Enemy/EnemyCharacter.h"
 #include "../Objects/GameObjects/GameObject.h"
 
 class PlayerCharacter : public Character {
 public:
-	PlayerCharacter(int x, int y, float size, float baseSpeed, float hp) : Character(x, y, size, baseSpeed, hp, "Assets/Images/Character/C_Front.png") {
+	PlayerCharacter(int x, int y, float size, float baseSpeed, float hp)
+	: Character(x, y, size, baseSpeed, hp, 15, 1, "Player", "Assets/Images/Character/C_Front.png" ){
 		LoadCharacterTextures();
 		currentDir = Direction::Down;
 		walkFrameTimer = 0;
-		walkFrameDuration = 1;
+		walkFrameDuration = 1 - (speed / 75);
 		isWalkFrame1 = true;
 		speed = baseSpeed;
 	};
@@ -26,7 +28,13 @@ public:
 	std::vector<Item*> GetInventory() const { return inventory; };
 	void UseItem(Item* item);
 
+	void HealPlayer(float amount) { health += amount; };
+
 private:
+	std::vector<Item*> inventory;
+
+	void LoadCharacterTextures();
+
     //Character Sprites
 	std::map<std::string, std::string> characterTextureFiles = {
 	 {"Back", "Assets/Images/Character/C_Back.png"},
@@ -45,14 +53,10 @@ private:
 	 {"RightWalk2", "Assets/Images/Character/C_RightWalking2.png"}
 	};
 
-	void LoadCharacterTextures();
-
     std::map<std::string, sf::Texture> characterTextures;
     std::map<std::string, std::unique_ptr<sf::Sprite>> characterSprites;
-	
+
 	float walkFrameTimer;
 	float walkFrameDuration;
 	bool isWalkFrame1;
-
-	std::vector<Item*> inventory;
 };

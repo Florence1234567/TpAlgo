@@ -4,7 +4,6 @@
 
 #include "HealthPotion.h"
 
-void HealthPotion::DrinkPotion() {
-    std::cout << "Drinking Health Potion" << std::endl;
-    // #TODO Drinking behavior
+void HealthPotion::DrinkPotion(PlayerCharacter* player) {
+    player->HealPlayer(healAmount);
 }

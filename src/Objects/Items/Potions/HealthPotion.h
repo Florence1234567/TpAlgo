@@ -9,7 +9,8 @@
 class HealthPotion : public PotionItem {
 public:
     HealthPotion() : PotionItem("Assets/Images/Objects/Berries.png", "Health Potion") {};
-    void DrinkPotion() override;
+    void DrinkPotion(PlayerCharacter* player) override;
 
 private:
+    float healAmount = 10;
 };

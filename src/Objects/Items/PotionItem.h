@@ -10,8 +10,8 @@ class PotionItem : public Item {
 public:
     PotionItem(std::string texturePath, std::string potionName);
 
-    void UseItem() override;
-    virtual void DrinkPotion() = 0;
+    void UseItem(PlayerCharacter* player) override;
+    virtual void DrinkPotion(PlayerCharacter* player) = 0;
 
 private:
 };
