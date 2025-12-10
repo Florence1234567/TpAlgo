@@ -38,17 +38,13 @@ int main() {
         InventoryUI InventoryUI(PController, Player, windowSize, 50);
 
         //Enemies
-        auto Chicken = std::make_unique<EnemyCharacter>(windowSize.x / 3, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Chicken, "Chicken");
+        auto Chicken = std::make_unique<EnemyCharacter>(windowSize.x / 3, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Chicken);
         EnemyCharacter* ChickenPtr = Chicken.get();
         gameMap.AddEnemy(std::move(Chicken));
 
-        auto Cow = std::make_unique<EnemyCharacter>(windowSize.x / 4, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Cow, "Cow");
+        auto Cow = std::make_unique<EnemyCharacter>(windowSize.x / 4, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Cow);
         EnemyCharacter* CowPtr = Cow.get();
         gameMap.AddEnemy(std::move(Cow));
-
-        auto Chicken2 = std::make_unique<EnemyCharacter>(windowSize.x / 2, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Chicken, "Chicken");
-        EnemyCharacter* ChickenPtr2 = Chicken2.get();
-        gameMap.AddEnemy(std::move(Chicken2));
 
         sf::Clock dtClock;
         while (window.isOpen())
@@ -73,9 +69,6 @@ int main() {
             CowPtr->Update(dt);
             CowPtr->UpdateSprite(dt);
 
-            ChickenPtr2->Update(dt);
-            ChickenPtr2->UpdateSprite(dt);
-
             Player.UpdateSprite(dt);
             PController.Update(dt);
             ActionQueueUI.Update(dt);
@@ -88,7 +81,6 @@ int main() {
             gameMap.DisplayObjects(window);
             ChickenPtr->Draw(window);
             CowPtr->Draw(window);
-            ChickenPtr2->Draw(window);
             Player.Draw(window);
 
             ActionQueueUI.Draw(window);

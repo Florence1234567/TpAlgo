@@ -8,6 +8,6 @@ PotionItem::PotionItem(std::string texturePath, std::string potionName) : Item(t
     bConsumable = true;
 }
 
-void PotionItem::UseItem(PlayerCharacter* player) {
-    DrinkPotion(player);
+void PotionItem::UseItem() {
+    DrinkPotion();
 }

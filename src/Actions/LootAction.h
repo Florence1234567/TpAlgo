@@ -22,6 +22,6 @@ public:
 
 private:
     GameObject* object;
-    const float range = 10;
+    const float range = 100;
     float lootTime = 3.f;
 };
