@@ -21,6 +21,11 @@ void PlayerController::HandleEvent(const sf::Event &event, sf::FloatRect playing
         if (!playingBounds.contains(worldPos))
             return;
 
+        if (bActionPerformed) {
+            bActionPerformed = false;
+            return;
+        }
+
         if (mouseButtonPressed->button == sf::Mouse::Button::Left && !bShowContextMenu) {
             cachedExecutableAction.clear();
             lastClickedPosition = worldPos;
@@ -83,5 +88,6 @@ void PlayerController::PerformAction(std::unique_ptr<Action> action) {
     }
 
     CloseContextMenu();
+    bActionPerformed = true;
     cachedExecutableAction.clear();
 }

@@ -27,5 +27,6 @@ private:
 
     // Context menu
     bool bShowContextMenu = false;
+    bool bActionPerformed = false;
     sf::Vector2f contextMenuPosition;
 };
