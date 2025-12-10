@@ -33,7 +33,7 @@ void InventoryUI::Update(sf::Time dt)
 {
 	items.clear();
 
-	std::vector<GameObject*>& inventory = character.GetInventory();
+	std::vector<Item*> inventory = character.GetInventory();
 
 	if (inventory.empty())
 		return;
@@ -44,14 +44,14 @@ void InventoryUI::Update(sf::Time dt)
 	const float rowSpacing = 48.f;
 
 	std::map<sf::String, int> typeCounts;
-	std::map<sf::String, GameObject*> typeToExample;
+	std::map<sf::String, Item*> typeToExample;
 
-	for (GameObject* item : inventory)
+	for (Item* item : inventory)
 	{
 		if (!item)
 			continue;
 
-		sf::String type = item->GetTypeTextAsString();
+		sf::String type = item->GetName();
 		typeCounts[type]++;
 		typeToExample[type] = item;
 	}
@@ -63,14 +63,14 @@ void InventoryUI::Update(sf::Time dt)
 		sf::String name = pair.first;
 		int count = pair.second;
 
-		GameObject* exampleItem = typeToExample[name];
+		Item* exampleItem = typeToExample[name];
 		if (!exampleItem)
 			continue;
 
-		const sf::Sprite* original = exampleItem->getSprite();
-		sf::Sprite sprite = *original;
-		sprite.setScale({ 3.f, 3.f });
-		sprite.setPosition({ x + contentMargin, y + index * rowSpacing + contentMargin });
+		const sf::Sprite* original = exampleItem->getSprite(); 
+		sf::Sprite sprite = *original;                          
+		sprite.setScale({ 2.f, 2.f });
+		sprite.setPosition({ x + contentMargin*0.75f, y + index * rowSpacing + contentMargin });
 
 		InventorySlot slot(sprite, name, count);
 

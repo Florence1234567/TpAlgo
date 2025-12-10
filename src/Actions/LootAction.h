@@ -5,7 +5,7 @@
 #pragma once
 #include "Action.h"
 #include "MoveAction.h"
-#include "../Game/GameObjects/GameObject.h"
+#include "../Objects/GameObjects/GameObject.h"
 
 
 class LootAction : public Action {

@@ -15,16 +15,16 @@ FetchContent_MakeAvailable(SFML)
 add_executable(TPAlgo
         src/main.cpp
         src/Game/GameMap.cpp
-        src/Base/Object.cpp
-        src/Base/Object.h
-        src/Base/Character.cpp
-        src/Base/Character.h
-        src/Base/Controller.cpp
-        src/Base/Controller.h
+        src/Objects/Object.cpp
+        src/Objects/Object.h
+        src/Objects/Character.cpp
+        src/Objects/Character.h
+        src/Objects/Controller.cpp
+        src/Objects/Controller.h
         src/Game/GameManager.cpp
         src/Game/GameManager.h
-        src/Game/GameObjects/GameObject.cpp
-        src/Game/GameObjects/GameObject.h
+        src/Objects/GameObjects/GameObject.cpp
+        src/Objects/GameObjects/GameObject.h
         src/UI/PlayerUI/PlayerUIComponent.cpp
         src/UI/PlayerUI/PlayerUIComponent.h
         src/UI/PlayerUI/InventoryUI.cpp
@@ -57,6 +57,16 @@ add_executable(TPAlgo
         src/Enemy/EnemyController.h 
         src/Enemy/EnemyCharacter.cpp 
         src/Enemy/EnemyCharacter.h
+        src/Objects/Items/Item.cpp
+        src/Objects/Items/Item.h
+        src/Objects/Items/PotionItem.cpp
+        src/Objects/Items/PotionItem.h
+        src/Objects/Items/Potions/HealthPotion.cpp
+        src/Objects/Items/Potions/HealthPotion.h
+        src/Objects/Items/Potions/DamagePotion.cpp
+        src/Objects/Items/Potions/DamagePotion.h
+        src/Objects/Items/Potions/SpeedPotion.cpp
+        src/Objects/Items/Potions/SpeedPotion.h
 )
 target_compile_features(TPAlgo PRIVATE cxx_std_17)
 target_link_libraries(TPAlgo PRIVATE SFML::Graphics)

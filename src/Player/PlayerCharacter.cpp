@@ -73,7 +73,10 @@ void PlayerCharacter::LoadCharacterTextures() {
 
 void PlayerCharacter::Loot(GameObject *lootTarget) {
     std::cout << "Done!" << std::endl;
-    inventory.push_back(lootTarget);
+    for (auto object: lootTarget->GetInventory()) {
+        inventory.push_back(object);
+    }
+    // inventory.push_back(lootTarget);
     lootTarget->Destroy();
 }
 

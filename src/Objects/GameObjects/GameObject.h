@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../../Base/Object.h"
+#include "../../Objects/Object.h"
+#include "../Items/Item.h"
 
 enum class ObjectType {
     Berries, Bush1, Bush2, Flower1, Flower2, Flower3, Flower4,
@@ -12,7 +13,7 @@ public:
     GameObject::GameObject(int x, int y, float size, ObjectType type)
         : Object(x, y, size, GetTexturePath(type)), type(type) {}
 
-    void Draw(sf::RenderTarget& target);
+    void Draw(sf::RenderWindow& window) const override;
 
     sf::FloatRect GetCollisionBounds() const;
     ObjectType GetType() const { return type; }
@@ -20,8 +21,15 @@ public:
     std::string GetTypeTextAsString() const;
     static int GetObjectTypeCount() { return static_cast<std::size_t>(ObjectType::Count); };
     bool IsLootable() const;
+    std::vector<Item*> GetInventory() const { return objectInventory; }
+
 private:
 	ObjectType type;
+    bool bLootable = false;
+
+    std::vector<Item*> objectInventory;
+    void FillInventory(int inventorySpace);
+
 
     static std::string GetTexturePath(ObjectType type) {
         switch (type) {
