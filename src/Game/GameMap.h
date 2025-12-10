@@ -4,7 +4,7 @@
 #include <iostream>
 #include <map>
 #include "../Objects/GameObjects/GameObject.h"
-#include "GameObjects/GameObject.h"
+#include "../Objects/GameObjects/GameObject.h"
 #include "../Enemy/EnemyCharacter.h"
 
 enum Tile {

@@ -2,12 +2,13 @@
 // Created by Antoine on 2025-12-05.
 //
 #pragma once
-#include "../Base/Character.h"
+#include "../Objects/Character.h"
 #include <iostream>
-#include "../Game/GameObjects/GameObject.h"
+#include "../Objects/GameObjects/GameObject.h"
 
 enum EnemyType{
-	Chick, Cow
+	Chicken,
+	Cow
 };
 
 class EnemyCharacter : public Character {

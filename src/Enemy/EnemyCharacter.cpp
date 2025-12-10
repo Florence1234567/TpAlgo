@@ -17,7 +17,7 @@ void EnemyCharacter::UpdateSprite(sf::Time dt)
         isWalkFrame1 = !isWalkFrame1;
     }
 
-    if (enemyType == EnemyType::Chick)
+    if (enemyType == EnemyType::Chicken)
         spriteName = "Chick";
     else
         spriteName = "Cow";
