@@ -38,9 +38,9 @@ int main() {
         InventoryUI InventoryUI(PController, Player, windowSize, 50);
 
         //Enemies
-        auto Chick = std::make_unique<EnemyCharacter>(windowSize.x / 3, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Chick);
-        EnemyCharacter* ChickPtr = Chick.get();
-        gameMap.AddEnemy(std::move(Chick));
+        auto Chicken = std::make_unique<EnemyCharacter>(windowSize.x / 3, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Chicken);
+        EnemyCharacter* ChickenPtr = Chicken.get();
+        gameMap.AddEnemy(std::move(Chicken));
 
         auto Cow = std::make_unique<EnemyCharacter>(windowSize.x / 4, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Cow);
         EnemyCharacter* CowPtr = Cow.get();
@@ -62,8 +62,8 @@ int main() {
 
             sf::Time dt = dtClock.restart();
             Player.Update(dt);
-            ChickPtr->Update(dt);
-            ChickPtr->UpdateSprite(dt);
+            ChickenPtr->Update(dt);
+            ChickenPtr->UpdateSprite(dt);
 
             CowPtr->Update(dt);
             CowPtr->UpdateSprite(dt);
@@ -78,7 +78,7 @@ int main() {
 
             gameMap.DisplayObjects(window);
             Player.Draw(window);
-            ChickPtr->Draw(window);
+            ChickenPtr->Draw(window);
             CowPtr->Draw(window);
 
             ActionQueueUI.Draw(window);
