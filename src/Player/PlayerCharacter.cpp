@@ -4,6 +4,8 @@
 
 #include "PlayerCharacter.h"
 
+#include <thread>
+
 void PlayerCharacter::Update(sf::Time dt) {
     Character::Update(dt);
     UpdateSprite(dt);
@@ -67,7 +69,7 @@ void PlayerCharacter::LoadCharacterTextures() {
         characterSprites[name] = std::make_unique<sf::Sprite>(texture);
         characterSprites[name]->setScale(sf::Vector2f(scale, scale));
         sf::FloatRect bounds = characterSprites[name]->getLocalBounds();
-        characterSprites[name]->setOrigin(sf::Vector2f(bounds.size.x/2.f, bounds.size.y/2.f));
+        characterSprites[name]->setOrigin(sf::Vector2f(bounds.size.x / 2.f, bounds.size.y / 2.f));
     }
 }
 
@@ -76,11 +78,13 @@ void PlayerCharacter::Loot(GameObject *lootTarget) {
     for (auto object: lootTarget->GetInventory()) {
         inventory.push_back(object);
     }
-    // inventory.push_back(lootTarget);
     lootTarget->Destroy();
 }
 
-void PlayerCharacter::RemoveItemFromInventory(int index)
-{
-    inventory.erase(inventory.begin() + index);
+void PlayerCharacter::UseItem(Item *item) {
+    item->UseItem();
+    auto it = std::find(inventory.begin(), inventory.end(), item);
+    if (it == inventory.end())
+        return;
+    inventory.erase(it);
 }

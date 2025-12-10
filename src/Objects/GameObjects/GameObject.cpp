@@ -1,4 +1,6 @@
 #include "GameObject.h"
+#include "GameObject.h"
+
 #include "../Items/Potions/DamagePotion.h"
 #include "../Items/Potions/HealthPotion.h"
 #include "../Items/Potions/SpeedPotion.h"
@@ -76,4 +78,3 @@ void GameObject::FillInventory(int inventorySpace) {
         objectInventory.push_back(newItem3);
     }
 }
-

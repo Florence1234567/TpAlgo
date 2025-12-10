@@ -1,10 +1,9 @@
 //
-// Created by Antoine on 2025-12-09.
+// Created by Antoine on 2025-12-10.
 //
 
 #include "HealthPotion.h"
 
 void HealthPotion::DrinkPotion() {
-    std::cout << "Drinking Health Potion" << std::endl;
-    // #TODO Drinking behavior
+    // ##TODO Drink behavior
 }

@@ -34,17 +34,21 @@ int main() {
 
         ActionQueueUI ActionQueueUI(PController, windowSize, 50);
         sf::Vector2f contextMenuPosition(ActionQueueUI.getPosition().x, ActionQueueUI.getPosition().y + ActionQueueUI.getPanelSize().y);
-        ActionContextMenuUI ActionContextMenuUI(&PController, contextMenuPosition);
+        ActionContextMenuUI ContextMenuUI(&PController, contextMenuPosition);
         InventoryUI InventoryUI(PController, Player, windowSize, 50);
 
         //Enemies
-        auto Chick = std::make_unique<EnemyCharacter>(windowSize.x / 3, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Chick);
-        EnemyCharacter* ChickPtr = Chick.get();
-        gameMap.AddEnemy(std::move(Chick));
+        auto Chicken = std::make_unique<EnemyCharacter>(windowSize.x / 3, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Chicken, "Chicken");
+        EnemyCharacter* ChickenPtr = Chicken.get();
+        gameMap.AddEnemy(std::move(Chicken));
 
-        auto Cow = std::make_unique<EnemyCharacter>(windowSize.x / 4, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Cow);
+        auto Cow = std::make_unique<EnemyCharacter>(windowSize.x / 4, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Cow, "Cow");
         EnemyCharacter* CowPtr = Cow.get();
         gameMap.AddEnemy(std::move(Cow));
+
+        auto Chicken2 = std::make_unique<EnemyCharacter>(windowSize.x / 2, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Chicken, "Chicken");
+        EnemyCharacter* ChickenPtr2 = Chicken2.get();
+        gameMap.AddEnemy(std::move(Chicken2));
 
         sf::Clock dtClock;
         while (window.isOpen())
@@ -54,36 +58,42 @@ int main() {
                     window.close();
 
                 if (PController.IsContextMenuOpen())
-                    ActionContextMenuUI.HandleEvent(*event, &window);
+                    ContextMenuUI.HandleEvent(*event, &window);
 
                 PController.HandleEvent(*event, grassBounds, &window);
                 InventoryUI.HandleEvent(*event, &window);
             }
 
+            // Update
             sf::Time dt = dtClock.restart();
             Player.Update(dt);
-            ChickPtr->Update(dt);
-            ChickPtr->UpdateSprite(dt);
+            ChickenPtr->Update(dt);
+            ChickenPtr->UpdateSprite(dt);
 
             CowPtr->Update(dt);
             CowPtr->UpdateSprite(dt);
+
+            ChickenPtr2->Update(dt);
+            ChickenPtr2->UpdateSprite(dt);
 
             Player.UpdateSprite(dt);
             PController.Update(dt);
             ActionQueueUI.Update(dt);
             InventoryUI.Update(dt);
 
+            // Draw
             window.clear(sf::Color::Blue);
             window.draw(backgroundSprite); 
 
             gameMap.DisplayObjects(window);
-            Player.Draw(window);
-            ChickPtr->Draw(window);
+            ChickenPtr->Draw(window);
             CowPtr->Draw(window);
+            ChickenPtr2->Draw(window);
+            Player.Draw(window);
 
             ActionQueueUI.Draw(window);
-            ActionContextMenuUI.Draw(window);
             InventoryUI.Draw(window);
+            ContextMenuUI.Draw(window);
 
             window.display();
         }

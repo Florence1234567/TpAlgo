@@ -5,15 +5,17 @@
 #include "../Objects/Character.h"
 #include <iostream>
 #include "../Objects/GameObjects/GameObject.h"
+#include "../Player/PlayerCharacter.h"
 
 enum EnemyType{
-	Chick, Cow
+	Chicken,
+	Cow
 };
 
 class EnemyCharacter : public Character {
 public:
-	EnemyCharacter(int x, int y, float size, float baseSpeed, float hp, EnemyType type) 
-		: Character(x, y, size, baseSpeed, hp, "Assets/Images/Character/C_Front.png") {
+	EnemyCharacter(int x, int y, float size, float baseSpeed, float hp, EnemyType type, std::string name)
+		: Character(x, y, size, baseSpeed, hp, 10, 1, name, "Assets/Images/Character/C_Front.png"), ATTACKCOOLDOWN(1), currentCooldown(0) {
 		LoadCharacterTextures();
 		currentDir = Direction::Down;
 		walkFrameTimer = 0;
@@ -29,6 +31,11 @@ public:
 	sf::FloatRect GetCollisionBounds() const;
 
 private:
+	std::vector<Item*> inventory;
+	const float ATTACKCOOLDOWN;
+	float currentCooldown;
+
+
 	//Enemy Sprites
 	std::map<std::string, std::string> enemyTextureFiles = {
 	 {"Chick", "Assets/Images/Character/Chick.png"},
