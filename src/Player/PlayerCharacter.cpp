@@ -76,3 +76,8 @@ void PlayerCharacter::Loot(GameObject *lootTarget) {
     inventory.push_back(lootTarget);
     lootTarget->Destroy();
 }
+
+void PlayerCharacter::RemoveItemFromInventory(int index)
+{
+    inventory.erase(inventory.begin() + index);
+}

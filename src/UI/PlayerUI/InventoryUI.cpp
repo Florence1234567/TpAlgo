@@ -21,9 +21,9 @@ void InventoryUI::Draw(sf::RenderWindow& window)
 	{
 		window.draw(slot.sprite);
 
-		sf::Text text(font, slot.name + "		x" + std::to_string(slot.count), 16);
+		sf::Text text(font, slot.name + "\t\tx" + std::to_string(slot.count), 16);
 		text.setFillColor(mainTextColor);
-		text.setPosition({ slot.sprite.getPosition().x + 60.f, slot.sprite.getPosition().y - 10.f});
+		text.setPosition({ slot.sprite.getPosition().x + 60.f, slot.sprite.getPosition().y - 10.f });
 
 		window.draw(text);
 	}
@@ -52,7 +52,7 @@ void InventoryUI::Update(sf::Time dt)
 			continue;
 
 		sf::String type = item->GetTypeTextAsString();
-		typeCounts[type]++;            
+		typeCounts[type]++;
 		typeToExample[type] = item;
 	}
 
@@ -67,15 +67,54 @@ void InventoryUI::Update(sf::Time dt)
 		if (!exampleItem)
 			continue;
 
-		const sf::Sprite* original = exampleItem->getSprite(); 
-		sf::Sprite sprite = *original;                          
-		sprite.setScale({ 3.f, 3.f });                          
+		const sf::Sprite* original = exampleItem->getSprite();
+		sf::Sprite sprite = *original;
+		sprite.setScale({ 3.f, 3.f });
 		sprite.setPosition({ x + contentMargin, y + index * rowSpacing + contentMargin });
 
 		InventorySlot slot(sprite, name, count);
 
+		sf::Text tempText(
+			font,
+			name + "\t\tx" + std::to_string(count),
+			16);
+
+		sf::FloatRect spriteBounds = sprite.getGlobalBounds();
+		sf::FloatRect textBounds = tempText.getLocalBounds();
+
+		float textX = spriteBounds.position.x + 60.f;
+		float textY = spriteBounds.position.y - 10.f;
+
+		float left = std::min(spriteBounds.position.x, textX);
+		float top = std::min(spriteBounds.position.y, textY);
+		float right = std::max(
+			spriteBounds.position.x + spriteBounds.size.x,
+			textX + textBounds.size.x);
+		float bottom = std::max(
+			spriteBounds.position.y + spriteBounds.size.y,
+			textY + textBounds.size.y);
+
+		slot.bounds = sf::FloatRect({ left, top }, { right - left, bottom - top });
+
 		items.push_back(slot);
 
 		++index;
+	}
+}
+
+void InventoryUI::HandleEvent(const sf::Event& event, sf::RenderWindow* window)
+{
+	if (const auto* mouseButtonPressed = event.getIf<sf::Event::MouseButtonPressed>()) {
+		sf::Vector2i mousePos = mouseButtonPressed->position;
+		sf::Vector2f worldPos = window->mapPixelToCoords(mousePos);
+
+		for (std::size_t i = 0; i < items.size(); ++i)
+			if (items[i].bounds.contains(worldPos))
+			{
+				if (mouseButtonPressed->button == sf::Mouse::Button::Left)
+					character.RemoveItemFromInventory(i);
+				
+				return;
+			}
 	}
 }
