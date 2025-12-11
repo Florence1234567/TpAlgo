@@ -9,6 +9,7 @@
 #include "UI/PlayerUI/ActionQueueUI.h"
 #include "UI/PlayerUI/ActionContextMenuUI.h"
 #include "UI/PlayerUI/InventoryUI.h"
+#include "UI/PlayerUI/HealthBar.h"
 #include "Enemy/EnemyCharacter.h"
 
 int main() {
@@ -50,6 +51,8 @@ int main() {
         EnemyCharacter* ChickenPtr2 = Chicken2.get();
         gameMap.AddEnemy(std::move(Chicken2));
 
+        HealthBar HealthBar({ 20.f, 40.f }, { 200.f, 20.f }, windowSize, Player);
+
         sf::Clock dtClock;
         while (window.isOpen())
         {
@@ -80,6 +83,7 @@ int main() {
             PController.Update(dt);
             ActionQueueUI.Update(dt);
             InventoryUI.Update(dt);
+            HealthBar.Update(dt);
 
             // Draw
             window.clear(sf::Color::Blue);
@@ -94,7 +98,7 @@ int main() {
             ActionQueueUI.Draw(window);
             InventoryUI.Draw(window);
             ContextMenuUI.Draw(window);
-
+            HealthBar.Draw(window);
             window.display();
         }
     }

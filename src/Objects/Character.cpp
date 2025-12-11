@@ -24,7 +24,7 @@ void Character::Update(sf::Time dt) {
     }
 
     if (currentTarget != nullptr) {
-        if (currentTarget->getHealth() <= 0 || !isAlive())
+        if (currentTarget->GetHealth() <= 0 || !isAlive())
             currentTarget = nullptr;
         else if (currentCooldown <= 0) {
             currentTarget->TakeDamage(damage);

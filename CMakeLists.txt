@@ -62,11 +62,13 @@ add_executable(TPAlgo
         src/Objects/Items/Potions/DamagePotion.h
         src/Objects/Items/Potions/SpeedPotion.cpp
         src/Objects/Items/Potions/SpeedPotion.h
+        src/Objects/Items/Potions/HealthPotion.cpp
         src/Enemy/EnemyController.cpp 
         src/Enemy/EnemyController.h 
         src/Enemy/EnemyCharacter.cpp 
         src/Enemy/EnemyCharacter.h
-        src/Objects/Items/Potions/HealthPotion.cpp
+        src/UI/PlayerUI/HealthBar.cpp
+        src/UI/PlayerUI/HealthBar.h
 )
 target_compile_features(TPAlgo PRIVATE cxx_std_17)
 target_link_libraries(TPAlgo PRIVATE SFML::Graphics)
