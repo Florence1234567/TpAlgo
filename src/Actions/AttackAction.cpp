@@ -10,7 +10,7 @@ void AttackAction::Execute() {
 }
 
 bool AttackAction::Update(sf::Time dt) {
-    if (owner->getHealth() <= 0 || enemy->getHealth() <= 0)
+    if (owner->GetHealth() <= 0 || enemy->GetHealth() <= 0)
         bCompleted = true;
 
     owner->Attack(enemy);

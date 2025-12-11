@@ -26,7 +26,9 @@ public:
     Direction getDirection() const { return currentDir; };
     bool hasDestination() const { return bHasDestination; };
     void Move(sf::Time dt);
-    float getHealth() const { return health; };
+    float GetHealth() const { return health; };
+    float GetMaxHealth() const { return maxHealth; };
+
     bool isAlive() const { return health > 0; };
     void TakeDamage(float damage);
 	void Attack(Character* target);
