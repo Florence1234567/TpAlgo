@@ -2,10 +2,9 @@
 // Created by Antoine on 2025-12-05.
 //
 #pragma once
-#include "../Objects/Character.h"
+#include "../Character.h"
 #include <iostream>
-#include "../Objects/GameObjects/GameObject.h"
-#include "../Player/PlayerCharacter.h"
+#include "../GameObjects/GameObject.h"
 
 enum EnemyType{
 	Chicken,

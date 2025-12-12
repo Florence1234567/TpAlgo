@@ -4,7 +4,7 @@
 
 #include "LootAction.h"
 
-#include "../Player/PlayerCharacter.h"
+#include "../Objects/Player/PlayerCharacter.h"
 
 void LootAction::Execute() {
     std::cout << "Looting" << std::endl;

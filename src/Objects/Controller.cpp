@@ -5,7 +5,6 @@
 #include "Controller.h"
 
 #include "../Actions/WaitAction.h"
-#include "../Player/PlayerCharacter.h"
 
 void Controller::Update(sf::Time dt) {
     owner->Update(dt);

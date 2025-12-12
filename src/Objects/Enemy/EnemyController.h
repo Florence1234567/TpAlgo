@@ -2,10 +2,9 @@
 // Created by Antoine on 2025-12-05.
 //
 #pragma once
-#include "../Objects/Controller.h"
+#include "../Controller.h"
 #include <unordered_map>
-#include "../Game/GameMap.h"
-#include "../DataStructures/Queue/ActionQueue.h"
+#include "../../Game/GameMap.h"
 
 class EnemyController : public Controller {
 public:

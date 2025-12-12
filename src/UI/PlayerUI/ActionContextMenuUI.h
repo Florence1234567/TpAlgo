@@ -4,7 +4,7 @@
 
 #pragma once
 #include "PlayerUIComponent.h"
-#include "../../Player/PlayerController.h"
+#include "../../Objects/Player/PlayerController.h"
 
 /// Bouton pour le menu contextuel
 class ActionButton {

@@ -31,10 +31,10 @@ add_executable(TPAlgo
         src/UI/PlayerUI/InventoryUI.h
         src/UI/PlayerUI/ActionQueueUI.cpp
         src/UI/PlayerUI/ActionQueueUI.h
-        src/Player/PlayerCharacter.cpp
-        src/Player/PlayerCharacter.h
-        src/Player/PlayerController.cpp
-        src/Player/PlayerController.h
+        src/Objects/Player/PlayerCharacter.cpp
+        src/Objects/Player/PlayerCharacter.h
+        src/Objects/Player/PlayerController.cpp
+        src/Objects/Player/PlayerController.h
         src/Actions/Action.cpp
         src/Actions/Action.h
         src/DataStructures/Queue/ActionQueue.cpp
@@ -63,10 +63,10 @@ add_executable(TPAlgo
         src/Objects/Items/Potions/SpeedPotion.cpp
         src/Objects/Items/Potions/SpeedPotion.h
         src/Objects/Items/Potions/HealthPotion.cpp
-        src/Enemy/EnemyController.cpp 
-        src/Enemy/EnemyController.h 
-        src/Enemy/EnemyCharacter.cpp 
-        src/Enemy/EnemyCharacter.h
+        src/Objects/Enemy/EnemyController.cpp
+        src/Objects/Enemy/EnemyController.h
+        src/Objects/Enemy/EnemyCharacter.cpp
+        src/Objects/Enemy/EnemyCharacter.h
         src/UI/PlayerUI/HealthBar.cpp
         src/UI/PlayerUI/HealthBar.h
 )

@@ -1,7 +1,7 @@
 #pragma once
 #include "PlayerUIComponent.h"
 #include "../UIComponent.h"
-#include "../../Player/PlayerCharacter.h"
+#include "../../Objects/Player/PlayerCharacter.h"
 #include <iostream>
 
 class HealthBar : UIComponent {

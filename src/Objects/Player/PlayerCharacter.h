@@ -2,11 +2,9 @@
 // Created by Antoine on 2025-12-05.
 //
 #pragma once
-#include "../Objects/Character.h"
+#include "../Character.h"
 #include <iostream>
-
-#include "../Enemy/EnemyCharacter.h"
-#include "../Objects/GameObjects/GameObject.h"
+#include "../GameObjects/GameObject.h"
 
 class PlayerCharacter : public Character {
 public:

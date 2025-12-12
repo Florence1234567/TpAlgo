@@ -4,8 +4,7 @@
 #include <iostream>
 #include <map>
 #include "../Objects/GameObjects/GameObject.h"
-#include "../Objects/GameObjects/GameObject.h"
-#include "../Enemy/EnemyCharacter.h"
+#include "../Objects/Enemy/EnemyCharacter.h"
 
 enum Tile {
 	EdgeUpLeft, EdgeUp, EdgeUpRight,

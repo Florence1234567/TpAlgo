@@ -4,13 +4,13 @@
 
 #include "Objects/Character.h"
 #include "Game/GameMap.h"
-#include "Player/PlayerCharacter.h"
-#include "Player/PlayerController.h"
+#include "Objects/Player/PlayerCharacter.h"
+#include "Objects/Player/PlayerController.h"
 #include "UI/PlayerUI/ActionQueueUI.h"
 #include "UI/PlayerUI/ActionContextMenuUI.h"
 #include "UI/PlayerUI/InventoryUI.h"
 #include "UI/PlayerUI/HealthBar.h"
-#include "Enemy/EnemyCharacter.h"
+#include "Objects/Enemy/EnemyCharacter.h"
 
 int main() {
     sf::Vector2u windowSize(1920, 1080);

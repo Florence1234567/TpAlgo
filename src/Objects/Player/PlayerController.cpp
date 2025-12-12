@@ -4,11 +4,11 @@
 
 #include "PlayerController.h"
 
-#include "../Actions/AttackAction.h"
-#include "../Actions/LootAction.h"
+#include "../../Actions/AttackAction.h"
+#include "../../Actions/LootAction.h"
 #include "../Player//PlayerCharacter.h"
-#include "../Actions/MoveAction.h"
-#include "../UI/PlayerUI/ActionContextMenuUI.h"
+#include "../../Actions/MoveAction.h"
+#include "../../UI/PlayerUI/ActionContextMenuUI.h"
 
 void PlayerController::HandleEvent(const sf::Event &event, sf::FloatRect playingBounds, sf::RenderWindow *window) {
     if (const auto *mouseButtonPressed = event.getIf<sf::Event::MouseButtonPressed>()) {

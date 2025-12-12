@@ -4,7 +4,7 @@
 
 #include "AttackAction.h"
 
-#include "../Player/PlayerCharacter.h"
+#include "../Objects/Player/PlayerCharacter.h"
 
 void AttackAction::Execute() {
 }

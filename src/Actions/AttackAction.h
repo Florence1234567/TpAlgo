@@ -5,8 +5,7 @@
 #pragma once
 #include "Action.h"
 #include "MoveAction.h"
-#include "../Enemy/EnemyCharacter.h"
-#include "SFML/System/Vector2.hpp"
+#include "../Objects/Enemy/EnemyCharacter.h"
 
 
 class AttackAction : public Action {

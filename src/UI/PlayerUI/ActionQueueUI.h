@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "PlayerUIComponent.h"
-#include "../../Player/PlayerController.h"
+#include "../../Objects/Player/PlayerController.h"
 #include <vector>
 #include <string>
 
