@@ -17,7 +17,7 @@ std::unique_ptr<Action> InteractAction::Clone() const {
 
 bool InteractAction::isInRange() const {
     const sf::Vector2f a = owner->GetPosition();
-    const sf::Vector2f b = NPC->GetPosition();
+    const sf::Vector2f b = { NPC->GetPosition().x + NPC->GetCollisionBounds().size.x, NPC->GetPosition().y };
     const float dx = a.x - b.x;
     const float dy = a.y - b.y;
     const float distance = std::sqrt(dx * dx + dy * dy);
@@ -26,5 +26,6 @@ bool InteractAction::isInRange() const {
 }
 
 std::unique_ptr<MoveAction> InteractAction::CallMoveActionFirst() {
-    return std::make_unique<MoveAction>(owner, NPC->GetPosition());
+    const sf::Vector2f targetPosition = { NPC->GetPosition().x + NPC->GetCollisionBounds().size.x, NPC->GetPosition().y };
+    return std::make_unique<MoveAction>(owner, targetPosition);
 }

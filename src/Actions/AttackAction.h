@@ -22,5 +22,5 @@ public:
 
 private:
     EnemyCharacter* enemy;
-    const float range = 10;
+    const float range = 25;
 };

@@ -26,7 +26,7 @@ std::unique_ptr<Action> AttackAction::Clone() const {
 
 bool AttackAction::isInRange() const {
     const sf::Vector2f a = owner->GetPosition();
-    const sf::Vector2f b = enemy->GetPosition();
+    const sf::Vector2f b = { enemy->GetPosition().x + enemy->GetCollisionBounds().size.x, enemy->GetPosition().y };
     const float dx = a.x - b.x;
     const float dy = a.y - b.y;
     const float distance = std::sqrt(dx * dx + dy * dy);
@@ -35,5 +35,6 @@ bool AttackAction::isInRange() const {
 }
 
 std::unique_ptr<MoveAction> AttackAction::CallMoveActionFirst() {
-    return std::make_unique<MoveAction>(owner, enemy->GetPosition());
+    const sf::Vector2f targetPosition = { enemy->GetPosition().x + enemy->GetCollisionBounds().size.x, enemy->GetPosition().y };
+    return std::make_unique<MoveAction>(owner, targetPosition);
 }

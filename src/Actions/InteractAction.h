@@ -22,5 +22,5 @@ explicit InteractAction(Character* character, NPCCharacter* target) : Action(cha
 
 private:
     NPCCharacter* NPC;
-    const float range = 10;
+    const float range = 25;
 };
