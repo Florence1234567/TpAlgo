@@ -1,10 +1,10 @@
 #include "DialogUI.h"
 
-void DialogUI::AddMessage(const std::string& msg, sf::Vector2f pos)
+void DialogUI::AddMessage(const std::string msg, sf::Vector2f pos)
 {
     messages.push({ msg, pos });
 
-    if (!isVisible)
+    if (isVisible)
         ShowNextMessage();
 }
 

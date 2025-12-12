@@ -16,7 +16,7 @@ public:
         background.setOutlineThickness(2);
     }
 
-    void AddMessage(const std::string& msg, sf::Vector2f pos);
+    void AddMessage(const std::string msg, sf::Vector2f pos);
 
     void Draw(sf::RenderWindow& window) override;
     void Update(sf::Time dt) override;

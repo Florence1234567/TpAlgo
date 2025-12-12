@@ -79,7 +79,7 @@ void PlayerCharacter::Loot(GameObject *lootTarget) {
 
     for (auto object: lootTarget->GetInventory())
         inventory.push_back(object);
-    
+
     lootTarget->Destroy();
 }
 
@@ -89,4 +89,12 @@ void PlayerCharacter::UseItem(Item *item) {
     if (it == inventory.end())
         return;
     inventory.erase(it);
+}
+
+void PlayerCharacter::ShowDialog(const std::string message) {
+    if (!dialogUI)
+        return;
+
+    sf::Vector2f pos = sf::Vector2f(GetPosition().x - 50.f, GetPosition().y - 50.f);
+    dialogUI->AddMessage(message, pos);
 }

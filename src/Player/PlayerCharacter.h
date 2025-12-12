@@ -9,6 +9,8 @@
 #include <iostream>
 #include "../UI/PlayerUI/DialogUI.h"
 
+class DialogUI;
+
 class PlayerCharacter : public Character {
 public:
 	PlayerCharacter(int x, int y, float size, float baseSpeed, float hp, DialogUI* dialogUI)
@@ -32,13 +34,8 @@ public:
 
 	void HealPlayer(float amount) { health += amount; };
 
-	void ShowDialog(const std::string& message) {
-		if (!dialogUI) 
-			return;
+	void ShowDialog(const std::string message);
 
-		sf::Vector2f pos = sf::Vector2f(GetPosition().x - 50.f, GetPosition().y - 50.f);
-		dialogUI->AddMessage(message, pos);
-	}
 private:
 	DialogUI* dialogUI;
 
