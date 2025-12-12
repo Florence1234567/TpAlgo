@@ -15,7 +15,7 @@ HealthBar::HealthBar(sf::Vector2f position, sf::Vector2f size, sf::Vector2u wind
     background.setPosition(position);
     background.setSize(size);
     background.setFillColor(sf::Color(220, 220, 220));
-    background.setOutlineColor(sf::Color::Black);
+    background.setOutlineColor(sf::Color(220, 220, 220));
     background.setOutlineThickness(2);
 
     //Foreground

@@ -36,7 +36,6 @@ private:
 	const float ATTACKCOOLDOWN;
 	float currentCooldown;
 
-
 	//Enemy Sprites
 	std::map<std::string, std::string> enemyTextureFiles = {
 	 {"Chick", "Assets/Images/Character/Chick.png"},
