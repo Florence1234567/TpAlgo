@@ -38,7 +38,12 @@ int main() {
         ActionContextMenuUI ContextMenuUI(&PController, contextMenuPosition);
         InventoryUI InventoryUI(PController, Player, windowSize, 50);
 
-        //Enemies
+        // NPCs
+        auto ChickenNPC = std::make_unique<NPCCharacter>(windowSize.x / 3, windowSize.y / 2, 2, NPCTypes::NPC_Chicken, "Chicken");
+        NPCCharacter* ChickenNPCPtr = ChickenNPC.get();
+        gameMap.AddNPC(std::move(ChickenNPC));
+
+        // Enemies
         auto Chicken = std::make_unique<EnemyCharacter>(windowSize.x / 3, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Chicken, "Chicken");
         EnemyCharacter* ChickenPtr = Chicken.get();
         gameMap.AddEnemy(std::move(Chicken));
@@ -74,6 +79,12 @@ int main() {
             // Update
             sf::Time dt = dtClock.restart();
             Player.Update(dt);
+
+            // NPCs
+            ChickenNPCPtr->Update(dt);
+            ChickenNPCPtr->UpdateSprite(dt);
+
+            // Enemy
             ChickenPtr->Update(dt);
             ChickenPtr->UpdateSprite(dt);
 
@@ -97,6 +108,7 @@ int main() {
             window.draw(backgroundSprite); 
 
             gameMap.DisplayObjects(window);
+            ChickenNPCPtr->Draw(window);
             ChickenPtr->Draw(window);
             CowPtr->Draw(window);
             ChickenPtr2->Draw(window);

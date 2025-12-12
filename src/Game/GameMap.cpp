@@ -302,3 +302,11 @@ std::vector<EnemyCharacter*> GameMap::GetEnemies() const
 
 	return enemyList;
 }
+
+std::vector<NPCCharacter *> GameMap::GetNPCs() const {
+	std::vector<NPCCharacter *> NPCList;
+	for (const auto& NPC: NPCs)
+		NPCList.push_back(NPC.get());
+
+	return NPCList;
+}

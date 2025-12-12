@@ -67,8 +67,14 @@ add_executable(TPAlgo
         src/Objects/Enemy/EnemyController.h
         src/Objects/Enemy/EnemyCharacter.cpp
         src/Objects/Enemy/EnemyCharacter.h
+        src/Objects/NPC/NPCCharacter.cpp
+        src/Objects/NPC/NPCCharacter.h
+        src/Objects/NPC/NPCController.cpp
+        src/Objects/NPC/NPCController.h
         src/UI/PlayerUI/HealthBar.cpp
         src/UI/PlayerUI/HealthBar.h
+        src/Actions/InteractAction.cpp
+        src/Actions/InteractAction.h
 )
 target_compile_features(TPAlgo PRIVATE cxx_std_17)
 target_link_libraries(TPAlgo PRIVATE SFML::Graphics)
