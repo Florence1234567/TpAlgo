@@ -5,9 +5,9 @@
 #include "Character.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
-
 #include "../Actions/Action.h"
 #include "../DataStructures/Queue/ActionQueue.h"
+#include "../Game/GameMap.h"
 
 class Character;
 

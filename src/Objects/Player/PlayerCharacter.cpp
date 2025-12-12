@@ -9,7 +9,13 @@
 void PlayerCharacter::Update(sf::Time dt) {
     Character::Update(dt);
     UpdateSprite(dt);
-    ShowDialog("Hello! I am above the player!");
+
+    // Gestion des buff des dégats et de la vitesse
+    if (damageBuffTimer > 0) damageBuffTimer -= dt.asSeconds();
+    if (damageBuffTimer <= 0) damage = baseDamage;
+
+    if (speedBuffTimer > 0) speedBuffTimer -= dt.asSeconds();
+    if (speedBuffTimer <= 0) speed = baseSpeed;
 }
 
 void PlayerCharacter::UpdateSprite(sf::Time dt) {
@@ -75,18 +81,27 @@ void PlayerCharacter::LoadCharacterTextures() {
 }
 
 void PlayerCharacter::Loot(GameObject *lootTarget) {
-    //dialogUI.AddText("Done looting!", sf::Vector2f(50.f, 500.f));
-
-    for (auto object: lootTarget->GetInventory())
+    std::cout << "Done!" << std::endl;
+    for (auto object: lootTarget->GetInventory()) {
         inventory.push_back(object);
-    
+    }
     lootTarget->Destroy();
 }
 
 void PlayerCharacter::UseItem(Item *item) {
-    item->UseItem();
+    item->UseItem(this);
     auto it = std::find(inventory.begin(), inventory.end(), item);
     if (it == inventory.end())
         return;
     inventory.erase(it);
+}
+
+void PlayerCharacter::IncreaseDamage(float amount, float buffTime) {
+    damage += amount;
+    damageBuffTimer = buffTime;
+}
+
+void PlayerCharacter::IncreaseSpeed(float amount, float buffTime) {
+    speed += amount;
+    speedBuffTimer = buffTime;
 }

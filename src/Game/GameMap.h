@@ -4,8 +4,8 @@
 #include <iostream>
 #include <map>
 #include "../Objects/GameObjects/GameObject.h"
-#include "../Objects/GameObjects/GameObject.h"
-#include "../Enemy/EnemyCharacter.h"
+#include "../Objects/Enemy/EnemyCharacter.h"
+#include "../Objects/NPC/NPCCharacter.h"
 
 enum Tile {
 	EdgeUpLeft, EdgeUp, EdgeUpRight,
@@ -37,7 +37,9 @@ public:
 	bool IsPositionBlocked(float x, float y, float width = 32, float height = 32) const;
 
 	void AddEnemy(std::unique_ptr<EnemyCharacter> enemy) { enemies.push_back(std::move(enemy)); }
+	void AddNPC(std::unique_ptr<NPCCharacter> NPC) { NPCs.push_back(std::move(NPC)); }
 	std::vector<EnemyCharacter*> GetEnemies() const;
+	std::vector<NPCCharacter*> GetNPCs() const;
 
 private:
 	int Width;
@@ -50,6 +52,7 @@ private:
 
 	std::vector<std::unique_ptr<GameObject>> gameObjects;
 	std::vector<std::unique_ptr<EnemyCharacter>> enemies;
+	std::vector<std::unique_ptr<NPCCharacter>> NPCs;
 
 	void PlaceRandomObjects(int count);
 	bool IsValidObjectPosition(int x, int y) const;

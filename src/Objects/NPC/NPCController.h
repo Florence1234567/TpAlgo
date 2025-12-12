@@ -2,14 +2,13 @@
 // Created by Antoine on 2025-12-05.
 //
 #pragma once
-#include "../Objects/Controller.h"
+#include "../Controller.h"
 #include <unordered_map>
-#include "../Game/GameMap.h"
-#include "../DataStructures/Queue/ActionQueue.h"
+#include "../../Game/GameMap.h"
 
-class EnemyController : public Controller {
+class NPCController : public Controller {
 public:
-    explicit EnemyController(Character* enemy, const GameMap* map) : Controller(enemy), gameMap(map) {};
+    explicit NPCController(Character* NPC, const GameMap* map) : Controller(NPC), gameMap(map) {};
 
     void HandleEvent(const sf::Event& event, sf::FloatRect playingBounds, sf::RenderWindow* window) override;
 

@@ -1,16 +1,16 @@
 //
-// Created by Antoine on 2025-12-06.
+// Created by Antoine on 2025-12-12.
 //
 
 #pragma once
 #include "Action.h"
 #include "MoveAction.h"
-#include "../Objects/Enemy/EnemyCharacter.h"
+#include "../Objects/NPC/NPCCharacter.h"
 
 
-class AttackAction : public Action {
+class InteractAction : public Action {
 public:
-    explicit AttackAction(Character* character, EnemyCharacter* target) : Action(character, ActionType::Attack, "Attack"), enemy(target) {};
+explicit InteractAction(Character* character, NPCCharacter* target) : Action(character, ActionType::Interact, "Interact"), NPC(target) {};
 
     void Execute() override;
     bool Update(sf::Time dt) override;
@@ -21,6 +21,6 @@ public:
     std::unique_ptr<MoveAction> CallMoveActionFirst();
 
 private:
-    EnemyCharacter* enemy;
+    NPCCharacter* NPC;
     const float range = 25;
 };

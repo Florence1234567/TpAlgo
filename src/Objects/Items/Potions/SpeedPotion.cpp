@@ -4,7 +4,9 @@
 
 #include "SpeedPotion.h"
 
-void SpeedPotion::DrinkPotion() {
-    std::cout << "Drinking Speed Potion" << std::endl;
-    // #TODO Drinking behavior
+#include "../../Player/PlayerCharacter.h"
+
+void SpeedPotion::DrinkPotion(PlayerCharacter* player) {
+    player->IncreaseSpeed(speedBoostAmount, buffDuration);
+    // TODO ajouter message d'action (besoin implémentation UI dialogue)
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include "PlayerUIComponent.h"
-#include "../../Player/PlayerController.h"
-#include "../../Player/PlayerCharacter.h"
+#include "../../Objects/Player/PlayerController.h"
+#include "../../Objects/Player/PlayerCharacter.h"
 #include "../../Objects/Items/Item.h"
 
 struct InventorySlot {

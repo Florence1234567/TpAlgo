@@ -23,6 +23,9 @@ HealthBar::HealthBar(sf::Vector2f position, sf::Vector2f size, sf::Vector2u wind
     foreground.setSize(size);
     foreground.setFillColor(sf::Color(120, 210, 170));
     fullWidth = size.x;
+
+    health = playerRef.GetHealth();
+    maxHealth = playerRef.GetMaxHealth();
 }
 
 void HealthBar::Draw(sf::RenderWindow& window)
@@ -33,8 +36,8 @@ void HealthBar::Draw(sf::RenderWindow& window)
 
 void HealthBar::Update(sf::Time dt)
 {
-    float health = playerRef.GetHealth();
-    float maxHealth = playerRef.GetMaxHealth();
+    health = playerRef.GetHealth();
+    maxHealth = playerRef.GetMaxHealth();
     float ratio = health / maxHealth;
     ratio = std::clamp(ratio, 0.f, 1.f);
 

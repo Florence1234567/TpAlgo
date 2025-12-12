@@ -4,11 +4,11 @@
 
 #include "PlayerController.h"
 
-#include "../Actions/AttackAction.h"
-#include "../Actions/LootAction.h"
-#include "../Player//PlayerCharacter.h"
-#include "../Actions/MoveAction.h"
-#include "../UI/PlayerUI/ActionContextMenuUI.h"
+#include "../../Actions/AttackAction.h"
+#include "../../Actions/InteractAction.h"
+#include "../../Actions/LootAction.h"
+#include "../../Actions/MoveAction.h"
+#include "../../UI/PlayerUI/ActionContextMenuUI.h"
 
 void PlayerController::HandleEvent(const sf::Event &event, sf::FloatRect playingBounds, sf::RenderWindow *window) {
     if (const auto *mouseButtonPressed = event.getIf<sf::Event::MouseButtonPressed>()) {
@@ -50,6 +50,16 @@ void PlayerController::HandleEvent(const sf::Event &event, sf::FloatRect playing
                     return;
                 }
             }
+
+            // NPC check
+            for (const auto &NPC : gameMap->GetNPCs()) {
+                if (!NPC)
+                    continue;
+
+                if (NPC->GetCollisionBounds().contains(worldPos)) {
+                    cachedExecutableAction.push_back(std::make_unique<InteractAction>(owner, NPC));
+                }
+            }
         }
     }
 
@@ -80,6 +90,18 @@ void PlayerController::PerformAction(std::unique_ptr<Action> action) {
             if (auto *attackAction = dynamic_cast<AttackAction*>(action.get())) {
                 if (!attackAction->isInRange()) {
                     std::unique_ptr<MoveAction> moveAction = static_cast<AttackAction*>(action.get())->
+                            CallMoveActionFirst();
+                    PushAction(std::move(moveAction));
+                    PushAction(std::move(action));
+                }else {
+                    PushAction(std::move(action));
+                }
+            }
+            break;
+        case ActionType::Interact:
+            if (auto *interactAction = dynamic_cast<InteractAction*>(action.get())) {
+                if (!interactAction->isInRange()) {
+                    std::unique_ptr<MoveAction> moveAction = static_cast<InteractAction*>(action.get())->
                             CallMoveActionFirst();
                     PushAction(std::move(moveAction));
                     PushAction(std::move(action));

@@ -9,7 +9,9 @@
 class SpeedPotion : public PotionItem {
 public:
     SpeedPotion() : PotionItem("Assets/Images/Objects/Berries.png", "Speed Potion") {};
-    void DrinkPotion() override;
+    void DrinkPotion(PlayerCharacter* player) override;
 
 private:
+    float speedBoostAmount = 40.f;
+    float buffDuration = 25.f;
 };

@@ -11,7 +11,7 @@ enum class ActionType {
     Move,
     Attack,
     Loot,
-    UseItem,
+    Interact,
     Wait,
     Unknown
 };

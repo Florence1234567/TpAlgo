@@ -4,7 +4,8 @@
 
 #include "DamagePotion.h"
 
-void DamagePotion::DrinkPotion() {
-    std::cout << "Drinking damage potion" << std::endl;
-    // #TODO Drinking behavior
+#include "../../Player/PlayerCharacter.h"
+
+void DamagePotion::DrinkPotion(PlayerCharacter* player) {
+    player->IncreaseDamage(damageAmount, buffDuration);
 }

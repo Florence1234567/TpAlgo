@@ -1,7 +1,7 @@
 #pragma once
 #include "PlayerUIComponent.h"
 #include "../UIComponent.h"
-#include "../../Player/PlayerCharacter.h"
+#include "../../Objects/Player/PlayerCharacter.h"
 #include <iostream>
 
 class HealthBar : UIComponent {
@@ -13,6 +13,8 @@ public:
 
 private:
     PlayerCharacter& playerRef;
+    float health = 0.f;
+    float maxHealth = 0.f;
 
     float fullWidth;
     sf::RectangleShape background;

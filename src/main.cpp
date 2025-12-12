@@ -4,13 +4,13 @@
 
 #include "Objects/Character.h"
 #include "Game/GameMap.h"
-#include "Player/PlayerCharacter.h"
-#include "Player/PlayerController.h"
+#include "Objects/Player/PlayerCharacter.h"
+#include "Objects/Player/PlayerController.h"
 #include "UI/PlayerUI/ActionQueueUI.h"
 #include "UI/PlayerUI/ActionContextMenuUI.h"
 #include "UI/PlayerUI/InventoryUI.h"
 #include "UI/PlayerUI/HealthBar.h"
-#include "Enemy/EnemyCharacter.h"
+#include "Objects/Enemy/EnemyCharacter.h"
 
 int main() {
     sf::Vector2u windowSize(1920, 1080);
@@ -29,11 +29,8 @@ int main() {
 
         sf::FloatRect grassBounds = gameMap.GetFenceBounds();
 
-        //Dialog Box
-        DialogUI DialogUI(sf::Vector2f(200.f, 20.f));
-
         //Create player
-        PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 2, 50.0f, 100.f, &DialogUI);
+        PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 2);
         PlayerController PController(&Player, &gameMap);
 
         ActionQueueUI ActionQueueUI(PController, windowSize, 50);
@@ -41,7 +38,12 @@ int main() {
         ActionContextMenuUI ContextMenuUI(&PController, contextMenuPosition);
         InventoryUI InventoryUI(PController, Player, windowSize, 50);
 
-        //Enemies
+        // NPCs
+        auto ChickenNPC = std::make_unique<NPCCharacter>(windowSize.x / 3, windowSize.y / 2, 2, NPCTypes::NPC_Chicken, "Chicken");
+        NPCCharacter* ChickenNPCPtr = ChickenNPC.get();
+        gameMap.AddNPC(std::move(ChickenNPC));
+
+        // Enemies
         auto Chicken = std::make_unique<EnemyCharacter>(windowSize.x / 3, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Chicken, "Chicken");
         EnemyCharacter* ChickenPtr = Chicken.get();
         gameMap.AddEnemy(std::move(Chicken));
@@ -53,6 +55,10 @@ int main() {
         auto Chicken2 = std::make_unique<EnemyCharacter>(windowSize.x / 2, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Chicken, "Chicken");
         EnemyCharacter* ChickenPtr2 = Chicken2.get();
         gameMap.AddEnemy(std::move(Chicken2));
+
+        auto Cow2 = std::make_unique<EnemyCharacter>(windowSize.x / 4, windowSize.y / 2, 2, 50.0f, 100.f, EnemyType::Cow, "Cow");
+        EnemyCharacter* CowPtr2 = Cow2.get();
+        gameMap.AddEnemy(std::move(Cow2));
 
         HealthBar HealthBar({ 20.f, 40.f }, { 200.f, 20.f }, windowSize, Player);
 
@@ -73,6 +79,12 @@ int main() {
             // Update
             sf::Time dt = dtClock.restart();
             Player.Update(dt);
+
+            // NPCs
+            ChickenNPCPtr->Update(dt);
+            ChickenNPCPtr->UpdateSprite(dt);
+
+            // Enemy
             ChickenPtr->Update(dt);
             ChickenPtr->UpdateSprite(dt);
 
@@ -82,29 +94,31 @@ int main() {
             ChickenPtr2->Update(dt);
             ChickenPtr2->UpdateSprite(dt);
 
+            CowPtr2->Update(dt);
+            CowPtr2->UpdateSprite(dt);
+
             Player.UpdateSprite(dt);
             PController.Update(dt);
             ActionQueueUI.Update(dt);
             InventoryUI.Update(dt);
             HealthBar.Update(dt);
-            DialogUI.Update(dt);            
-            
+
             // Draw
             window.clear(sf::Color::Blue);
             window.draw(backgroundSprite); 
 
             gameMap.DisplayObjects(window);
+            ChickenNPCPtr->Draw(window);
             ChickenPtr->Draw(window);
             CowPtr->Draw(window);
             ChickenPtr2->Draw(window);
+            CowPtr2->Draw(window);
             Player.Draw(window);
 
             ActionQueueUI.Draw(window);
             InventoryUI.Draw(window);
             ContextMenuUI.Draw(window);
             HealthBar.Draw(window);
-            DialogUI.Draw(window);
-
             window.display();
         }
     }

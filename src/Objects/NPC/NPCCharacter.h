@@ -2,27 +2,28 @@
 // Created by Antoine on 2025-12-05.
 //
 #pragma once
-#include "../Objects/Character.h"
+#include "../Character.h"
 #include <iostream>
-#include "../Objects/GameObjects/GameObject.h"
-#include "../Player/PlayerCharacter.h"
+#include <map>
 
-enum EnemyType{
-	Chicken,
-	Cow
+#include "../GameObjects/GameObject.h"
+
+enum NPCTypes {
+	NPC_Chicken,
+	NPC_Cow
 };
 
-class EnemyCharacter : public Character {
+class NPCCharacter : public Character {
 public:
-	EnemyCharacter(int x, int y, float size, float baseSpeed, float hp, EnemyType type, std::string name)
-		: Character(x, y, size, baseSpeed, hp, 10, 1, name, "Assets/Images/Character/C_Front.png"), ATTACKCOOLDOWN(1), currentCooldown(0) {
+	NPCCharacter(int x, int y, float size, NPCTypes type, std::string name)
+		: Character(x, y, size, 0.f, 1000.f, 0.f, 0.f, name, "Assets/Images/Character/C_Front.png"), ATTACKCOOLDOWN(0), currentCooldown(0) {
 		LoadCharacterTextures();
 		currentDir = Direction::Down;
 		walkFrameTimer = 0;
 		walkFrameDuration = 1;
 		isWalkFrame1 = true;
 		speed = baseSpeed;
-		enemyType = type;
+		NPCType = type;
 	};
 
 	void Update(sf::Time dt) override;
@@ -35,8 +36,9 @@ private:
 	const float ATTACKCOOLDOWN;
 	float currentCooldown;
 
-	//Enemy Sprites
-	std::map<std::string, std::string> enemyTextureFiles = {
+
+	//NPC Sprites
+	std::map<std::string, std::string> NPCTextureFiles = {
 	 {"Chick", "Assets/Images/Character/Chick.png"},
 	 {"Chick1", "Assets/Images/Character/Chick1.png"},
 	 {"Cow", "Assets/Images/Character/Cow.png"},
@@ -45,12 +47,12 @@ private:
 
 	void LoadCharacterTextures();
 
-	std::map<std::string, sf::Texture> enemyTextures;
-	std::map<std::string, std::unique_ptr<sf::Sprite>> enemySprites;
+	std::map<std::string, sf::Texture> NPCTextures;
+	std::map<std::string, std::unique_ptr<sf::Sprite>> NPCSprites;
 
 	float walkFrameTimer;
 	float walkFrameDuration;
 	bool isWalkFrame1;
 
-	EnemyType enemyType;
+	NPCTypes NPCType;
 };
