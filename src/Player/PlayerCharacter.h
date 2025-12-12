@@ -3,25 +3,27 @@
 //
 #pragma once
 #include "../Objects/Character.h"
-#include <iostream>
-
 #include "../Enemy/EnemyCharacter.h"
 #include "../Objects/GameObjects/GameObject.h"
+#include <SFML/Graphics.hpp>  
+#include <iostream>
+#include "../UI/PlayerUI/DialogUI.h"
 
 class PlayerCharacter : public Character {
 public:
-	PlayerCharacter(int x, int y, float size, float baseSpeed, float hp)
-	: Character(x, y, size, baseSpeed, hp, 15, 1, "Player", "Assets/Images/Character/C_Front.png" ){
+	PlayerCharacter(int x, int y, float size, float baseSpeed, float hp, DialogUI* dialogUI)
+		: Character(x, y, size, baseSpeed, hp, 15, 1, "Player", "Assets/Images/Character/C_Front.png"), dialogUI(dialogUI)
+	{
 		LoadCharacterTextures();
 		currentDir = Direction::Down;
 		walkFrameTimer = 0;
 		walkFrameDuration = 1 - (speed / 75);
 		isWalkFrame1 = true;
 		speed = baseSpeed;
-	};
+	}
 
 	void Update(sf::Time dt) override;
-    void UpdateSprite(sf::Time dt);
+	void UpdateSprite(sf::Time dt);
 
 	void Loot(GameObject* lootTarget);
 
@@ -30,12 +32,21 @@ public:
 
 	void HealPlayer(float amount) { health += amount; };
 
+	void ShowDialog(const std::string& message) {
+		if (!dialogUI) 
+			return;
+
+		sf::Vector2f pos = sf::Vector2f(GetPosition().x - 50.f, GetPosition().y - 50.f);
+		dialogUI->AddMessage(message, pos);
+	}
 private:
+	DialogUI* dialogUI;
+
 	std::vector<Item*> inventory;
 
 	void LoadCharacterTextures();
 
-    //Character Sprites
+	//Character Sprites
 	std::map<std::string, std::string> characterTextureFiles = {
 	 {"Back", "Assets/Images/Character/C_Back.png"},
 	 {"BackJump", "Assets/Images/Character/C_BackJump.png"},
@@ -46,15 +57,15 @@ private:
 	 {"FrontWalk2", "Assets/Images/Character/C_FrontWalk2.png"},
 	 {"Jump", "Assets/Images/Character/C_Jump.png"},
 	 {"Left", "Assets/Images/Character/C_Left.png"},
-     {"LeftWalk1", "Assets/Images/Character/C_LeftWalking1.png"},
+	 {"LeftWalk1", "Assets/Images/Character/C_LeftWalking1.png"},
 	 {"LeftWalk2", "Assets/Images/Character/C_LeftWalking2.png"},
 	 {"Right", "Assets/Images/Character/C_Right.png"},
 	 {"RightWalk1", "Assets/Images/Character/C_RightWalking1.png"},
 	 {"RightWalk2", "Assets/Images/Character/C_RightWalking2.png"}
 	};
 
-    std::map<std::string, sf::Texture> characterTextures;
-    std::map<std::string, std::unique_ptr<sf::Sprite>> characterSprites;
+	std::map<std::string, sf::Texture> characterTextures;
+	std::map<std::string, std::unique_ptr<sf::Sprite>> characterSprites;
 
 	float walkFrameTimer;
 	float walkFrameDuration;

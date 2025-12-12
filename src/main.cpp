@@ -29,8 +29,11 @@ int main() {
 
         sf::FloatRect grassBounds = gameMap.GetFenceBounds();
 
+        //Dialog Box
+        DialogUI DialogUI(sf::Vector2f(200.f, 20.f));
+
         //Create player
-        PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 2, 50.0f, 100.f);
+        PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 2, 50.0f, 100.f, &DialogUI);
         PlayerController PController(&Player, &gameMap);
 
         ActionQueueUI ActionQueueUI(PController, windowSize, 50);
@@ -84,7 +87,8 @@ int main() {
             ActionQueueUI.Update(dt);
             InventoryUI.Update(dt);
             HealthBar.Update(dt);
-
+            DialogUI.Update(dt);            
+            
             // Draw
             window.clear(sf::Color::Blue);
             window.draw(backgroundSprite); 
@@ -99,6 +103,8 @@ int main() {
             InventoryUI.Draw(window);
             ContextMenuUI.Draw(window);
             HealthBar.Draw(window);
+            DialogUI.Draw(window);
+
             window.display();
         }
     }

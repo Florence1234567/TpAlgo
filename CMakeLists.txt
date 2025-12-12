@@ -69,7 +69,7 @@ add_executable(TPAlgo
         src/Enemy/EnemyCharacter.h
         src/UI/PlayerUI/HealthBar.cpp
         src/UI/PlayerUI/HealthBar.h
-)
+ "src/UI/PlayerUI/DialogUI.h" "src/UI/PlayerUI/DialogUI.cpp")
 target_compile_features(TPAlgo PRIVATE cxx_std_17)
 target_link_libraries(TPAlgo PRIVATE SFML::Graphics)
 

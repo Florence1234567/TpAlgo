@@ -9,6 +9,7 @@
 void PlayerCharacter::Update(sf::Time dt) {
     Character::Update(dt);
     UpdateSprite(dt);
+    ShowDialog("Hello! I am above the player!");
 }
 
 void PlayerCharacter::UpdateSprite(sf::Time dt) {
@@ -74,10 +75,11 @@ void PlayerCharacter::LoadCharacterTextures() {
 }
 
 void PlayerCharacter::Loot(GameObject *lootTarget) {
-    std::cout << "Done!" << std::endl;
-    for (auto object: lootTarget->GetInventory()) {
+    //dialogUI.AddText("Done looting!", sf::Vector2f(50.f, 500.f));
+
+    for (auto object: lootTarget->GetInventory())
         inventory.push_back(object);
-    }
+    
     lootTarget->Destroy();
 }
 
