@@ -1,37 +1,25 @@
 #include "DialogUI.h"
 
-void DialogUI::AddMessage(const std::string& msg, sf::Vector2f pos)
+void DialogUI::AddMessage(const std::string msg, sf::Vector2f pos)
 {
-    messages.push({ msg, pos });
-
-    if (!isVisible)
-        ShowNextMessage();
+    text = msg;
+    timer = duration;
+    sf::FloatRect bounds = background.getLocalBounds();
+    background.setOrigin(sf::Vector2f(bounds.size.x / 2.f, bounds.size.y / 2.f));
+    background.setPosition(pos);
+    position = background.getPosition();
+    isVisible = true;
 }
 
 void DialogUI::Update(sf::Time dt)
 {
-    if (!isVisible) 
+    if (!isVisible)
         return;
 
-    timer += dt;
-    if (timer >= duration) {
-        ShowNextMessage();
-    }
-}
-
-void DialogUI::ShowNextMessage()
-{
-    if (messages.empty()) {
+    timer -= dt.asSeconds();
+    if (timer <= 0) {
         isVisible = false;
-        return;
     }
-
-    Message msg = messages.front();
-    messages.pop();
-    text = msg.text;
-    position = msg.position;
-    timer = sf::Time::Zero;
-    isVisible = true;
 }
 
 void DialogUI::Draw(sf::RenderWindow& window)
@@ -39,12 +27,12 @@ void DialogUI::Draw(sf::RenderWindow& window)
     if (!isVisible) 
         return;
 
-    background.setPosition(position);
     window.draw(background);
 
-    sf::Text textBox(font, text, 20);
+    sf::Text textBox(font, text, 12);
     textBox.setFillColor(sf::Color::Black);
-    textBox.setPosition(position + sf::Vector2f(5.f, 5.f));
+    sf::Vector2f textPosition = { position.x - background.getLocalBounds().size.x / 2.f + margin, position.y - background.getLocalBounds().size.y / 2.f + margin };
+    textBox.setPosition(textPosition);
 
     window.draw(textBox);
 }

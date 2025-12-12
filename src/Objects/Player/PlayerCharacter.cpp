@@ -81,10 +81,11 @@ void PlayerCharacter::LoadCharacterTextures() {
 }
 
 void PlayerCharacter::Loot(GameObject *lootTarget) {
-    std::cout << "Done!" << std::endl;
-    for (auto object: lootTarget->GetInventory()) {
+    ShowDialog("Done looting!");
+
+    for (auto object: lootTarget->GetInventory())
         inventory.push_back(object);
-    }
+
     lootTarget->Destroy();
 }
 
@@ -104,4 +105,12 @@ void PlayerCharacter::IncreaseDamage(float amount, float buffTime) {
 void PlayerCharacter::IncreaseSpeed(float amount, float buffTime) {
     speed += amount;
     speedBuffTimer = buffTime;
+}
+
+void PlayerCharacter::ShowDialog(const std::string message) const {
+    if (!dialogUI)
+        return;
+
+    sf::Vector2f pos = sf::Vector2f({sprite.getPosition().x, sprite.getPosition().y - sprite.getLocalBounds().size.y});
+    dialogUI->AddMessage(message, pos);
 }

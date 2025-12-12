@@ -8,4 +8,5 @@
 
 void DamagePotion::DrinkPotion(PlayerCharacter* player) {
     player->IncreaseDamage(damageAmount, buffDuration);
+    player->ShowDialog("Damage potion consumed");
 }
