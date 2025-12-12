@@ -4,6 +4,8 @@
 #pragma once
 #include "../Character.h"
 #include <iostream>
+#include <map>
+
 #include "../GameObjects/GameObject.h"
 
 enum EnemyType{

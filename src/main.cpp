@@ -30,7 +30,7 @@ int main() {
         sf::FloatRect grassBounds = gameMap.GetFenceBounds();
 
         //Create player
-        PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 2, 50.0f, 100.f);
+        PlayerCharacter Player(windowSize.x / 2, windowSize.y / 2, 2);
         PlayerController PController(&Player, &gameMap);
 
         ActionQueueUI ActionQueueUI(PController, windowSize, 50);
@@ -50,6 +50,10 @@ int main() {
         auto Chicken2 = std::make_unique<EnemyCharacter>(windowSize.x / 2, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Chicken, "Chicken");
         EnemyCharacter* ChickenPtr2 = Chicken2.get();
         gameMap.AddEnemy(std::move(Chicken2));
+
+        auto Cow2 = std::make_unique<EnemyCharacter>(windowSize.x / 4, windowSize.y / 2, 2, 50.0f, 100.f, EnemyType::Cow, "Cow");
+        EnemyCharacter* CowPtr2 = Cow2.get();
+        gameMap.AddEnemy(std::move(Cow2));
 
         HealthBar HealthBar({ 20.f, 40.f }, { 200.f, 20.f }, windowSize, Player);
 
@@ -79,6 +83,9 @@ int main() {
             ChickenPtr2->Update(dt);
             ChickenPtr2->UpdateSprite(dt);
 
+            CowPtr2->Update(dt);
+            CowPtr2->UpdateSprite(dt);
+
             Player.UpdateSprite(dt);
             PController.Update(dt);
             ActionQueueUI.Update(dt);
@@ -93,6 +100,7 @@ int main() {
             ChickenPtr->Draw(window);
             CowPtr->Draw(window);
             ChickenPtr2->Draw(window);
+            CowPtr2->Draw(window);
             Player.Draw(window);
 
             ActionQueueUI.Draw(window);

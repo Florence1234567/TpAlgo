@@ -9,7 +9,9 @@
 class DamagePotion : public PotionItem {
 public:
     DamagePotion() : PotionItem("Assets/Images/Objects/Berries.png", "Damage Potion") {};
-    void DrinkPotion() override;
+    void DrinkPotion(PlayerCharacter* player) override;
 
 private:
+    float damageAmount = 10;
+    float buffDuration = 15.f;
 };

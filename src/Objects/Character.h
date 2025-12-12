@@ -3,18 +3,14 @@
 //
 #pragma once
 #include "Object.h"
-#include <map>
-#include "SFML/Graphics/Sprite.hpp"
 #include "SFML/Graphics/Texture.hpp"
-#include "SFML/Network/SocketHandle.hpp"
-#include <iostream>
 #include "SFML/Graphics/RenderWindow.hpp"
 
 
 class Character : public Object {
 public:
     Character(int x, int y, float size, float baseSpeed, float hp, float damage, const float attackCooldown, std::string name, const std::string& texturePath)
-        : Object(x, y, size, texturePath), speed(baseSpeed), health(hp), maxHealth(hp), damage(damage), armour(0), name(name), ATTACKCOOLDOWN(attackCooldown), currentCooldown(0) {};
+        : Object(x, y, size, texturePath), baseSpeed(baseSpeed), speed(baseSpeed), health(hp), maxHealth(hp), baseDamage(damage), damage(damage), armour(0), name(name), ATTACKCOOLDOWN(attackCooldown), currentCooldown(0) {};
 
     enum class Direction {
         Up, Down, Left, Right
@@ -36,9 +32,11 @@ public:
 protected:
     std::string name;
     float speed;
+    float baseSpeed;
     float health;
     float maxHealth;
     float damage;
+    float baseDamage;
     float armour;
     sf::Vector2<float> destination;
     bool bHasDestination = false;

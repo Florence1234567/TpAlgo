@@ -4,12 +4,14 @@
 #pragma once
 #include "../Character.h"
 #include <iostream>
+#include <map>
 #include "../GameObjects/GameObject.h"
+#include "../Items/Item.h"
 
 class PlayerCharacter : public Character {
 public:
-	PlayerCharacter(int x, int y, float size, float baseSpeed, float hp)
-	: Character(x, y, size, baseSpeed, hp, 15, 1, "Player", "Assets/Images/Character/C_Front.png" ){
+	PlayerCharacter(int x, int y, float size)
+	: Character(x, y, size, 50.f, 100.f, 15, 1, "Player", "Assets/Images/Character/C_Front.png" ){
 		LoadCharacterTextures();
 		currentDir = Direction::Down;
 		walkFrameTimer = 0;
@@ -27,9 +29,13 @@ public:
 	void UseItem(Item* item);
 
 	void HealPlayer(float amount) { health += amount; };
+	void IncreaseDamage(float amount, float buffTime);
+	void IncreaseSpeed(float amount, float buffTime);
 
 private:
 	std::vector<Item*> inventory;
+	float damageBuffTimer;
+	float speedBuffTimer;
 
 	void LoadCharacterTextures();
 

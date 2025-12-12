@@ -9,6 +9,13 @@
 void PlayerCharacter::Update(sf::Time dt) {
     Character::Update(dt);
     UpdateSprite(dt);
+
+    // Gestion des buff des dégats et de la vitesse
+    if (damageBuffTimer > 0) damageBuffTimer -= dt.asSeconds();
+    if (damageBuffTimer <= 0) damage = baseDamage;
+
+    if (speedBuffTimer > 0) speedBuffTimer -= dt.asSeconds();
+    if (speedBuffTimer <= 0) speed = baseSpeed;
 }
 
 void PlayerCharacter::UpdateSprite(sf::Time dt) {
@@ -82,9 +89,19 @@ void PlayerCharacter::Loot(GameObject *lootTarget) {
 }
 
 void PlayerCharacter::UseItem(Item *item) {
-    item->UseItem();
+    item->UseItem(this);
     auto it = std::find(inventory.begin(), inventory.end(), item);
     if (it == inventory.end())
         return;
     inventory.erase(it);
+}
+
+void PlayerCharacter::IncreaseDamage(float amount, float buffTime) {
+    damage += amount;
+    damageBuffTimer = buffTime;
+}
+
+void PlayerCharacter::IncreaseSpeed(float amount, float buffTime) {
+    speed += amount;
+    speedBuffTimer = buffTime;
 }

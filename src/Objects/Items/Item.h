@@ -5,6 +5,8 @@
 #pragma once
 #include "../Object.h"
 
+class PlayerCharacter;
+
 enum class ItemType {
     HealthPotion,
     DamagePotion,
@@ -21,7 +23,7 @@ public:
 
     ItemType GetItemType() const { return type; };
     bool IsConsumable() const { return bConsumable; };
-    virtual void UseItem() = 0;
+    virtual void UseItem(PlayerCharacter* player) = 0;
     std::string GetName() const { return name; };
 
 protected:

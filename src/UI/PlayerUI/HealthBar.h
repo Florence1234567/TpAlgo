@@ -13,6 +13,8 @@ public:
 
 private:
     PlayerCharacter& playerRef;
+    float health = 0.f;
+    float maxHealth = 0.f;
 
     float fullWidth;
     sf::RectangleShape background;

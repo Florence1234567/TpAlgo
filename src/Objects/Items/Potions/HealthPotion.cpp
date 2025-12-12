@@ -4,6 +4,10 @@
 
 #include "HealthPotion.h"
 
-void HealthPotion::DrinkPotion() {
-    // ##TODO Drink behavior
+#include "../../Player/PlayerCharacter.h"
+
+void HealthPotion::DrinkPotion(PlayerCharacter* player) {
+    player->HealPlayer(healAmount);
+
+    // TODO ajouter message d'action (besoin implémentation UI dialogue)
 }
