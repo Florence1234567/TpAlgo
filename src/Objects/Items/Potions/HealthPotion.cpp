@@ -10,4 +10,5 @@ void HealthPotion::DrinkPotion(PlayerCharacter* player) {
     player->HealPlayer(healAmount);
 
     // TODO ajouter message d'action (besoin implémentation UI dialogue)
+    player->ShowDialog("Health potion consumed");
 }

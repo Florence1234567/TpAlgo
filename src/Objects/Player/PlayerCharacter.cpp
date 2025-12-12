@@ -16,8 +16,6 @@ void PlayerCharacter::Update(sf::Time dt) {
 
     if (speedBuffTimer > 0) speedBuffTimer -= dt.asSeconds();
     if (speedBuffTimer <= 0) speed = baseSpeed;
-
-    ShowDialog("Hello! I am above the player!");
 }
 
 void PlayerCharacter::UpdateSprite(sf::Time dt) {
@@ -83,7 +81,7 @@ void PlayerCharacter::LoadCharacterTextures() {
 }
 
 void PlayerCharacter::Loot(GameObject *lootTarget) {
-    //dialogUI.AddText("Done looting!", sf::Vector2f(50.f, 500.f));
+    ShowDialog("Done looting!");
 
     for (auto object: lootTarget->GetInventory())
         inventory.push_back(object);
@@ -109,10 +107,10 @@ void PlayerCharacter::IncreaseSpeed(float amount, float buffTime) {
     speedBuffTimer = buffTime;
 }
 
-void PlayerCharacter::ShowDialog(const std::string message) {
+void PlayerCharacter::ShowDialog(const std::string message) const {
     if (!dialogUI)
         return;
 
-    sf::Vector2f pos = sf::Vector2f(GetPosition().x - 50.f, GetPosition().y - 50.f);
+    sf::Vector2f pos = sf::Vector2f({sprite.getPosition().x, sprite.getPosition().y - sprite.getLocalBounds().size.y});
     dialogUI->AddMessage(message, pos);
 }

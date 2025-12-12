@@ -7,12 +7,8 @@
 #include <map>
 #include "../GameObjects/GameObject.h"
 #include "../Items/Item.h"
-#include "../Objects/Character.h"
-#include "../Enemy/EnemyCharacter.h"
-#include "../Objects/GameObjects/GameObject.h"
-#include <SFML/Graphics.hpp>  
-#include <iostream>
-#include "../UI/PlayerUI/DialogUI.h"
+#include <SFML/Graphics.hpp>
+#include "../../UI/PlayerUI/DialogUI.h"
 
 class DialogUI;
 
@@ -41,7 +37,7 @@ public:
 	void IncreaseDamage(float amount, float buffTime);
 	void IncreaseSpeed(float amount, float buffTime);
 
-	void ShowDialog(const std::string message);
+	void ShowDialog(const std::string message) const;
 
 private:
 	DialogUI* dialogUI;
