@@ -42,7 +42,7 @@ int main() {
         InventoryUI InventoryUI(PController, Player, windowSize, 50);
 
         // NPCs
-        auto FoxNPC = std::make_unique<NPCCharacter>(windowSize.x / 3, windowSize.y / 2, 2, NPCTypes::Fox, "Fox");
+        auto FoxNPC = std::make_unique<NPCCharacter>(windowSize.x / 3, windowSize.y / 2, 2, NPCTypes::Fox, "Fox", &DialogUI);
         NPCCharacter* FoxNPCPtr = FoxNPC.get();
         gameMap.AddNPC(std::move(FoxNPC));
 
