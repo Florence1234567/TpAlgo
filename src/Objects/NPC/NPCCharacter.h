@@ -12,8 +12,7 @@
 class DialogUI;
 
 enum NPCTypes {
-	NPC_Chicken,
-	NPC_Cow
+	Fox
 };
 
 class NPCCharacter : public Character {
@@ -48,10 +47,8 @@ private:
 
 	//NPC Sprites
 	std::map<std::string, std::string> NPCTextureFiles = {
-	 {"Chick", "Assets/Images/Character/Chick.png"},
-	 {"Chick1", "Assets/Images/Character/Chick1.png"},
-	 {"Cow", "Assets/Images/Character/Cow.png"},
-	 {"Cow1", "Assets/Images/Character/Cow1.png"},
+	 {"Fox", "Assets/Images/Character/Fox1.png"},
+	 {"Fox1", "Assets/Images/Character/Fox2.png"},
 	};
 
 	void LoadCharacterTextures();
