@@ -48,9 +48,9 @@ private:
 	std::vector<std::string> currentDialogs {};
 	std::vector<std::string> Dialogs = {
 		"Bonjour voyageur!",
-		"Extermines les vaches \net les poulets sur mon \nterrain.",
+		"Extermine les vaches \net les poulets sur mon \nterrain.",
 		"Tu peux fouiller un peu \npartout.",
-		"Tu risques de trouver \ndes choses utiles pour\nton avanture."
+		"Tu risques de trouver \ndes choses utiles pour\nton aventure."
 	};
 
 
