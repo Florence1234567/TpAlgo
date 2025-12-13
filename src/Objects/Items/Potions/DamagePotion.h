@@ -8,7 +8,7 @@
 
 class DamagePotion : public PotionItem {
 public:
-    DamagePotion() : PotionItem("Assets/Images/Objects/Berries.png", "Damage Potion") {};
+    DamagePotion() : PotionItem("Assets/Images/Objects/Potion6.png", "Damage Potion") {};
     void DrinkPotion(PlayerCharacter* player) override;
 
 private:

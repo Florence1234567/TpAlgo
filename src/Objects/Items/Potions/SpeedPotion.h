@@ -8,7 +8,7 @@
 
 class SpeedPotion : public PotionItem {
 public:
-    SpeedPotion() : PotionItem("Assets/Images/Objects/Berries.png", "Speed Potion") {};
+    SpeedPotion() : PotionItem("Assets/Images/Objects/Potion4.png", "Speed Potion") {};
     void DrinkPotion(PlayerCharacter* player) override;
 
 private:
