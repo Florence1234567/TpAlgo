@@ -5,12 +5,6 @@
 HealthBar::HealthBar(sf::Vector2f position, sf::Vector2f size, sf::Vector2u windowSize, PlayerCharacter& player)
 	: UIComponent(position, size), playerRef(player)
 {
-	/*if (!heartTexture.loadFromFile("Assets/Images/Objects/Heart.png"))
-		std::cerr << "Failed to load heart.png\n";
-
-	heartSprite.setTexture(heartTexture);
-	heartSprite.setScale({ 2.f, 2.f });*/
-
     //Background
     background.setPosition(position);
     background.setSize(size);

@@ -17,13 +17,13 @@ void NPCCharacter::UpdateSprite(sf::Time dt)
         isWalkFrame1 = !isWalkFrame1;
     }
 
-    if (NPCType == NPCTypes::NPC_Chicken)
-        spriteName = "Chick";
-    else
-        spriteName = "Cow";
+    if (NPCType == NPCTypes::Fox)
+        spriteName = "Fox";
 
     if (!isWalkFrame1)
         spriteName += "1";
+    else
+        spriteName += "2";
 
 
     auto it = NPCSprites.find(spriteName);

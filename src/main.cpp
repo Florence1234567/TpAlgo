@@ -42,9 +42,9 @@ int main() {
         InventoryUI InventoryUI(PController, Player, windowSize, 50);
 
         // NPCs
-        auto ChickenNPC = std::make_unique<NPCCharacter>(windowSize.x / 3, windowSize.y / 2, 2, NPCTypes::NPC_Chicken, "Chicken");
-        NPCCharacter* ChickenNPCPtr = ChickenNPC.get();
-        gameMap.AddNPC(std::move(ChickenNPC));
+        auto FoxNPC = std::make_unique<NPCCharacter>(windowSize.x / 3, windowSize.y / 2, 2, NPCTypes::Fox, "Fox");
+        NPCCharacter* FoxNPCPtr = FoxNPC.get();
+        gameMap.AddNPC(std::move(FoxNPC));
 
         // Enemies
         auto Chicken = std::make_unique<EnemyCharacter>(windowSize.x / 3, windowSize.y / 3, 2, 50.0f, 100.f, EnemyType::Chicken, "Chicken");
@@ -63,7 +63,7 @@ int main() {
         EnemyCharacter* CowPtr2 = Cow2.get();
         gameMap.AddEnemy(std::move(Cow2));
 
-        HealthBar HealthBar({ 20.f, 40.f }, { 200.f, 20.f }, windowSize, Player);
+        HealthBar HealthBar({ 70.f, 30.f }, { 200.f, 20.f }, windowSize, Player);
 
         sf::Clock dtClock;
         while (window.isOpen())
@@ -84,8 +84,8 @@ int main() {
             Player.Update(dt);
 
             // NPCs
-            ChickenNPCPtr->Update(dt);
-            ChickenNPCPtr->UpdateSprite(dt);
+            FoxNPCPtr->Update(dt);
+            FoxNPCPtr->UpdateSprite(dt);
 
             // Enemy
             ChickenPtr->Update(dt);
@@ -112,7 +112,7 @@ int main() {
             window.draw(backgroundSprite); 
 
             gameMap.DisplayObjects(window);
-            ChickenNPCPtr->Draw(window);
+            FoxNPCPtr->Draw(window);
             ChickenPtr->Draw(window);
             CowPtr->Draw(window);
             ChickenPtr2->Draw(window);
