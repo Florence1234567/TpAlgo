@@ -41,8 +41,6 @@ public:
 	DialogUI* GetDialogUI() const { return dialogUI; };
 
 private:
-	void Die() override;
-
 	DialogUI* dialogUI;
 
 	std::vector<Item*> inventory;

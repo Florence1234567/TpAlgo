@@ -21,8 +21,6 @@ add_executable(TPAlgo
         src/Objects/Character.h
         src/Objects/Controller.cpp
         src/Objects/Controller.h
-        src/Game/GameManager.cpp
-        src/Game/GameManager.h
         src/Objects/GameObjects/GameObject.cpp
         src/Objects/GameObjects/GameObject.h
         src/UI/PlayerUI/PlayerUIComponent.cpp

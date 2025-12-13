@@ -11,6 +11,7 @@
 #include "../../UI/PlayerUI/ActionContextMenuUI.h"
 
 void PlayerController::HandleEvent(const sf::Event &event, sf::FloatRect playingBounds, sf::RenderWindow *window) {
+    if (!owner->isAlive()) return;
     if (const auto *mouseButtonPressed = event.getIf<sf::Event::MouseButtonPressed>()) {
         sf::Vector2i mousePos = mouseButtonPressed->position;
         sf::Vector2f worldPos = window->mapPixelToCoords(mousePos);
