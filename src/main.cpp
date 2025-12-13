@@ -42,7 +42,7 @@ int main() {
         InventoryUI InventoryUI(PController, Player, windowSize, 50);
 
         // NPCs
-        auto ChickenNPC = std::make_unique<NPCCharacter>(windowSize.x / 3, windowSize.y / 2, 2, NPCTypes::NPC_Chicken, "Chicken");
+        auto ChickenNPC = std::make_unique<NPCCharacter>(windowSize.x / 3, windowSize.y / 2, 2, NPCTypes::NPC_Chicken, "Chicken", &DialogUI);
         NPCCharacter* ChickenNPCPtr = ChickenNPC.get();
         gameMap.AddNPC(std::move(ChickenNPC));
 

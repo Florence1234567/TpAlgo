@@ -67,3 +67,16 @@ void NPCCharacter::LoadCharacterTextures()
         NPCSprites[name]->setOrigin(sf::Vector2f(bounds.size.x / 2.f, bounds.size.y / 2.f));
     }
 }
+
+void NPCCharacter::StartDialog() const {
+    ShowDialogs("Bonjour voyageur!");
+}
+
+
+void NPCCharacter::ShowDialogs(const std::string message) const {
+    if (!dialogUI)
+        return;
+
+    sf::Vector2f pos = sf::Vector2f({sprite.getPosition().x, sprite.getPosition().y - sprite.getLocalBounds().size.y - 15.f});
+    dialogUI->AddMessage(message, pos);
+}

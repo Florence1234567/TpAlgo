@@ -4,7 +4,9 @@
 
 #include "InteractAction.h"
 
-void InteractAction::Execute() {}
+void InteractAction::Execute() {
+    NPC->StartDialog();
+}
 
 bool InteractAction::Update(sf::Time dt) {
     bCompleted = true;

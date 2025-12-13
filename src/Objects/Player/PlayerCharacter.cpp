@@ -114,3 +114,10 @@ void PlayerCharacter::ShowDialog(const std::string message) const {
     sf::Vector2f pos = sf::Vector2f({sprite.getPosition().x, sprite.getPosition().y - sprite.getLocalBounds().size.y});
     dialogUI->AddMessage(message, pos);
 }
+
+void PlayerCharacter::Die() {
+    // TODO Die sequence
+
+    // Call default die logic after custom die logic
+    Character::Die();
+}

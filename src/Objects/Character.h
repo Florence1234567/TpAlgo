@@ -45,4 +45,6 @@ protected:
 	const float ATTACKCOOLDOWN;
 	float currentCooldown;
 	Character* currentTarget = nullptr;
+
+    virtual void Die();
 };

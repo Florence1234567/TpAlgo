@@ -40,6 +40,8 @@ public:
 	void ShowDialog(const std::string message) const;
 
 private:
+	void Die() override;
+
 	DialogUI* dialogUI;
 
 	std::vector<Item*> inventory;

@@ -6,7 +6,10 @@
 #include <iostream>
 #include <map>
 
+#include "../../UI/PlayerUI/DialogUI.h"
 #include "../GameObjects/GameObject.h"
+
+class DialogUI;
 
 enum NPCTypes {
 	NPC_Chicken,
@@ -15,8 +18,8 @@ enum NPCTypes {
 
 class NPCCharacter : public Character {
 public:
-	NPCCharacter(int x, int y, float size, NPCTypes type, std::string name)
-		: Character(x, y, size, 0.f, 1000.f, 0.f, 0.f, name, "Assets/Images/Character/C_Front.png"), ATTACKCOOLDOWN(0), currentCooldown(0) {
+	NPCCharacter(int x, int y, float size, NPCTypes type, std::string name, DialogUI* dialogUI)
+		: Character(x, y, size, 0.f, 1000.f, 0.f, 0.f, name, "Assets/Images/Character/C_Front.png"), ATTACKCOOLDOWN(0), currentCooldown(0), dialogUI(dialogUI) {
 		LoadCharacterTextures();
 		currentDir = Direction::Down;
 		walkFrameTimer = 0;
@@ -31,10 +34,16 @@ public:
 
 	sf::FloatRect GetCollisionBounds() const;
 
+	void StartDialog() const;
+
 private:
 	std::vector<Item*> inventory;
 	const float ATTACKCOOLDOWN;
 	float currentCooldown;
+
+	DialogUI* dialogUI;
+	void ShowDialogs(const std::string message) const;
+	std::vector<std::string> Dialogs;
 
 
 	//NPC Sprites

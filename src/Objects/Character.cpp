@@ -51,13 +51,16 @@ void Character::setDestination(float worldX, float worldY) {
         currentDir = (dir.y > 0) ? Direction::Down : Direction::Up;
 }
 
+void Character::Die() {
+    this->Destroy();
+}
+
+
 void Character::TakeDamage(float damage) {
-    std::cout << "(" << name << ") Damage taken: " << damage << std::endl;
     health -= damage;
     if (health <= 0) health = 0;
-    std::cout << "(" << name << ") Current health: " << health << std::endl;
     if (!isAlive())
-        this->Destroy();
+        Die();
 }
 
 void Character::Attack(Character* target) {
