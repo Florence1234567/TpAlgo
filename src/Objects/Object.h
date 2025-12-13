@@ -21,6 +21,7 @@ public:
 
     sf::Vector2f GetPosition() const { return sf::Vector2f(posX, posY); };
 
+    void SetSize(float scale) { this->scale = scale; };
     float GetSize() const { return sprite.getScale().x; };
 
     void Destroy();
