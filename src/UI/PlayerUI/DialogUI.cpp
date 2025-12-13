@@ -4,7 +4,7 @@ void DialogUI::LoadSprite()
 {
     if (backgroundTexture.loadFromFile(spritePath)) {
         backgroundSprite = new sf::Sprite(backgroundTexture);
-        backgroundSprite->setScale({ 0.025f, 0.025f });
+        backgroundSprite->setScale({ 0.05f, 0.025f });
     }  
 }
 
@@ -41,7 +41,7 @@ void DialogUI::Draw(sf::RenderWindow& window)
 
     sf::Text textBox(font, text, 12);
     textBox.setFillColor(sf::Color::Black);
-    sf::Vector2f textPosition = { position.x - background.getLocalBounds().size.x / 2.f + margin - 5 + offset.x, position.y - background.getLocalBounds().size.y / 2.f + margin };
+    sf::Vector2f textPosition = { position.x - background.getLocalBounds().size.x / 2.f + margin, position.y - background.getLocalBounds().size.y / 2.f + margin };
     textBox.setPosition(textPosition);
 
     window.draw(textBox);

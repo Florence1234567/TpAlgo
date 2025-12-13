@@ -38,5 +38,5 @@ private:
     std::string spritePath;
     sf::Texture backgroundTexture;
     sf::Sprite* backgroundSprite;
-    sf::Vector2f offset = { 60, 0 };
+    sf::Vector2f offset = { 80, 0 };
 };
