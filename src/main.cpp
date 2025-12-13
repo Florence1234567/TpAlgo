@@ -29,7 +29,7 @@ int main() {
 
         sf::FloatRect grassBounds = gameMap.GetFenceBounds();
 
-        //Dialog Box
+        //Dialog Box       
         DialogUI DialogUI(sf::Vector2f(200.f, 20.f));
 
         //Create player
