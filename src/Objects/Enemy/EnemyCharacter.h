@@ -15,8 +15,8 @@ enum EnemyType{
 
 class EnemyCharacter : public Character {
 public:
-	EnemyCharacter(int x, int y, float size, float baseSpeed, float hp, EnemyType type, std::string name)
-		: Character(x, y, size, baseSpeed, hp, 10, 1, name, "Assets/Images/Character/C_Front.png"), ATTACKCOOLDOWN(1), currentCooldown(0) {
+	EnemyCharacter(int x, int y, float hp, float damage, float attackSpeed, EnemyType type, std::string name)
+		: Character(x, y, 2, 0.f, hp, damage, attackSpeed, name, "Assets/Images/Character/C_Front.png"), ATTACKCOOLDOWN(attackSpeed), currentCooldown(0) {
 		LoadCharacterTextures();
 		currentDir = Direction::Down;
 		walkFrameTimer = 0;

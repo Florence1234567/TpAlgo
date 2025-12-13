@@ -61,14 +61,10 @@ add_executable(TPAlgo
         src/Objects/Items/Potions/SpeedPotion.cpp
         src/Objects/Items/Potions/SpeedPotion.h
         src/Objects/Items/Potions/HealthPotion.cpp
-        src/Objects/Enemy/EnemyController.cpp
-        src/Objects/Enemy/EnemyController.h
         src/Objects/Enemy/EnemyCharacter.cpp
         src/Objects/Enemy/EnemyCharacter.h
         src/Objects/NPC/NPCCharacter.cpp
         src/Objects/NPC/NPCCharacter.h
-        src/Objects/NPC/NPCController.cpp
-        src/Objects/NPC/NPCController.h
         src/UI/PlayerUI/HealthBar.cpp
         src/UI/PlayerUI/HealthBar.h
         src/Actions/InteractAction.cpp

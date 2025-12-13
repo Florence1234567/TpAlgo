@@ -15,7 +15,7 @@ class DialogUI;
 class PlayerCharacter : public Character {
 public:
 	PlayerCharacter(int x, int y, float size, DialogUI* dialogUI)
-		: Character(x, y, size, 50.f, 100.f, 15, 1, "Player", "Assets/Images/Character/C_Front.png"), dialogUI(dialogUI)
+		: Character(x, y, size, 50.f, 100.f, 15, 0.75f, "Player", "Assets/Images/Character/C_Front.png"), dialogUI(dialogUI)
 	{
 		LoadCharacterTextures();
 		currentDir = Direction::Down;

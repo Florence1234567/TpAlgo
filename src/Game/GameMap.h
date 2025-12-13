@@ -55,6 +55,7 @@ private:
 	std::vector<std::unique_ptr<NPCCharacter>> NPCs;
 
 	void PlaceRandomObjects(int count);
+	void PlaceRandomEnemies(int minCount, int maxCount);
 	bool IsValidObjectPosition(int x, int y) const;
 
 	std::vector<std::vector<Tile>> map;

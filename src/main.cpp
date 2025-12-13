@@ -32,17 +32,7 @@ struct GameSession
     std::unique_ptr<NPCCharacter> foxNPC;
     NPCCharacter* foxNPCPtr;
 
-    std::unique_ptr<EnemyCharacter> chicken;
-    EnemyCharacter* chickenPtr;
-
-    std::unique_ptr<EnemyCharacter> cow;
-    EnemyCharacter* cowPtr;
-
-    std::unique_ptr<EnemyCharacter> chicken2;
-    EnemyCharacter* chickenPtr2;
-
-    std::unique_ptr<EnemyCharacter> cow2;
-    EnemyCharacter* cowPtr2;
+    std::vector<EnemyCharacter*> enemies;
 
     GameSession(sf::Vector2u windowSize, sf::RenderWindow& window)
         : gameMap(windowSize.x, windowSize.y),
@@ -72,29 +62,7 @@ struct GameSession
         gameMap.AddNPC(std::move(foxNPC));
 
         // Enemies
-        chicken = std::make_unique<EnemyCharacter>(
-            windowSize.x / 3, windowSize.y / 3, 2,
-            50.0f, 100.f, EnemyType::Chicken, "Chicken");
-        chickenPtr = chicken.get();
-        gameMap.AddEnemy(std::move(chicken));
-
-        cow = std::make_unique<EnemyCharacter>(
-            windowSize.x / 4, windowSize.y / 3, 2,
-            50.0f, 100.f, EnemyType::Cow, "Cow");
-        cowPtr = cow.get();
-        gameMap.AddEnemy(std::move(cow));
-
-        chicken2 = std::make_unique<EnemyCharacter>(
-            windowSize.x / 2, windowSize.y / 3, 2,
-            50.0f, 100.f, EnemyType::Chicken, "Chicken");
-        chickenPtr2 = chicken2.get();
-        gameMap.AddEnemy(std::move(chicken2));
-
-        cow2 = std::make_unique<EnemyCharacter>(
-            windowSize.x / 4, windowSize.y / 2, 2,
-            50.0f, 100.f, EnemyType::Cow, "Cow");
-        cowPtr2 = cow2.get();
-        gameMap.AddEnemy(std::move(cow2));
+        enemies = gameMap.GetEnemies();
     }
 };
 
@@ -137,7 +105,6 @@ int main() {
             if (!session->player.isAlive())
                 resetRequested = true;
 
-            // If reset requested, recreate the session and continue
             if (resetRequested) {
                 delete session;
                 session = new GameSession(windowSize, window);
@@ -155,17 +122,10 @@ int main() {
             session->foxNPCPtr->UpdateSprite(dt);
 
             // Enemy
-            session->chickenPtr->Update(dt);
-            session->chickenPtr->UpdateSprite(dt);
-
-            session->cowPtr->Update(dt);
-            session->cowPtr->UpdateSprite(dt);
-
-            session->chickenPtr2->Update(dt);
-            session->chickenPtr2->UpdateSprite(dt);
-
-            session->cowPtr2->Update(dt);
-            session->cowPtr2->UpdateSprite(dt);
+            for (auto* enemy : session->enemies) {
+                enemy->Update(dt);
+                enemy->UpdateSprite(dt);
+            }
 
             session->player.UpdateSprite(dt);
             session->playerController.Update(dt);
@@ -180,10 +140,10 @@ int main() {
 
             session->gameMap.DisplayObjects(window);
             session->foxNPCPtr->Draw(window);
-            session->chickenPtr->Draw(window);
-            session->cowPtr->Draw(window);
-            session->chickenPtr2->Draw(window);
-            session->cowPtr2->Draw(window);
+
+            for (auto* enemy : session->enemies)
+                enemy->Draw(window);
+
             session->player.Draw(window);
 
             session->actionQueueUI.Draw(window);

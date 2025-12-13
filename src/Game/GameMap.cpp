@@ -14,7 +14,6 @@ GameMap::GameMap(int width, int height) {
 	map.resize(Height, std::vector<Tile>(Width, Tile::Grass));
 	objectsMap.resize(Height, std::vector<Objects>(Width, Objects::ObjectNone));
 
-	// Build the map
 	for (int y = 0; y < Height; y++)
 		for (int x = 0; x < Width; x++)
 		{
@@ -49,7 +48,8 @@ GameMap::GameMap(int width, int height) {
 		objectsSprites[object]->setScale(sf::Vector2f(scaleX, scaleY));
 	}
 
-	PlaceRandomObjects(30);
+	PlaceRandomObjects(40);
+	PlaceRandomEnemies(6, 10);
 }
 
 Tile GameMap::DecideTile(int x, int y) {
@@ -165,6 +165,69 @@ void GameMap::PlaceRandomObjects(int count)
 		int pixelY = tileY * PixelsPerSquare + PixelsPerSquare / 2;
 
 		gameObjects.push_back(std::make_unique<GameObject>(pixelX, pixelY, 2, objectType));
+		placed++;
+	}
+}
+
+void GameMap::PlaceRandomEnemies(int minCount, int maxCount)
+{
+	const int tilesX = (Width - rightPadding) / PixelsPerSquare;
+	const int tilesY = Height / PixelsPerSquare;
+	const int minX = 2;
+	const int minY = 2;
+	const int maxX = tilesX - 3;
+	const int maxY = tilesY - 2;
+
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> distCount(minCount, maxCount);
+	std::uniform_int_distribution<> distX(minX, maxX);
+	std::uniform_int_distribution<> distY(minY, maxY);
+	std::uniform_int_distribution<> distType(0, 1);
+
+	int count = distCount(gen);
+	int placed = 0;
+	int attemps = 0;
+	const int maxAttemps = count * 20;
+
+	while (placed < count && attemps < maxAttemps) {
+		attemps++;
+
+		int tileX = distX(gen);
+		int tileY = distY(gen);
+
+		if (map[tileY][tileX] != Tile::Grass)
+			continue;
+
+		int pixelX = tileX * PixelsPerSquare + PixelsPerSquare / 2;
+		int pixelY = tileY * PixelsPerSquare + PixelsPerSquare / 2;
+
+		if (IsPositionBlocked(pixelX, pixelY, 32.f, 32.f))
+			continue;
+
+		EnemyType type;
+		std::string name;
+		float hp;
+		float damage;
+		float speed; //Vitesse d'attaque
+
+		if (distType(gen) == 0) {
+			type = EnemyType::Chicken;
+			name = "Chicken";
+			hp = 40.f;
+			damage = 5.f;
+			speed = 0.25f;
+		} else {
+			type = EnemyType::Cow;
+			name = "Cow";
+			hp = 100.f;
+			damage = 10.f;
+			speed = 1.f;
+		}
+
+		auto enemy = std::make_unique<EnemyCharacter>(pixelX, pixelY, hp, damage, speed, type, name);
+
+		enemies.push_back(std::move(enemy));
 		placed++;
 	}
 }
