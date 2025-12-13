@@ -40,6 +40,7 @@ protected:
     float armour;
     sf::Vector2<float> destination;
     bool bHasDestination = false;
+    bool canMove = true;
     Direction currentDir;
 
 	const float ATTACKCOOLDOWN;

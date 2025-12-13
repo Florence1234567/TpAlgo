@@ -4,8 +4,10 @@
 
 #include "./Character.h"
 
+#include "../UI/DialogUI.h"
+
 void Character::Update(sf::Time dt) {
-    if (bHasDestination) {
+    if (bHasDestination && canMove) {
         sf::Vector2f curPos = sprite.getPosition();
         sf::Vector2f dir = destination - curPos;
         float distance = std::sqrt(dir.x * dir.x + dir.y * dir.y);

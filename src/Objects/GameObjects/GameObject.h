@@ -27,6 +27,7 @@ private:
     bool bLootable = false;
 
     std::vector<Item*> objectInventory;
+    int maxInventorySize = 3;
     void FillInventory(int inventorySpace);
 
 

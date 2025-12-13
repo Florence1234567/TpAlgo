@@ -10,6 +10,8 @@ void PlayerCharacter::Update(sf::Time dt) {
     Character::Update(dt);
     UpdateSprite(dt);
 
+    canMove = dialogUI->DialogOver();
+
     // Gestion des buff des dégats et de la vitesse
     if (damageBuffTimer > 0) damageBuffTimer -= dt.asSeconds();
     if (damageBuffTimer <= 0) damage = baseDamage;
@@ -28,7 +30,7 @@ void PlayerCharacter::UpdateSprite(sf::Time dt) {
         isWalkFrame1 = !isWalkFrame1;
     }
 
-    if (bHasDestination) {
+    if (bHasDestination && canMove) {
         switch (currentDir) {
             case Direction::Up:
                 spriteName = "Back";
@@ -47,7 +49,7 @@ void PlayerCharacter::UpdateSprite(sf::Time dt) {
         spriteName = "Front";
     }
 
-    if (bHasDestination) {
+    if (bHasDestination && canMove) {
         if (!isWalkFrame1)
             spriteName += "Walk1";
         else
