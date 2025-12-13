@@ -6,7 +6,7 @@
 #include <iostream>
 #include <map>
 
-#include "../../UI/PlayerUI/DialogUI.h"
+#include "../../UI/DialogUI.h"
 #include "../GameObjects/GameObject.h"
 
 class DialogUI;
@@ -33,7 +33,9 @@ public:
 
 	sf::FloatRect GetCollisionBounds() const;
 
-	void StartDialog() const;
+	void StartDialog();
+	DialogUI* GetDialogUI() const { return dialogUI; };
+	bool DialogFinished() const { return !dialogActive; };
 
 private:
 	std::vector<Item*> inventory;
@@ -42,7 +44,14 @@ private:
 
 	DialogUI* dialogUI;
 	void ShowDialogs(const std::string message) const;
-	std::vector<std::string> Dialogs;
+	bool dialogActive = false;
+	std::vector<std::string> currentDialogs {};
+	std::vector<std::string> Dialogs = {
+		"Bonjour voyageur!",
+		"Extermines les vaches \net les poulets sur mon \nterrain.",
+		"Tu peux fouiller un peu \npartout.",
+		"Tu risques de trouver \ndes choses utiles pour\nton avanture."
+	};
 
 
 	//NPC Sprites

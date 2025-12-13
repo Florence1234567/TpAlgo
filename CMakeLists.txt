@@ -75,8 +75,8 @@ add_executable(TPAlgo
         src/UI/PlayerUI/HealthBar.h
         src/Actions/InteractAction.cpp
         src/Actions/InteractAction.h
-        src/UI/PlayerUI/DialogUI.cpp
-        src/UI/PlayerUI/DialogUI.h
+        src/UI/DialogUI.cpp
+        src/UI/DialogUI.h
         )
 target_compile_features(TPAlgo PRIVATE cxx_std_17)
 target_link_libraries(TPAlgo PRIVATE SFML::Graphics)

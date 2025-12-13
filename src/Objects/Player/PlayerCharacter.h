@@ -8,7 +8,7 @@
 #include "../GameObjects/GameObject.h"
 #include "../Items/Item.h"
 #include <SFML/Graphics.hpp>
-#include "../../UI/PlayerUI/DialogUI.h"
+#include "../../UI/DialogUI.h"
 
 class DialogUI;
 
@@ -38,6 +38,7 @@ public:
 	void IncreaseSpeed(float amount, float buffTime);
 
 	void ShowDialog(const std::string message) const;
+	DialogUI* GetDialogUI() const { return dialogUI; };
 
 private:
 	void Die() override;

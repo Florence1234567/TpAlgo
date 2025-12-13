@@ -4,6 +4,16 @@ void NPCCharacter::Update(sf::Time dt)
 {
 	Character::Update(dt);
 	UpdateSprite(dt);
+
+    if (dialogActive) {
+        if (dialogUI->DialogOver()) {
+            ShowDialogs(currentDialogs[0]);
+            currentDialogs.erase(currentDialogs.begin());
+        }
+
+        if (currentDialogs.empty())
+            dialogActive = false;
+    }
 }
 
 void NPCCharacter::UpdateSprite(sf::Time dt)
@@ -68,8 +78,9 @@ void NPCCharacter::LoadCharacterTextures()
     }
 }
 
-void NPCCharacter::StartDialog() const {
-    ShowDialogs("Bonjour voyageur!");
+void NPCCharacter::StartDialog() {
+    currentDialogs = Dialogs;
+    dialogActive = true;
 }
 
 

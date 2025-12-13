@@ -8,8 +8,9 @@ void DialogUI::LoadSprite()
     }  
 }
 
-void DialogUI::AddMessage(const std::string msg, sf::Vector2f pos)
+void DialogUI::AddMessage(const std::string msg, sf::Vector2f pos, float time)
 {
+    duration = time;
     text = msg;
     timer = duration;
 
@@ -41,7 +42,7 @@ void DialogUI::Draw(sf::RenderWindow& window)
 
     sf::Text textBox(font, text, 12);
     textBox.setFillColor(sf::Color::Black);
-    sf::Vector2f textPosition = { position.x - background.getLocalBounds().size.x / 2.f + margin, position.y - background.getLocalBounds().size.y / 2.f + margin };
+    sf::Vector2f textPosition = { position.x - background.getLocalBounds().size.x / 2.f + margin, position.y - background.getLocalBounds().size.y };
     textBox.setPosition(textPosition);
 
     window.draw(textBox);

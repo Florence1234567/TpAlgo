@@ -1,6 +1,6 @@
 #pragma once
-#include "PlayerUIComponent.h"
-#include "../UIComponent.h"
+#include "PlayerUI/PlayerUIComponent.h"
+#include "UIComponent.h"
 #include <SFML/Graphics.hpp>
 #include <string>
 
@@ -22,10 +22,12 @@ public:
     }
 
     void LoadSprite();
-    void AddMessage(const std::string msg, sf::Vector2f pos);
+    void AddMessage(const std::string msg, sf::Vector2f pos, float time = 3.f);
     void Draw(sf::RenderWindow& window) override;
     void Update(sf::Time dt) override;
     void SetPosition(sf::Vector2f pos) { position = pos; };
+    void HideMessage() { isVisible = false; };
+    bool DialogOver() const { return timer <= 0.f; };
 
 private:
     sf::Vector2f panelSize;

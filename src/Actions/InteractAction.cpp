@@ -9,7 +9,7 @@ void InteractAction::Execute() {
 }
 
 bool InteractAction::Update(sf::Time dt) {
-    bCompleted = true;
+    bCompleted = NPC->DialogFinished();
     return !Finished();
 }
 
