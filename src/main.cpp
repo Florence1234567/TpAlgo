@@ -14,7 +14,7 @@
 
 int main() {
     sf::Vector2u windowSize(1920, 1080);
-    sf::RenderWindow window(sf::VideoMode(windowSize), "Le meilleur jeu");
+    sf::RenderWindow window(sf::VideoMode(windowSize), "Bunny adventure");
     window.setFramerateLimit(120);
 
     try
